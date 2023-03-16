@@ -1,6 +1,7 @@
 import AllFiles from "./Components/allFiles";
 import File from "./Components/file";
 import Home from "./Components/Home";
+import React from "react";
 function App() {
 
   return (

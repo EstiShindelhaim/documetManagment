@@ -51,7 +51,7 @@ exports.addOfficer=async(req, res)=>{
 
  }
 
- exports.getOfficersByManagerId=(req, res)=>{//לא צריך
+ exports.getOfficersByManagerId=(req, res)=>{
   console.log(req.params.managerId);
     const managerId =req.params.managerId ;
     officerDal.getOfficersByManagerId(managerId)

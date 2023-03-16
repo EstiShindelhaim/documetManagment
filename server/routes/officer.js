@@ -11,7 +11,7 @@ officerRouter.route("/getOfficers")
 officerRouter.route("/:id")
     .put(officerCntrl.updateOfficerById)
     .delete(officerCntrl.deleteOfficerById)
-officerRouter.route("/byManager/:managerId")//לא צריך    
+officerRouter.route("/byManager/:managerId")
     .get(officerCntrl.getOfficersByManagerId )
 officerRouter.route("/numOfDocuments/:idofficer")  
     .get(officerCntrl.getNumOfDocuments )

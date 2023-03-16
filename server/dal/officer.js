@@ -50,7 +50,8 @@ exports.getOfficersFilterAndSort=(FilterAndSortObg)=>{
     return Officer.findAll(qry);
 };
 
-exports.getOfficersByManagerId=(id)=>{//מיותר
+exports.getOfficersByManagerId=(id)=>{
+    console.log(id);
     return Officer.findAll({where:{managerId:id}});
 };
 
