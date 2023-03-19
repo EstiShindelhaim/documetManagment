@@ -122,13 +122,13 @@ export default function BasicDemo(props) {
                 <h1 className="m-0" >{props.title}</h1>
                 <span className="p-input-icon-right">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => filterProduct(e.target.value)} placeholder="Search..." />
+                    <InputText type="search" onInput={(e) => filterProduct(e.target.value)} placeholder="חפש..." />
                 </span>
             </div>
             <br></br>
             {props.popup}
             {console.log(props.popup)}
-            <div className="flex justify-content-end">
+            <div className="flex justify-content-end" style={{ direction: "ltr"}}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
             </div>
         </>

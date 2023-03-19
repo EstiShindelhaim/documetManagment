@@ -9,8 +9,10 @@ const principalRouter = require("./routes/principal");
 const dashboardRouter = require("./routes/dashboard");
 const stageRouter = require("./routes/stage");
 const professionUnitRouter=require("./routes/profession_unit");
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded());
@@ -24,6 +26,7 @@ app.use("/principal", principalRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/stages", stageRouter);
 app.use("/professionUnit", professionUnitRouter);
+
 
 app.all("*", (req, res) => {
   res.status(404);
