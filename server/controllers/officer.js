@@ -32,6 +32,7 @@ exports.addOfficer=async(req, res)=>{
  }
  
  exports.getOfficersFilterAndSort=(req, res)=>{
+  console.log("dddddddddddddddddddddddddddddddd");
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!"
