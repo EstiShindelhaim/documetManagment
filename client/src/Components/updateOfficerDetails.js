@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
-import 'primeflex/primeflex.css'; 
+import 'primeflex/primeflex.css';
 import { InputText } from "primereact/inputtext";
-import  Password from './password';
-import { useFunc } from"../Hooks/useFunc";
+import Password from './password';
+import { useFunc } from "../Hooks/useFunc";
 import { Button } from "primereact/button";
-import useAxiosGet from "../../Hooks/useGet"
+import useAxiosGet from "../Hooks/useGet"
+import AutoCompleted from "./autoComplete";
 
-export default function UpdateOfficerDetails() {
+export default function UpdateOfficerDetails(props) {
     const { getData, postData } = useFunc();
-    const {data:d, loading:l, error:e, refetch:f} = useAxiosGet("professionUnit/byManager",1);
+    const { data: d, loading: l, error: e, refetch: f } = useAxiosGet("professionUnit/byManager", 1);
 
     const [name, setname] = useState('');
     const [password1, setpassword1] = useState('');
@@ -20,54 +21,54 @@ export default function UpdateOfficerDetails() {
     const [mail, setmail] = useState('');
     const [professionUnitId, setProfessionUnitId] = useState('');
     const [numOfDocuments, setnumOfDocuments] = useState('');
-    const { updateData} = useFunc();
-    
-        const hundleSubmit = async () => {
-            if(password1!='' && password1!=password2)
-            {
-                alert("אשר סיסמה שנית")
-                return
-            }
-            if(!mail.endsWith('@gmail.com'))
-            { 
-                alert("כתובת מייל לא חוקית")
-                return;
-            }
-            // const {data, loading, error, refetch} =await getData("manager/numOfDocumentsForOfficer",1)
-            // const num=data.num
-            // if(num<parseInt(numOfDocuments))
-            // {
-            //     console.log(numOfDocuments,num);
-            //     alert("מדי הרבה מסמכים מאושרים");
-            //     return;
-            // }
-            let professionUnit=d.filter((p=>p.name==professionUnitId))
-             const officerToUpdae =
-             {
+    const { updateData } = useFunc();
 
-                idNumber:1,
-                professionUnitId:undefined,
-                name: undefined,
-                password: undefined,
-                mail: undefined,
-
-            }
-            if(name!='')
-            officerToUpdae.name=name
-            if(password1!='')
-            officerToUpdae.password1=password1
-            if(professionUnitId!='')
-            officerToUpdae.professionUnit[0].idprofession_unit
-            if(mail!='')
-            officerToUpdae.mail=mail
-            updateData("manager",1,officerToUpdae)
+    const hundleSubmit = async () => {
+        if (password1 != '' && password1 != password2) {
+            alert("אשר סיסמה שנית")
+            return
         }
+        if (mail!= '' && !mail.endsWith('@gmail.com')) {
+            alert("כתובת מייל לא חוקית")
+            return;
+        }
+        const {data, loading, error, refetch} =await getData("manager/numOfDocumentsForOfficer",1)
+        const num=data.num
+        if(numOfDocuments!='' && num+props.numOfDocuments<parseInt(numOfDocuments))
+        {
+            console.log(numOfDocuments,num);
+            alert("מדי הרבה מסמכים מאושרים");
+            return;
+        }
+        let professionUnit = d.filter((p => p.name == professionUnitId))
+        const officerToUpdae =
+        {
+            professionUnitId: undefined,
+            name: undefined,
+            password: undefined,
+            mail: undefined,
+            numOfDocuments:undefined
+
+        }
+        if (name != '')
+            officerToUpdae.name = name
+        if (password1 != '')
+            officerToUpdae.password1 = password1
+        if (professionUnitId != '')
+            officerToUpdae.professionUnitId=professionUnit[0].idprofession_unit
+        if (mail != '')
+            officerToUpdae.mail = mail
+        if(numOfDocuments !='')
+            officerToUpdae.numOfDocuments=parseInt(numOfDocuments)
+            console.log(props.id);
+        updateData("officer",props.id, officerToUpdae)
+    }
 
 
 
 
     return (<>
-         <div className="card flex justify-content-center">
+        <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="name">שם</label>
                 <InputText id="name" aria-describedby="name-help" value={name} onChange={(e) => setname(e.target.value)} />
@@ -76,7 +77,7 @@ export default function UpdateOfficerDetails() {
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="password1">סיסמה</label>
-                <Password id="password1"value={password1} onChange={(e) => setpassword1(e.target.value)}></Password>
+                <Password id="password1" value={password1} onChange={(e) => setpassword1(e.target.value)}></Password>
             </div>
         </div>
         <div className="card flex justify-content-center">
@@ -88,23 +89,23 @@ export default function UpdateOfficerDetails() {
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="mail">אימייל</label>
-                <InputText id="mail" aria-describedby="mail-help" value={mail} onChange={(e) => setmail(e.target.value)}/>
+                <InputText id="mail" aria-describedby="mail-help" value={mail} onChange={(e) => setmail(e.target.value)} />
             </div>
         </div>
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="numOfDocuments">מס' קבצים מאושר</label>
-                <InputText id="numOfDocuments" aria-describedby="numOfDocuments-help" value={numOfDocuments} onChange={(e) => setnumOfDocuments(e.target.value)}/>
+                <InputText id="numOfDocuments" aria-describedby="numOfDocuments-help" value={numOfDocuments} onChange={(e) => setnumOfDocuments(e.target.value)} />
             </div>
         </div>
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="professionUnitId">יחידת מקצוע</label>
-                <AutoCompleted id="professionUnitId"value={professionUnitId}managerId={1}url={"professionUnit/byManager"}params={1} setValue={setProfessionUnitId}></AutoCompleted>
+                <AutoCompleted id="professionUnitId" value={professionUnitId} managerId={1} url={"professionUnit/byManager"} params={1} setValue={setProfessionUnitId}></AutoCompleted>
             </div>
         </div>
 
-        <Button label="אישור" icon="pi pi-check" onClick={hundleSubmit}></Button>
-    </>   
+        <Button label="אישור" icon="pi pi-check" id={props.id} onClick={hundleSubmit}></Button>
+    </>
     )
 }

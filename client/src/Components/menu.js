@@ -3,6 +3,7 @@ import { TabMenu } from 'primereact/tabmenu';
 import {useNavigate} from "react-router-dom"
 import PopUp from './popup';
 import UpdateDetails from './updateDetails';
+import { Button } from 'primereact/button';
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -19,7 +20,9 @@ export default function Menu() {
     return (
         <div className="card">
             <TabMenu model={items} />
+            <Button icon="pi pi-comment" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
             <PopUp label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails></UpdateDetails>} ></PopUp>
+            <br></br>
         </div>
     )
 }

@@ -17,6 +17,7 @@ import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from"../../Hooks/useFunc";
+import UpdateOfficerDetails from '../updateOfficerDetails';
 
 
 
@@ -76,7 +77,7 @@ const Officers = () => {
                             {/* {let id=product.idofficer} */}
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                                 <Button icon="pi pi-comment" tooltip="צור קשר" lassName="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                                <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>
+                                <PopUp label="עד	כן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<UpdateOfficerDetails numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                                 <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" lassName="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             </div>
                         </div>
@@ -102,7 +103,7 @@ const Officers = () => {
                         </div>
                         <div className="flex align-items-center justify-content-between">
                             <Button icon="pi pi-comment" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                            <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>
+                            <PopUp label="עד	כן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<UpdateOfficerDetails numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                             <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" lassName="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                         </div>
                     </div>

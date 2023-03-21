@@ -66,7 +66,7 @@ export default function UpdateDetails() {
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="password2">אשר סיסמה</label>
-                <InputText id="password2" aria-describedby="password-help" value={password2} onChange={(e) => setpassword2(e.target.value)} />
+                <Password id="password1"value={password1} onChange={(e) => setpassword1(e.target.value)}></Password>
             </div>
         </div>
         <div className="card flex justify-content-center">
