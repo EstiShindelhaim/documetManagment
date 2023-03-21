@@ -37,5 +37,17 @@ export const useFunc = () => {
         }
     };
 
-    return { getData,postData,updateData }
+    const deteteData =async (url, params) => {
+        try {
+            console.log(url);
+            const res = await axios.delete(`http://localhost:5000/${url}/${params}`);
+            console.log(res);
+            return res
+        }
+        catch (err) {
+            console.error(`error ${err}`);
+        }
+    };
+
+    return { getData,postData,updateData,deteteData }
 }

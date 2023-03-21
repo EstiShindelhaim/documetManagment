@@ -24,7 +24,7 @@ import { useFunc } from"../../Hooks/useFunc";
 
 
 const Officers = () => {
-    const { getData, postData } = useFunc();
+    const { getData,postData,updateData,deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
     const { data, loading, error, refetch } = useAxiosGet("officer/byManager", 1);
@@ -51,6 +51,12 @@ const Officers = () => {
                 return null;
         }
     }
+    const deleteProd=async(id)=>{
+        console.log("id",id);
+        await deteteData("officer", id); 
+        let { data:pr, loading:prl, error:pre, refetch:prr } =await getData("officer/byManager", 1); 
+        setProducts(pr);
+    }
         const listItem = (product) => {
             return (
                 <div className="col-12">
@@ -67,10 +73,11 @@ const Officers = () => {
                                     </span>
                                 </div>
                             </div>
+                            {/* {let id=product.idofficer} */}
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                                <Button icon="pi pi-comment" label="צור קשר" lassName="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                                <Button icon="pi pi-comment" tooltip="צור קשר" lassName="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                                 <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>
-
+                                <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" lassName="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             </div>
                         </div>
                     </div>
@@ -94,8 +101,9 @@ const Officers = () => {
                             <Tag value={product.numOfDocuments}></Tag>
                         </div>
                         <div className="flex align-items-center justify-content-between">
-                            <Button icon="pi pi-comment" label="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Button icon="pi pi-comment" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>
+                            <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" lassName="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                         </div>
                     </div>
                 </div>
