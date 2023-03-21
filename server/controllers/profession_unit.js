@@ -48,6 +48,7 @@ exports.getProfessionUnitByManager = async(req, res) => {
     const data= await managerDal.getManagerById(id);
     if (data) {
       manager=data;
+      console.log(data);
     } 
     else {
       res.status(404).send({

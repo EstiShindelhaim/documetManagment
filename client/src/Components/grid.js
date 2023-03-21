@@ -10,18 +10,23 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css';
+import useAxiosGet from '../Hooks/useGet'
 
 export default function BasicDemo(props) {
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    const ProductService=props.productService
-
+    const {data, loading, error, refetch} = useAxiosGet(props.url,props.param);
+    
+    console.log(data);
+   const ProductService=props.productService
+ 
     useEffect(() => {
         
         ProductService.getProducts().then((data) => {setProducts(data); console.log(products);});
-
-    }, []);
-
+ }, []);
+if(loading)
+return <p>loading</p>
+console.log(data);
     const getSeverity = (product) => {
         switch (product.inventoryStatus) {
             case 'INSTOCK':

@@ -3,14 +3,16 @@ const officerDal= require('../dal/officer');
 const bcrypt= require('bcrypt')
 
 exports.addOfficer=async(req, res)=>{
+  console.log("req.body");
   console.log(req.body);
-  const {managerId, professionUnitId, permissionId, idNumber ,name,password,mail,numOfDocuments} = req.body
+  const {managerId, professionUnitId, idNumber ,name,password,mail,numOfDocuments} = req.body
   if (!managerId || !idNumber || !password || !numOfDocuments) {// Confirm data
     return res.status(400).json({ message: 'All fields are required' })
   }
  
   const hashedPwd = await bcrypt.hash(password, 10)
-  const userObject = {managerId, professionUnitId, permissionId, idNumber ,name,password:hashedPwd,mail,numOfDocuments}
+  const userObject = {managerId, professionUnitId, idNumber ,name,password:hashedPwd,mail,numOfDocuments}
+  console.log("userObject");
   console.log(userObject);
     
   if (!req.body) {

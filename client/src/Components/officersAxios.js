@@ -1,4 +1,4 @@
-import {get} from "../Hooks/useAxios"
+// import {get} from "../Hooks/useAxios"
 export const ProductService = {
     getProductsData() {
         return [
@@ -97,13 +97,13 @@ export const ProductService = {
         return Promise.resolve(this.getProductsData().slice(0, 10));
     },
 
-    // getProducts() {
-    //     return Promise.resolve(this.getProductsData());
-    // },
-    getProducts(){
-        console.log("in dal");
-        return Promise.resolve(get('localhost:5000/officer/byManager',1));
+    getProducts() {
+        return Promise.resolve(this.getProductsData());
     },
+    // getProducts(){
+    //     console.log("in dal");
+    //     return Promise.resolve(get('localhost:5000/officer/byManager',1));
+    // },
 
     getProductsWithOrdersSmall() {
         

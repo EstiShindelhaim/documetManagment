@@ -9,11 +9,11 @@ import { Button } from 'primereact/button';
 export default function MyButton(props) {
     console.log((props.label));
     console.log((props.icon));
-    return (
+    return (//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
         <div className="card flex flex-wrap justify-content-center gap-3">
             <Button label={props.label} icon={props.icon} 
-            // onClick={()=>{props.func()}} 
+             onClick={()=>{props.func()}} 
             />
         </div>
     )
