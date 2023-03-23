@@ -14,7 +14,8 @@ export default function Menu() {
         {label: 'תיקים', icon: 'pi pi-folder-open'
         // ,command:()=>{navigate("/files")}
     },
-        { label: 'דאשבורד', icon: 'pi pi-fw pi-chart-line'}
+    { label: 'יחידות מקצוע', icon: 'pi pi-th-large' },
+        { label: 'דאשבורד', icon: 'pi pi-fw pi-chart-line' }
     ];
 
     return (

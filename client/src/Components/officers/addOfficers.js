@@ -22,6 +22,7 @@ const AddOfficers = () => {
         if(!id || !name || !password1 || !password2 || !mail || !numOfDocuments)
         {
             alert("נא למלא את כל השדות")
+            console.log(id,"id",name,"name",password1,"password1",password2,"password2",mail,"mail",numOfDocuments,"numOfDocuments");
             return;
         }
         if(password1!=password2)
@@ -91,7 +92,7 @@ const AddOfficers = () => {
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="password2">אשר סיסמה</label>
-                <Password id="password1"value={password1} onChange={(e) => setpassword1(e.target.value)}></Password>
+                <Password id="password1"value={password2} onChange={(e) => setpassword2(e.target.value)}></Password>
             </div>
         </div>
         <div className="card flex justify-content-center">
