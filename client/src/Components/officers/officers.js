@@ -148,7 +148,7 @@ const Officers = () => {
                     </span>
                 </div>
                 <br></br>
-                {<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד"  visible={visible} setVisible={setVisible} content={<AddOfficer visible={visible} setVisible={setVisible}></AddOfficer> } ></PopUp>}
+                {<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד"  visible={visible} setVisible={setVisible} content={<AddOfficer visible={visible} setVisible={setVisible} ></AddOfficer> } ></PopUp>}
                 {/* {console.log(props.popup)} */}
                 <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
