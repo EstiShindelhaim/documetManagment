@@ -30,6 +30,7 @@ const Officers = () => {
     const [layout, setLayout] = useState('grid');
     const { data, loading, error, refetch } = useAxiosGet("officer/byManager", 1);
     const [search, setSearch] = useState('');
+    const [visible, setVisible] = useState(false);
     useEffect(() => {
         if((!products ||products.length==0)&&((!search ||search=='')))
         setProducts(data); console.log(products);
@@ -77,9 +78,9 @@ const Officers = () => {
                             </div>
                             {/* {let id=product.idofficer} */}
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                                <Button icon="pi pi-comment" tooltip="צור קשר" lassName="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                                <Button icon="pi pi-comment" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                                 <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<UpdateOfficerDetails numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
-                                <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" lassName="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                                <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             </div>
                         </div>
                     </div>
@@ -105,7 +106,7 @@ const Officers = () => {
                         <div className="flex align-items-center justify-content-between">
                             <Button icon="pi pi-comment" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" content={<UpdateOfficerDetails numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
-                            <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" lassName="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={()=>{deleteProd(product.idofficer)}} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                         </div>
                     </div>
                 </div>
@@ -147,7 +148,7 @@ const Officers = () => {
                     </span>
                 </div>
                 <br></br>
-                {<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>}
+                {<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד"  visible={visible} setVisible={setVisible} content={<AddOfficer visible={visible} setVisible={setVisible}></AddOfficer> } ></PopUp>}
                 {/* {console.log(props.popup)} */}
                 <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />

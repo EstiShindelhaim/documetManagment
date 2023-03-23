@@ -15,7 +15,7 @@ import useAxiosGet from "../../Hooks/useGet"
 
 
 
-const AddOfficers = () => {
+const AddOfficers = ({visible,setVisible}) => {
     const { getData, postData } = useFunc();
     const {data:d, loading:l, error:e, refetch:f} = useAxiosGet("professionUnit/byManager",1);
     const hundleSubmit = async () => {
@@ -57,7 +57,11 @@ const AddOfficers = () => {
         }
         console.log(officer);
        postData("officer",officer)
-    
+       setVisible(false)
+
+
+
+       //get all officers
     }
 
     const [id, setId] = useState('');
