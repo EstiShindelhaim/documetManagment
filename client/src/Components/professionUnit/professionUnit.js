@@ -24,7 +24,7 @@ import UpdateProfessionUnitDetails from '../updateProfessionUnitDetails';
 
 
 
-const Profession_unit = () => {
+const ProfessionUnit = () => {
     const { getData,postData,updateData,deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
@@ -179,5 +179,5 @@ const Profession_unit = () => {
 
 //     }
     };
-    export default Profession_unit;
+    export default ProfessionUnit;
  

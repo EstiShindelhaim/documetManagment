@@ -11,24 +11,33 @@ const sequelize= require('sequelize');
 
 
 //לבדוק!!!!!!
-exports.getLastFiles= (numOfFile)=>
+exports.getLastFiles= (numOfFiles, officerId)=>
 {
-    return File.findAll(
-        {
-            limit: parseInt(numOfFile),
+    const statusOfChecked=2;////
+
+    return Stages.findAll(
+        {  
             include:
             [{
-                model:db.stages_of_progress_of_files,  
-                attributes: ['fileId', 'statusId', 'date'], 
-                where:{'statusId':2},
+                model:File,  
+                where:
+                {
+                    statusId:statusOfChecked,
+                    officerId:officerId
+                },
             }],
             raw:true,
-            where:{'statusId':2},
-            order:[[db.stages_of_progress_of_files,'date', 'DESC']],
+            limit: parseInt(numOfFiles),
+            order:[['date', 'DESC']], 
+            where:
+            {
+                statusId:statusOfChecked
+
+            }
             
         }
         )
-}
+};
 
 exports.getRGGrafOfFilesByYear = (id) => {
     return Stages.findAll({

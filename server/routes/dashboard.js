@@ -16,7 +16,7 @@ dashRouter.route("/getFilesByYear/:managerId")
     .get(dashCntrl.getGrafOfFilesByYear)
 dashRouter.route("/getFilesByMonth/:managerId")
     .get(dashCntrl.getGrafOfFilesByMonth)
-// dashRouter.route("/:num")
-//     .get(dashCntrl.getLastFiles)
+dashRouter.route("/:num/:officerId")
+    .get(dashCntrl.getLastFiles)
 
 module.exports = dashRouter;

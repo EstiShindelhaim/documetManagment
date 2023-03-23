@@ -3,7 +3,7 @@ const file = require('../models/file');
 
 
 exports.getLastFiles = (req, res) => {
-    dashDal.getLastFiles(req.params.num)
+    dashDal.getLastFiles(parseInt(req.params.num), parseInt(req.params.officerId))
     .then(data => {
         res.send(data);
         })
@@ -14,7 +14,6 @@ exports.getLastFiles = (req, res) => {
     });
     })
     };
-
 
 exports.getRGGrafOfFilesByYear = (req, res) => {
     const id = req.params.managerId;
