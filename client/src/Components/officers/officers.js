@@ -65,7 +65,8 @@ const Officers = () => {
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <Button icon="pi pi-comment" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
-                            <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
+                            <Delete key={product.idofficer} function={()=>{deleteProd(product.idofficer)}} ></Delete>
                         </div>
                     </div>
                 </div>
@@ -93,9 +94,9 @@ const Officers = () => {
                     <div className="flex align-items-center justify-content-between">
                         <Button icon="pi pi-comment" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                         <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
-                        <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
+                        <Delete key={product.idofficer} function={()=>{deleteProd(product.idofficer)}} ></Delete>
                     </div>
-                    {/* <Delete key={product.idofficer} function={()=>{deleteProd(product.idofficer)}} ></Delete> */}
                 </div>
             </div>
         );
@@ -140,7 +141,6 @@ const Officers = () => {
         import('jspdf').then((jsPDF) => {
             import('jspdf-autotable').then(() => {
                 const doc = new jsPDF.default(0, 0);
-
                 doc.autoTable(exportColumns, products);
                 doc.save('products.pdf');
             });
