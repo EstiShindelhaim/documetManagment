@@ -13,6 +13,10 @@ const Stage= db.stages_of_progress_of_files;
 const Op = db.Sequelize.Op;
 const sequelize= require('sequelize');
 
+exports.getManagerByIdNumber = (id) => {
+  return Manager.findAll({ where: { idNumber: id } });
+};
+
 exports.getManagerById = (id) => {
   //return Manager.findByPk(id);
   return Manager.findAll({ where: { idmanager: id } });

@@ -1,5 +1,31 @@
 const managerDal = require("../dal/manager");
 
+exports.login = (req, res) => {
+  const idNumber = req.params.idNumber;
+  const password = req.params.password;
+  managerDal
+    .getManagerByIdNumber(idNumber)
+    .then((data) => {
+      if (data) {
+        if(data[0].password==password)
+          res.send({user:data[0]});
+        else
+        res.send({
+          message: `The password:${password} not correct for id number: ${idNumber}`,
+        });
+      } else {
+        res.status(404).send({
+          message: `Cannot find Manager with id= ${idNumber}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: `Error retrieving Manager with id= ${id}.`,
+      });
+    });
+};
+
 exports.getManagerById = (req, res) => {
   const id = req.params.id;
   managerDal

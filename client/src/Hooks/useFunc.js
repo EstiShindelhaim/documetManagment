@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const url1="http://localhost:5000/";
+
 export const useFunc = () => {
     const postData = async (url, body) => {
         console.log(url);
         try {
-            const res = await axios.post(`http://localhost:5000/${url}`,body);
+            const res = await axios.post(`${url1}${url}`, body);
             console.log(res);
         }
         catch (err) {
@@ -13,10 +15,10 @@ export const useFunc = () => {
 
     }
 
-    const getData =async (url, params) => {
+    const getData = async (url, params) => {
         try {
             console.log(url);
-            const res = await axios.get(`http://localhost:5000/${url}/${params}`);
+            const res = await axios.get(`${url1}${url}/${params}`);
             console.log(res);
             return res
         }
@@ -25,10 +27,10 @@ export const useFunc = () => {
         }
     };
 
-    const updateData =async (url, params,body) => {
+    const updateData = async (url, params, body) => {
         try {
             console.log(url);
-            const res = await axios.put(`http://localhost:5000/${url}/${params}`,body);
+            const res = await axios.put(`${url1}${url}/${params}`, body);
             console.log(res);
             return res
         }
@@ -37,10 +39,10 @@ export const useFunc = () => {
         }
     };
 
-    const deteteData =async (url, params) => {
+    const deteteData = async (url, params) => {
         try {
             console.log(url);
-            const res = await axios.delete(`http://localhost:5000/${url}/${params}`);
+            const res = await axios.delete(`${url1}${url}/${params}`);
             console.log(res);
             return res
         }
@@ -49,5 +51,5 @@ export const useFunc = () => {
         }
     };
 
-    return { getData,postData,updateData,deteteData }
+    return { getData, postData, updateData, deteteData }
 }

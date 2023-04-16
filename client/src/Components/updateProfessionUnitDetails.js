@@ -5,7 +5,7 @@ import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css';
 import { InputText } from "primereact/inputtext";
-import Password from './password';
+import { Password } from 'primereact/password';
 import { useFunc } from "../Hooks/useFunc";
 import { Button } from "primereact/button";
 import useAxiosGet from "../Hooks/useGet"

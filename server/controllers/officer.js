@@ -60,6 +60,23 @@ exports.addOfficer=async(req, res)=>{
     officerDal.getOfficersByManagerId(managerId)
       .then(data => {
         if (data) {
+          // data.forEach(element => {
+          //   element['professionUnit']=element.profession_unit.name;
+          //   delete element.profession_unit;
+          // });
+          // d=data.map((e)=>{e['professionUnit']=e.profession_unit.name; delete e.profession_unit; return e;})
+          data=data.map((e)=>{return{"idofficer":e.idofficer,
+                                      "managerId":e.managerId,
+                                      "professionUnitId":e.professionUnitId,
+                                      "idNumber":e.idNumber,
+                                      "name":e.name,
+                                      "password":e.password,
+                                      "mail":e.mail,
+                                      "numOfDocuments":e.numOfDocuments,
+                                      "professionUnit":e.profession_unit.name}})
+          
+          // console.log(d);
+          console.log(data);
           res.send(data);
         } else {
           res.status(404).send({

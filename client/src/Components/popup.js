@@ -10,7 +10,7 @@ export default function PopUp(props) {
     return (
         <div className="card flex justify-content-center" style={{ direction: "ltr"}}>
             <Button label={props.label} icon={props.icon} onClick={() => props.setVisible(true)} />
-            <Dialog header={props.header} visible={props.visible} style={{ width: '50vw' }} onHide={() => props.setVisible(false)}>
+            <Dialog  header={props.header} visible={props.visible} style={{ width: '50vw' }} onHide={() => props.setVisible(false)}>
                 <div className="m-0">
                     {props.content}
                 </div>

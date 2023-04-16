@@ -52,7 +52,10 @@ exports.getOfficersFilterAndSort=(FilterAndSortObg)=>{
 
 exports.getOfficersByManagerId=(id)=>{
     console.log(id);
-    return Officer.findAll({where:{managerId:id}});
+    return Officer.findAll({
+        where:{managerId:id},
+        include: [{ model: db.profession_units, attributes:['name']}]
+    });
 };
 
 
