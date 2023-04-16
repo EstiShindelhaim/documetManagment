@@ -73,7 +73,7 @@ const Officers = () => {
             </div>
         );
     };
-
+    
     const gridItem = (product) => {
         return (
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
