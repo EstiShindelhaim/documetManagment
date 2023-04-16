@@ -11,27 +11,33 @@ const sequelize= require('sequelize');
 
 
 //לבדוק!!!!!!
-exports.getLastFiles= (numOfFiles, officerId)=>
+exports.getLastFiles= (numOfFiles, managerId)=>
 {
-    const statusOfChecked=2;////
-
     return Stages.findAll(
         {  
-            include:
-            [{
-                model:File,  
-                where:
-                {
-                    statusId:statusOfChecked,
-                    officerId:officerId
-                },
-            }],
+            // include:
+            // [{
+            //     model:File,  
+            //     where:
+            //     {
+            //         statusId:statusOfChecked,
+            //         officerId:officerId
+            //     },
+            // }],
+
+            include: [
+              {model:db.files,  attributes: [],include:{model:db.officers,  attributes: [], where:{'managerId':managerId}}}
+              ,
+            { model: db.statuses, attributes:[], where:{name:'נבדק ע"י הפקיד'}}
+          ],
+
             raw:true,
             limit: parseInt(numOfFiles),
-            order:[['date', 'DESC']], 
+            order:[['date', 'DESC']]
+            , 
             where:
             {
-                statusId:statusOfChecked
+                statusId:2
 
             }
             
@@ -48,7 +54,7 @@ exports.getRGGrafOfFilesByYear = (id) => {
 
       ],
       include: [{model:db.files,  attributes: [],include:{model:db.officers,  attributes: [], where:{'managerId':id}}},
-                { model: db.statuses, attributes:[], where:{name:'נבדק ע"י הפקיד'}}
+      { model: db.statuses, attributes:[], where:{name:'נבדק ע"י הפקיד'}}
         ],
       raw:true,
       group: [sequelize.fn('YEAR', sequelize.col('date'))],

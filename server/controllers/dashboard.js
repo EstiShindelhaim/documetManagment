@@ -3,7 +3,8 @@ const file = require('../models/file');
 
 
 exports.getLastFiles = (req, res) => {
-    dashDal.getLastFiles(parseInt(req.params.num), parseInt(req.params.officerId))
+    console.log("num", req.params.num, "manager",  req.params.managerId);
+    dashDal.getLastFiles(req.params.num, req.params.managerId)
     .then(data => {
         res.send(data);
         })

@@ -10,6 +10,7 @@ import { useFunc } from "../../Hooks/useFunc";
 import { Button } from "primereact/button";
 import useAxiosGet from "../../Hooks/useGet"
 import AutoCompleted from "../autoComplete";
+import Submit from "./submit";
 
 export default function UpdateOfficerDetails(props) {
     const { getData, postData } = useFunc();
@@ -75,7 +76,7 @@ export default function UpdateOfficerDetails(props) {
         let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
         props.setProducts(pr);
 
-        props.toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד עודכן בהצלחה', life: 2000});
+        props.toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד עודכן בהצלחה', life: 1500});
     }
 
 
@@ -121,8 +122,10 @@ export default function UpdateOfficerDetails(props) {
                 <AutoCompleted id="professionUnitId" value={professionUnitId} managerId={1} url={"professionUnit/byManager"} params={1} setValue={setProfessionUnitId}></AutoCompleted>
             </div>
         </div>
+        <br></br>
 
-        <Button label="אישור" icon="pi pi-check" id={props.id} onClick={hundleSubmit}></Button>
+        {/* <Button label="אישור" icon="pi pi-check" id={props.id} onClick={hundleSubmit}></Button> */}
+        <Submit function={hundleSubmit}></Submit>
     </>
     )
 }

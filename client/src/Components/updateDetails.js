@@ -52,7 +52,10 @@ export default function UpdateDetails(props) {
         }
         if(notValidMail) setNotValidMail(false);
         updateData("manager", 1, managerToUpdae);
+
         props.setVisible(false);
+
+        props.toast.current.show({severity:'success', summary: 'Success', detail:'הפרטים עודכנו בהצלחה', life: 1500});
     }
 
 

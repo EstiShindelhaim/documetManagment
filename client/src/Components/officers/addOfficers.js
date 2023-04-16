@@ -73,7 +73,7 @@ const AddOfficers = (props) => {
        let { data:pr, loading:prl, error:pre, refetch:prr } =await getData("officer/byManager", 1);
        props.setProducts(pr);
 
-       props.toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד נוסף בהצלחה', life: 2000});
+       props.toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד נוסף בהצלחה', life: 1500});
                  
     }
 

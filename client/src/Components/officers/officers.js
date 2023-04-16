@@ -41,7 +41,7 @@ const Officers = () => {
         await deteteData("officer", id);
         let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
         setProducts(pr);
-        toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד נמחק בהצלחה', life: 2000});
+        toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד נמחק בהצלחה', life: 1500});
     }
     const listItem = (product) => {
         return (
@@ -73,7 +73,7 @@ const Officers = () => {
             </div>
         );
     };
-    
+
     const gridItem = (product) => {
         return (
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">

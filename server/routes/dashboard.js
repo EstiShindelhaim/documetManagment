@@ -4,6 +4,9 @@ const dashCntrl = require("../controllers/dashboard");
 
 const dashRouter = express.Router();
 
+
+dashRouter.route("/getLastFiles/:num/:managerId")
+    .get(dashCntrl.getLastFiles)
 dashRouter.route("/getRGFilesByYear/:managerId")
     .get(dashCntrl.getRGGrafOfFilesByYear)
 dashRouter.route("/getRGFilesByMonth/:managerId")

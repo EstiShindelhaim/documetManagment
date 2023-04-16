@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useRef} from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 import {useNavigate} from "react-router-dom"
 import PopUp from './popup';
@@ -6,10 +6,13 @@ import UpdateDetails from './updateDetails';
 import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Tag } from 'primereact/tag';
+import { Toast } from 'primereact/toast';
+
 
 export default function Menu() {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
+    const toast = useRef(null);
     const items = [
         {label: 'פקידים', icon: 'pi pi-fw pi-users'
         , command:()=>{navigate("/officers")}
@@ -39,8 +42,9 @@ export default function Menu() {
             <ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>
             </div>
             <Button icon="pi pi-comment" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
-            <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
+            <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
             <br></br>
+            <Toast ref={toast}/>
         </div>
     )
 }
