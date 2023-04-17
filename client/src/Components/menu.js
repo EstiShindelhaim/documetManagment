@@ -89,21 +89,23 @@ export default function Menu() {
     };
 
     return (
-        <div className="card">
+        <div style={{display:"flex", flexWrap:"wrap"}} className="card">
             <TabMenu model={items} />
-            <div style={{ width: "10%" }}>
+            <div style={{ width: "10%", marginRight:"10%" /*, display:"flex", flexWrap:"wrap"}}*/}}> 
                 <Tag value="מנהל" rounded></Tag>
                 {2000 - numOfDocumentForManager}/<b>2000</b>
-                {console.log("numOfDocumentForManager", numOfDocumentForManager)}
                 <ProgressBar value={((2000 - numOfDocumentForManager) / 2000) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
+            </div> 
+            <div style={{ width: "2%"}}></div>
+            <div style={{ width: "10%" /*, display:"flex", flexWrap:"wrap"}}*/}}>
                 <Tag value="פקידים" rounded></Tag>
                 {2000 - numOfDocumentForEmp}/<b>2000</b>
-                {console.log("numOfDocumentForEmp", numOfDocumentForEmp)}
                 <ProgressBar value={((2000 - numOfDocumentForEmp) / 2000) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
             </div>
-            <Button icon="pi pi-comment" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
+            <div style={{ width: "2%"}}></div>
+            <Button style={{ display:"flex"}} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
+            <div style={{ width: "2%"}}></div>
             <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
-            <br></br>
             <Toast ref={toast} />
         </div>
     )
