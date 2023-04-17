@@ -6,6 +6,29 @@ exports.getLastFiles = (req, res) => {
     console.log("num", req.params.num, "manager",  req.params.managerId);
     dashDal.getLastFiles(req.params.num, req.params.managerId)
     .then(data => {
+        // {
+        //     "idstages_of_progress_of_file": 286,
+        //     "fileId": 361,
+        //     "statusId": 2,
+        //     "date": "2022-04-16",
+        //     "file.name": "יוסי",
+        //     "file.result": 1,
+        //     "file.remarks": "",
+        //     "file.officer.idofficer": 7,
+        //     "file.officer.name": "לאה כהן",
+        //     "status.name": "נבדק ע\"י הפקיד"
+        // }
+        console.log(data);
+        data=data.map((e)=>{return{"idfile":e.fileId,
+                                    "statusId":e.statusId,
+                                    "date":e.date,
+                                    "name":e["file.name"],
+                                    "result":e["file.result"],
+                                    "remarks":e["file.remarks"],
+                                    "idofficer":e["file.officer.idofficer"],
+                                    "statusName":e["status.name"],
+                                    "officerName":e["file.officer.name"]}});
+        console.log(data);
         res.send(data);
         })
     .catch(err => {

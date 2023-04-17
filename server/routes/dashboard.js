@@ -4,22 +4,19 @@ const dashCntrl = require("../controllers/dashboard");
 
 const dashRouter = express.Router();
 
-
-dashRouter.route("/getLastFiles/:num/:managerId")
+dashRouter.route("/lastFiles/:num/:managerId")
     .get(dashCntrl.getLastFiles)
-dashRouter.route("/getRGFilesByYear/:managerId")
+dashRouter.route("/RGFilesByYear/:managerId")
     .get(dashCntrl.getRGGrafOfFilesByYear)
-dashRouter.route("/getRGFilesByMonth/:managerId")
+dashRouter.route("/RGFilesByMonth/:managerId")
     .get(dashCntrl.getRGGrafOfFilesByMonth)
-dashRouter.route("/getFilesBy2month/:managerId")
+dashRouter.route("/filesBy2month/:managerId")
     .get(dashCntrl.getFilesBy2month)
-dashRouter.route("/getFilesBy2year/:managerId")
+dashRouter.route("/filesBy2year/:managerId")
     .get(dashCntrl.getFilesBy2year)
-dashRouter.route("/getFilesByYear/:managerId")
+dashRouter.route("/filesByYear/:managerId")
     .get(dashCntrl.getGrafOfFilesByYear)
-dashRouter.route("/getFilesByMonth/:managerId")
+dashRouter.route("/filesByMonth/:managerId")
     .get(dashCntrl.getGrafOfFilesByMonth)
-dashRouter.route("/:num/:officerId")
-    .get(dashCntrl.getLastFiles)
 
 module.exports = dashRouter;
