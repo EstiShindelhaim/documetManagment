@@ -108,6 +108,7 @@ exports.getFilesBy2year = async(req, res) => {
     }; 
 };
 
+
 exports.getGrafOfFilesByYear = (req, res) => {
     const id = req.params.managerId;
     dashDal.getGrafOfFilesByYear(id)
