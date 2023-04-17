@@ -11,11 +11,13 @@ fileRouter.route("/:id")
     .get(fileCntrl.getFileByID)
     .put(fileCntrl.updateFile)
     .delete(fileCntrl.deleteFileByID)
-
-    fileRouter.route("/getfiles")
+fileRouter.route("/byManager/:managerId")
+    .get(fileCntrl.getFilesByManagerId)
+fileRouter.route("/passedToManager/:managerId")
+    .get(fileCntrl.getFilesPassedToManager)
+fileRouter.route("/getfiles")
     .post(fileCntrl.getAllFiles)
-
-    fileRouter.route("/getfilesPassedManager")
+fileRouter.route("/getfilesPassedManager")
     .post(fileCntrl.getFilesPassedManager)
 
 

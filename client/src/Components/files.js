@@ -1,5 +1,5 @@
 import File from './file';
-import getAllFiles from '../service/allFile';
+import getAllFiles from '../Service/allFile';
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';

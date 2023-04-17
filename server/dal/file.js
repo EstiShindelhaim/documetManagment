@@ -21,16 +21,27 @@ exports.getFileByID=(id)=>{
 
 };
 
+exports.getFilesByManagerId=(id)=>{
+    return File.findAll({
+        include:[{model:db.statuses,  attributes: ['name'], where:{'name':{[Op.ne]: 'נסגר ע"י המנהל'}}},
+        {model:db.officers, attributes: ['name'] },
+        {model:db.officers, attributes: [], where:{'managerId':id}}]
+    });
+};
 
-
+exports.getFilesPassedToManager=(id)=>{
+    return File.findAll({
+        include:[{model:db.statuses,  attributes: ['name'], where:{'name': 'הועבר למנהל'}},
+        {model:db.officers, attributes: ['name'] },
+        {model:db.officers, attributes: [], where:{'managerId':id}}]
+    });
+};
 const concatForWhere=(wh,attribute_key ,attribute_value)=>
 {    
     if(attribute_value)
 
         wh=wh[attribute_key] =attribute_value;
 }
-
-
 
 exports.getAllFiles= (filterParams)=>{
 
@@ -66,9 +77,7 @@ exports.getAllFiles= (filterParams)=>{
                 ];
     qry.raw=true;
     return File.findAll(qry);
-
 };
-
 
 exports.getFilesPassedManager= (filterParams)=>{
 

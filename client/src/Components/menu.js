@@ -56,15 +56,21 @@ export default function Menu() {
     const toast = useRef(null);
     const items = [
         {
-            label: 'פקידים', icon: 'pi pi-fw pi-users'
-            , command: () => { navigate("/officers") }
+            label: 'פקידים', icon: 'pi pi-fw pi-users',
+            command: () => { navigate("/officers") }
         },
         {
             label: 'תיקים', icon: 'pi pi-folder-open'
             // ,command:()=>{navigate("/files")}
         },
-        { label: 'יחידות מקצוע', icon: 'pi pi-th-large', command: () => { navigate("/professionUnits") } },
-        { label: 'דאשבורד', icon: 'pi pi-fw pi-chart-line' }
+        { 
+            label: 'יחידות מקצוע', icon: 'pi pi-th-large', 
+            command: () => { navigate("/professionUnits") } 
+        },
+        { 
+            label: 'דאשבורד', icon: 'pi pi-fw pi-chart-line',
+            command: () => { navigate("/dashboard") }
+        }
     ];
 
     const valueTemplateEmp = (value) => {

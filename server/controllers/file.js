@@ -20,7 +20,6 @@ exports.addFile = (req, res) => {
 
     
 exports.getFileByID=(req, res)=>{
-    console.log("innnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     const id =req.params.id;
     fileDal.getFileByID(id).then(data => {
         if (data) {
@@ -52,6 +51,86 @@ exports.getAllFiles=(req, res)=>{//לשים לב למיין
         });
         });
 }
+
+exports.getFilesByManagerId=(req, res)=>{
+  console.log(req.params.managerId);
+    const managerId =req.params.managerId ;
+    fileDal.getFilesByManagerId(managerId)
+      .then(data => {
+        if (data) {
+          // data.forEach(element => {
+          //   element['professionUnit']=element.profession_unit.name;
+          //   delete element.profession_unit;
+          // });
+          // d=data.map((e)=>{e['professionUnit']=e.profession_unit.name; delete e.profession_unit; return e;})
+          data=data.map((e)=>{return{"idfile":e.idfile,
+                                      "statusId":e.statusId,
+                                      "urgency":e.urgency,
+                                      "ApplicationSubmissionDate":e.ApplicationSubmissionDate,
+                                      "IDnumberOfApplicant":e.IDnumberOfApplicant,
+                                      "name":e.name,
+                                      "result":e.result,
+                                      "officerId":e.officerId,
+                                      "thoroughCheck":e.thoroughCheck,
+                                      "remarks":e.remarks,
+                                      "statusName":e.status.name,
+                                      "officerName":e.officer.name}})
+          
+          // // console.log(d);
+          // console.log(data);
+          res.send(data);
+        } else {
+          res.status(404).send({
+            message: `Cannot find files with managerId= ${managerId}.`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: `Error retrieving files with managerId= ${managerId}.`
+        });
+      });
+  }
+
+  exports.getFilesPassedToManager=(req, res)=>{
+    console.log(req.params.managerId);
+      const managerId =req.params.managerId ;
+      fileDal.getFilesPassedToManager(managerId)
+        .then(data => {
+          if (data) {
+            // data.forEach(element => {
+            //   element['professionUnit']=element.profession_unit.name;
+            //   delete element.profession_unit;
+            // });
+            // d=data.map((e)=>{e['professionUnit']=e.profession_unit.name; delete e.profession_unit; return e;})
+            data=data.map((e)=>{return{"idfile":e.idfile,
+                                        "statusId":e.statusId,
+                                        "urgency":e.urgency,
+                                        "ApplicationSubmissionDate":e.ApplicationSubmissionDate,
+                                        "IDnumberOfApplicant":e.IDnumberOfApplicant,
+                                        "name":e.name,
+                                        "result":e.result,
+                                        "officerId":e.officerId,
+                                        "thoroughCheck":e.thoroughCheck,
+                                        "remarks":e.remarks,
+                                        "statusName":e.status.name,
+                                        "officerName":e.officer.name}})
+            
+            // // console.log(d);
+            // console.log(data);
+            res.send(data);
+          } else {
+            res.status(404).send({
+              message: `Cannot find files with managerId= ${managerId}.`
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: `Error retrieving files with managerId= ${managerId}.`
+          });
+        });
+    }
 
 exports.getFilesPassedManager=(req, res)=>{//לשים לב למיין
   console.log(req.body);
