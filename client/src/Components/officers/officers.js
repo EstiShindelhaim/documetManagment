@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
@@ -29,19 +29,30 @@ const Officers = () => {
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
+
     useEffect(() => {
         console.log("products", products);
         if (!search || search == '')
             setProducts(data);
-    });
+    }, [data]);
+
+    useEffect(() => {
+        console.log("products", products);
+        if (!search || search == '')
+            setProducts(data);
+    }, [search]);
+
     if (loading)
         return <p>loading</p>
 
     const deleteProd = async (id) => {
         await deteteData("officer", id);
-        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
-        setProducts(pr);
-        toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד נמחק בהצלחה', life: 1500});
+        refetch();
+        // const { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
+        // console.log("products===========", pr);
+        // setProducts(pr)
+        // setProducts([{ name: "aaa", idNumber: 123, mail: "jjjj", numOfDocuments: 1, professionUnit: "asd" }]);
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'הפקיד נמחק בהצלחה', life: 1500 });
     }
     const listItem = (product) => {
         return (
@@ -64,9 +75,9 @@ const Officers = () => {
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <Button icon="pi pi-send" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                            <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                            <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts}name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit ={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                             {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
-                            <Delete key={product.idofficer} function={()=>{deleteProd(product.idofficer)}} ></Delete>
+                            <Delete key={product.idofficer} function={() => { deleteProd(product.idofficer) }} ></Delete>
                         </div>
                     </div>
                 </div>
@@ -93,9 +104,9 @@ const Officers = () => {
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <Button icon="pi pi-send" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} numOfDocuments={product.numOfDocuments} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                        <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts}name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit ={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                         {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
-                        <Delete key={product.idofficer} function={()=>{deleteProd(product.idofficer)}} ></Delete>
+                        <Delete key={product.idofficer} function={() => { deleteProd(product.idofficer) }} ></Delete>
                     </div>
                 </div>
             </div>
@@ -194,9 +205,9 @@ const Officers = () => {
             </div>
             <br></br>
             <div style={{ textAlign: "center" }}>
-                <Button style={{direction:"ltr"}} type="button" label="EXCELיצוא הפקידים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+                <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא הפקידים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                <Button style={{direction:"ltr"}} type="button" label="PDFיצוא הפקידים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
+                <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא הפקידים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
             </div>
             <br></br>
             <PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></PopUp>
@@ -210,7 +221,7 @@ const Officers = () => {
     return (
         <div className="card">
             <DataView value={products} itemTemplate={itemTemplate} layout={layout} header={header()} />
-            <Toast ref={toast}/>
+            <Toast ref={toast} />
         </div>
     )
 

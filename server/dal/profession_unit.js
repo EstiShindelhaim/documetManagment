@@ -15,3 +15,10 @@ return Profession.update(stageToUpdate, {
     where: { idprofession_unit: id },
 });
 };
+
+exports.deleteProfessionUnitById = (id) => {
+  console.log("id",id);
+  return Profession.destroy({
+    where: { idprofession_unit: id }
+  })
+}

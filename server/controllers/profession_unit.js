@@ -101,3 +101,27 @@ exports.updateProfessionUnit = (req, res) => {
       });
     });
 };
+
+
+exports.deleteProfessionUnitById=(req, res)=>{
+  const id = req.params.id;
+  console.log("id",id);
+  ProfessionDal.deleteProfessionUnitById(id)
+ 
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "professionUnit was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete professionUnit with id. Maybe professionUnit was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: `Could not delete professionUnit with id= ${id}`
+      });
+    });
+}

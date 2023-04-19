@@ -15,26 +15,17 @@ import Submit from "./submit";
 export default function UpdateOfficerDetails(props) {
     const { getData, postData } = useFunc();
     const { data: d, loading: l, error: e, refetch: f } = useAxiosGet("professionUnit/byManager", 1);
-
-    const [name, setname] = useState('');
-    const [password1, setpassword1] = useState('');
-    const [password2, setpassword2] = useState('');
-    const [mail, setmail] = useState('');
-    const [professionUnitId, setProfessionUnitId] = useState('');
-    const [numOfDocuments, setnumOfDocuments] = useState('');
+    const [name, setname] = useState(props.name);
+    console.log("props.name",props.name,"props.mail",props.mail,"props.professionUnit",props.professionUnit,"props.numOfDocuments",props.numOfDocuments);
+    const [mail, setmail] = useState(props.mail);
+    const [professionUnitId, setProfessionUnitId] = useState(props.professionUnit);
+    const [numOfDocuments, setnumOfDocuments] = useState(props.numOfDocuments);
     const { updateData } = useFunc();
     const [notValidMail, setNotValidMail] = useState(false);
     const [notValidPassword, setNotValidPassword] = useState(false);
     const [notValidDocuments, setNotValidDocuments] = useState(false);
 
     const hundleSubmit = async () => {
-        if (password1 != password2) {
-            if (!notValidPassword) setNotValidPassword(true);
-            if (notValidMail) setNotValidMail(false);
-            if (notValidDocuments) setNotValidDocuments(false);
-            return
-        }
-        if (notValidPassword) setNotValidPassword(false);
         if (mail != '' && !mail.endsWith('@gmail.com')) {
             if (!notValidMail) setNotValidMail(true);
             if (notValidDocuments) setNotValidDocuments(false);
@@ -53,15 +44,13 @@ export default function UpdateOfficerDetails(props) {
         {
             professionUnitId: undefined,
             name: undefined,
-            password: undefined,
             mail: undefined,
             numOfDocuments: undefined
 
         }
         if (name != '')
             officerToUpdae.name = name
-        if (password1 != '')
-            officerToUpdae.password = password1
+       
         if (professionUnitId != '')
             officerToUpdae.professionUnitId = professionUnit[0].idprofession_unit
         if (mail != '')
@@ -83,23 +72,11 @@ export default function UpdateOfficerDetails(props) {
 
 
     return (<>
+    <div style={{direction:"rtl"}}>
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="name">שם</label>
                 <InputText id="name" aria-describedby="name-help" value={name} onChange={(e) => setname(e.target.value)} />
-            </div>
-        </div>
-        <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-2">
-                <label htmlFor="password1">סיסמה</label>
-                <Password id="password1" value={password1} onChange={(e) => setpassword1(e.target.value)}></Password>
-            </div>
-        </div>
-        <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-2">
-                <label htmlFor="password2">אשר סיסמה</label>
-                <Password id="password2" aria-describedby="password-help" value={password2} onChange={(e) => setpassword2(e.target.value)} />
-                {notValidPassword && <span style={{ color: "red" }}>אשר סיסמה שנית</span>}
             </div>
         </div>
         <div className="card flex justify-content-center">
@@ -122,10 +99,18 @@ export default function UpdateOfficerDetails(props) {
                 <AutoCompleted id="professionUnitId" value={professionUnitId} managerId={1} url={"professionUnit/byManager"} params={1} setValue={setProfessionUnitId}></AutoCompleted>
             </div>
         </div>
+        </div>
         <br></br>
 
         {/* <Button label="אישור" icon="pi pi-check" id={props.id} onClick={hundleSubmit}></Button> */}
-        <Submit function={hundleSubmit}></Submit>
+        <Submit function={hundleSubmit} current={{name:props.name,
+                                                    mail:props.mail,
+                                                    professionUnit:props.professionUnit,
+                                                    numOfDocuments:props.numOfDocuments}}
+                                        new={{name:props.name,
+                                                    mail:mail,
+                                                    professionUnit:professionUnitId,
+                                                    numOfDocuments:numOfDocuments}}></Submit>
     </>
     )
 }

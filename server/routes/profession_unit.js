@@ -9,5 +9,6 @@ professionRouter.route("/:managerId")
 professionRouter.route("/byManager/:managerId")
   .get(professionCntrl.getProfessionUnitByManager)
 professionRouter.route("/:id")
-  .put(professionCntrl.updateProfessionUnit);
+  .put(professionCntrl.updateProfessionUnit)
+  .delete(professionCntrl.deleteProfessionUnitById)
 module.exports = professionRouter;
