@@ -1,6 +1,6 @@
 import React from "react";
 import AddOfficer from "./popup";
-import AllFiles from "./files";
+
 import Menu from "./menu";
 import Officers from "./officers/officers";
 import Profession_unit from "./professionUnit/professionUnit";

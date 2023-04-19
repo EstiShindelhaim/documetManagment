@@ -61,7 +61,7 @@ export default function Menu() {
         },
         {
             label: 'תיקים', icon: 'pi pi-folder-open'
-            // ,command:()=>{navigate("/files")}
+            ,command:()=>{navigate("/files")}
         },
         { 
             label: 'יחידות מקצוע', icon: 'pi pi-th-large', 

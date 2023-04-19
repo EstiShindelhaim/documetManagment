@@ -4,6 +4,7 @@ const db = require("../models/index");
 const File= db.files;
 
 const Op = db.Sequelize.Op;
+const Stages = db.stages_of_progress_of_files;
 
 exports.addFile = (fileToAdd) => {
 
@@ -25,7 +26,9 @@ exports.getFilesByManagerId=(id)=>{
     return File.findAll({
         include:[{model:db.statuses,  attributes: ['name'], where:{'name':{[Op.ne]: 'נסגר ע"י המנהל'}}},
         {model:db.officers, attributes: ['name'] },
-        {model:db.officers, attributes: [], where:{'managerId':id}}]
+        {model:db.officers, attributes: [], where:{'managerId':id}},
+        // {model:Stages, attributes: ['date'] ,include:{model:db.statuses,  attributes: [], where:{'name': 'נבדק ע"י הפקיד'}}}
+    ]
     });
 };
 
@@ -33,7 +36,9 @@ exports.getFilesPassedToManager=(id)=>{
     return File.findAll({
         include:[{model:db.statuses,  attributes: ['name'], where:{'name': 'הועבר למנהל'}},
         {model:db.officers, attributes: ['name'] },
-        {model:db.officers, attributes: [], where:{'managerId':id}}]
+        {model:db.officers, attributes: [], where:{'managerId':id}},
+        // {model:Stages, attributes: ['date']}
+    ]
     });
 };
 const concatForWhere=(wh,attribute_key ,attribute_value)=>

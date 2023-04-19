@@ -1,4 +1,4 @@
-import Files from "./Components/files";
+import Files from "./Components/files/files";
 import Home from "./Components/Home";
 import React from "react";
 import Login from "./Components/login/login";

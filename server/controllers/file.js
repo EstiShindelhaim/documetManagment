@@ -74,7 +74,9 @@ exports.getFilesByManagerId=(req, res)=>{
                                       "thoroughCheck":e.thoroughCheck,
                                       "remarks":e.remarks,
                                       "statusName":e.status.name,
-                                      "officerName":e.officer.name}})
+                                      "officerName":e.officer.name,
+                                      // "openDate":e.stages_of_progress_of_files.date
+                                    }})
           
           // // console.log(d);
           // console.log(data);

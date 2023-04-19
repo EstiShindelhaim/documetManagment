@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { Tag } from 'primereact/tag';
-import { ProductService } from './service/ProductService';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
 
