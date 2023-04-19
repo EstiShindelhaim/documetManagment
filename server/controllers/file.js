@@ -79,7 +79,7 @@ exports.getFilesByManagerId=(req, res)=>{
                                     }})
           
           // // console.log(d);
-          // console.log(data);
+          console.log(data);
           res.send(data);
         } else {
           res.status(404).send({
@@ -151,66 +151,64 @@ exports.getFilesPassedManager=(req, res)=>{//לשים לב למיין
 //     res.send("getAllFiles");
 // }
 
+
 exports.updateFile=async(req, res)=>{
-    const id=req.params.id;
-    const data=new date();
-    let lfile;
-    try{
-      const data= await fileDal.getFileByID(id);
-      if (data) {
-        lfile=data;
-      } 
-      else {
-        res.status(404).send({
-          message: `Cannot find file with id= ${id}.`,
-        });
-      }
+  const id=req.params.id;
+  const ts = Date.now();
+  const date = new Date(ts);
+  let lfile;
+  try{
+    const data= await fileDal.getFileByID(id);
+    if (data) {
+      lfile=data;
+    } 
+    else {
+      res.status(404).send({
+        message: `Cannot find file with id= ${id}.`,
+      });
     }
-    catch(err){
+  }
+  catch(err){
+    res.status(500).send({
+      message: `Error retrieving last file with id= ${id}.`,
+    });
+  };
+  lfile=lfile[0];
+  console.log(lfile);
+  console.log(lfile.statusId);
+  console.log(req.body.statusId);
+  console.log(req.body.statusId && lfile.statusId!=req.body.statusId);
+  if(req.body.statusId && lfile.statusId!=req.body.statusId){
+    stageDal
+    .addStage({fileId:id,statusId:req.body.statusId,date:date})
+    .then()
+    .catch((err) => {
       res.status(500).send({
-        message: `Error retrieving last file with id= ${id}.`,
+        message: err.message || "Some error occurred while creating the Stage.",
       });
-    };
-    lfile=lfile[0];
-    console.log(lfile);
-    console.log(lfile.statusId);
-    console.log(req.body.statusId);
-    console.log(req.body.statusId && lfile.statusId!=req.body.statusId);
-    if(req.body.statusId && lfile.statusId!=req.body.statusId){
-      if(!req.body.date){
-        res.status(500).send({
-          message: `when you change the status you have to send date.`,
+    });
+  }
+  console.log(id);
+  fileDal.updateFile(id ,req.body)
+  .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "File was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update File with id=${id}. Maybe File was not found or req.body is empty!`
         });
       }
-      stageDal
-      .addStage({fileId:id,statusId:req.body.statusId,date:data})
-      .then()
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Stage.",
-        });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message||"Error updating File with id=" + id
       });
-    }
-    console.log(id);
-    fileDal.updateFile(id ,req.body)
-    .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "File was updated successfully."
-          });
-        } else {
-          res.send({
-            message: `Cannot update File with id=${id}. Maybe File was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: err.message||"Error updating File with id=" + id
-        });
-      });
+    });
 
 }
+
 // closeFile=(req, res)=>{//????
 //     res.send("closeReques");
 // }
@@ -229,7 +227,7 @@ exports.deleteFileByID=(req, res)=>{//????
   })
   .catch(err => {
     res.status(500).send({
-      message: err.message||"Could not delete File with id=" + id
+      message: err.message||"Could not delete File with id="+id
     });
   });
 }

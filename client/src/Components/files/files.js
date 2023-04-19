@@ -25,16 +25,25 @@ const Files = () => {
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
     const { data, loading, error, refetch } = useAxiosGet("file/byManager", 2);
-    const { data:dStatuses, loading:lStatuses, error:eStatuses, refetch:rStatuses } = useAxiosGet("file/byManager", 2);
+    const { data:dStatuses, loading:lStatuses, error:eStatuses, refetch:rStatuses } = useAxiosGet("status");
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
-
+    let statusId=2
     useEffect(() => {
         console.log("products", products);
         setProducts(data);
     }, [data]);
+
+    useEffect(() => {
+        if(dStatuses){
+            console.log("dStatuses",dStatuses);
+            statusId=dStatuses.filter(e=>e.name=='נסגר ע"י המנהל')[0].idstatus;
+            console.log("statusId", statusId);
+        }
+
+    }, [dStatuses]);
 
     useEffect(() => {
         console.log("products", products);
@@ -46,8 +55,8 @@ const Files = () => {
         return <p>loading</p>
 
     const closeProd = async (id) => {
-        const body={"statusId":1}
-        await updateData("file", id,body);
+        const body={"statusId":statusId}
+        await updateData("file", id, body);
         refetch();
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
     }
@@ -73,7 +82,7 @@ const Files = () => {
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                            <Button icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            <Button onClick={()=>{closeProd(product.idfile)}} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                             <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                         </div>
                     </div>
@@ -116,7 +125,7 @@ const Files = () => {
                         <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
                         <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                             <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                            <Button icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            <Button onClick={()=>{closeProd(product.idfile)}} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                             <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                         </div>
                     </div>
