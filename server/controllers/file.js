@@ -153,6 +153,7 @@ exports.getFilesPassedManager=(req, res)=>{//לשים לב למיין
 
 exports.updateFile=async(req, res)=>{
     const id=req.params.id;
+    const data=new date();
     let lfile;
     try{
       const data= await fileDal.getFileByID(id);
@@ -182,7 +183,7 @@ exports.updateFile=async(req, res)=>{
         });
       }
       stageDal
-      .addStage({fileId:id,statusId:req.body.statusId,date:req.body.date})
+      .addStage({fileId:id,statusId:req.body.statusId,date:data})
       .then()
       .catch((err) => {
         res.status(500).send({

@@ -25,6 +25,7 @@ const Files = () => {
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
     const { data, loading, error, refetch } = useAxiosGet("file/byManager", 2);
+    const { data:dStatuses, loading:lStatuses, error:eStatuses, refetch:rStatuses } = useAxiosGet("file/byManager", 2);
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -44,14 +45,11 @@ const Files = () => {
     if (loading)
         return <p>loading</p>
 
-    const deleteProd = async (id) => {
-        await deteteData("officer", id);
+    const closeProd = async (id) => {
+        const body={"statusId":1}
+        await updateData("file", id,body);
         refetch();
-        // const { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
-        // console.log("products===========", pr);
-        // setProducts(pr)
-        // setProducts([{ name: "aaa", idNumber: 123, mail: "jjjj", numOfDocuments: 1, professionUnit: "asd" }]);
-        toast.current.show({ severity: 'success', summary: 'Success', detail: 'הפקיד נמחק בהצלחה', life: 1500 });
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
     }
 
     const listItem = (product) => {
@@ -76,6 +74,7 @@ const Files = () => {
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                             <Button icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                         </div>
                     </div>
                 </div>
@@ -118,6 +117,7 @@ const Files = () => {
                         <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                             <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                             <Button icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                         </div>
                     </div>
                 </div>
@@ -144,8 +144,6 @@ const Files = () => {
     }
 
     const FilterProduct = async (args) => {
-        // refetch();
-        // pr = data.filter(p => forFilter(p, args))
 
         let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("file/byManager", 2);
         pr = pr.filter(p => forFilter(p, args))
@@ -153,11 +151,11 @@ const Files = () => {
     }
 
     const cols = [
-        { field: 'idNumber', header: 'Id Number' },
-        { field: 'name', header: 'Name' },
-        { field: 'mail', header: 'Mail' },
-        { field: 'numOfDocuments', header: 'Num Of Documents' },
-        { field: 'professionUnit', header: 'Profession Unit' }
+        { field: "name", header: 'מגיש התיק' },
+        { field: "statusName", header:  'סטטוס'},
+        { field: "result", header:'תוצאת התיק'  },
+        { field: "officerName", header:'פקיד מטפל'  },
+        { field: "remarks", header:'הערות'  }
     ];
 
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
@@ -176,11 +174,11 @@ const Files = () => {
         import('xlsx').then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(products.map((e) => {
                 return {
-                    "Id Number": e.idNumber,
-                    "Name": e.name,
-                    "Mail": e.mail,
-                    "num Of Documents": e.numOfDocuments,
-                    "Profession Unit": e.professionUnit
+                    'מגיש התיק': e.name,
+                    'סטטוס': e.statusName,
+                    'תוצאת התיק': e.result,
+                    'פקיד מטפל': e.officerName,
+                    'הערות': e.remarks
                 }
             }));
             const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };

@@ -10,6 +10,7 @@ const dashboardRouter = require("./routes/dashboard");
 const stageRouter = require("./routes/stage");
 const professionUnitRouter=require("./routes/profession_unit");
 const cors = require('cors');
+const statusRouter = require("./routes/status");
 
 const app = express();
 app.use(cors());
@@ -26,7 +27,7 @@ app.use("/principal", principalRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/stages", stageRouter);
 app.use("/professionUnit", professionUnitRouter);
-
+app.use("/status", statusRouter);
 
 app.all("*", (req, res) => {
   res.status(404);
