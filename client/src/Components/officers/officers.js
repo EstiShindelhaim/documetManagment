@@ -48,11 +48,13 @@ const Officers = () => {
     const deleteProd = async (id) => {
         await deteteData("officer", id);
         refetch();
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'הפקיד נמחק בהצלחה', life: 1500 });
+        
         // const { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
         // console.log("products===========", pr);
         // setProducts(pr)
         // setProducts([{ name: "aaa", idNumber: 123, mail: "jjjj", numOfDocuments: 1, professionUnit: "asd" }]);
-        toast.current.show({ severity: 'success', summary: 'Success', detail: 'הפקיד נמחק בהצלחה', life: 1500 });
+        
     }
     const listItem = (product) => {
         return (

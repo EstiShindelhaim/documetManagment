@@ -20,8 +20,8 @@ exports.getLastFiles = (req, res) => {
         // }
         console.log(data);
         data=data.map((e)=>{return{"idfile":e.fileId,
-                                    "statusId":e.statusId,
-                                    "date":e.date,
+                                    "statusId":e.statusId,                             
+                                    "date":new Date(e.date).toLocaleDateString(),
                                     "name":e["file.name"],
                                     "result":e["file.result"],
                                     "remarks":e["file.remarks"],

@@ -68,7 +68,7 @@ export default function Menu() {
             command: () => { navigate("/professionUnits") } 
         },
         { 
-            label: 'דאשבורד', icon: 'pi pi-fw pi-chart-line',
+            label: 'דאשבורד', icon: 'pi pi-chart-line',
             command: () => { navigate("/dashboard") }
         }
     ];

@@ -16,6 +16,7 @@ import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
+import { SelectButton } from 'primereact/selectbutton';
 import UpdateOfficerDetails from './updateOfficerDetails';
 import Delete from '../delete';
 import { Toast } from 'primereact/toast';
@@ -25,21 +26,26 @@ const Files = () => {
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
     const { data, loading, error, refetch } = useAxiosGet("file/byManager", 2);
-    const { data:dStatuses, loading:lStatuses, error:eStatuses, refetch:rStatuses } = useAxiosGet("status");
+    const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [statusId, setStatusId] = useState(3);
+    // const [statusPass, setStatusPass] = useState(3);
+    const options = ['כל התיקים', 'תיקים שהועברו למנהל'];
+    const [value, setValue] = useState(options[0]);
+
     const toast = useRef(null);
-    let statusId=2
     useEffect(() => {
         console.log("products", products);
         setProducts(data);
     }, [data]);
 
     useEffect(() => {
-        if(dStatuses){
-            console.log("dStatuses",dStatuses);
-            statusId=dStatuses.filter(e=>e.name=='נסגר ע"י המנהל')[0].idstatus;
+        if (dStatuses) {
+            console.log("dStatuses", dStatuses);
+            setStatusId(dStatuses.filter(e => e.name == 'נסגר ע"י המנהל')[0].idstatus);
+            // setStatusPass(dStatuses.filter(e => e.name == 'הועבר למנהל')[0].idstatus);
             console.log("statusId", statusId);
         }
 
@@ -51,18 +57,30 @@ const Files = () => {
             setProducts(data);
     }, [search]);
 
+    // useEffect(() => {
+    //     console.log("products", products);
+    //     if (!search || search == '')
+    //         setProducts(data);
+    // }, [value]);
+
     if (loading)
         return <p>loading</p>
 
+    if (lStatuses)
+        return <p>loading</p>
+
     const closeProd = async (id) => {
-        const body={"statusId":statusId}
+        console.log("statusId", statusId);
+        const body = { "statusId": statusId }
+        console.log("idddddddddddddddddddddd", id);
         await updateData("file", id, body);
         refetch();
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
     }
 
     const listItem = (product) => {
-        return (
+        if(value=='כל התיקים' || product.statusName=="הועבר למנהל")
+        return (         
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -78,11 +96,12 @@ const Files = () => {
                             <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                             {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                             <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                            <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
                             <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                            <Button onClick={()=>{closeProd(product.idfile)}} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                             <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                         </div>
                     </div>
@@ -108,6 +127,7 @@ const Files = () => {
     };
 
     const gridItem = (product) => {
+        if(value=='כל התיקים' || product.statusName=="הועבר למנהל")
         return (
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div className="p-4 border-1 surface-border surface-card border-round">
@@ -122,10 +142,11 @@ const Files = () => {
                         <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                         {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                         <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                        <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
                         <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
                         <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                             <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                            <Button onClick={()=>{closeProd(product.idfile)}} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                             <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                         </div>
                     </div>
@@ -143,7 +164,7 @@ const Files = () => {
     };
 
     const forFilter = (p, args) => {
-        let keys = ["name", "officerName", "remarks","statusName"]
+        let keys = ["name", "officerName", "remarks", "statusName", "ApplicationSubmissionDate"]
         for (let i = 0; i < keys.length; i++) {
             if (typeof (p[keys[i]]) == "string" && p[keys[i]].indexOf(args) != -1)
                 return true;
@@ -161,10 +182,11 @@ const Files = () => {
 
     const cols = [
         { field: "name", header: 'מגיש התיק' },
-        { field: "statusName", header:  'סטטוס'},
-        { field: "result", header:'תוצאת התיק'  },
-        { field: "officerName", header:'פקיד מטפל'  },
-        { field: "remarks", header:'הערות'  }
+        { field: "statusName", header: 'סטטוס' },
+        { field: "result", header: 'תוצאת התיק' },
+        { field: "officerName", header: 'פקיד מטפל' },
+        { field: "ApplicationSubmissionDate", header: 'תאריך הגשת התיק' },
+        { field: "remarks", header: 'הערות' }
     ];
 
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
@@ -187,7 +209,8 @@ const Files = () => {
                     'סטטוס': e.statusName,
                     'תוצאת התיק': e.result,
                     'פקיד מטפל': e.officerName,
-                    'הערות': e.remarks
+                    'הערות': e.remarks,
+                    'תאריך הגשת התיק': e.ApplicationSubmissionDate
                 }
             }));
             const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
@@ -233,6 +256,9 @@ const Files = () => {
             <br></br>
             <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
+            </div>
+            <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
+                <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>
         </>
         );

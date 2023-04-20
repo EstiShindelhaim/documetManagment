@@ -66,7 +66,7 @@ exports.getFilesByManagerId=(req, res)=>{
           data=data.map((e)=>{return{"idfile":e.idfile,
                                       "statusId":e.statusId,
                                       "urgency":e.urgency,
-                                      "ApplicationSubmissionDate":e.ApplicationSubmissionDate,
+                                      "ApplicationSubmissionDate":new Date(e.ApplicationSubmissionDate).toLocaleDateString(),
                                       "IDnumberOfApplicant":e.IDnumberOfApplicant,
                                       "name":e.name,
                                       "result":e.result,
@@ -77,9 +77,6 @@ exports.getFilesByManagerId=(req, res)=>{
                                       "officerName":e.officer.name,
                                       // "openDate":e.stages_of_progress_of_files.date
                                     }})
-          
-          // // console.log(d);
-          console.log(data);
           res.send(data);
         } else {
           res.status(404).send({
@@ -107,8 +104,8 @@ exports.getFilesByManagerId=(req, res)=>{
             // d=data.map((e)=>{e['professionUnit']=e.profession_unit.name; delete e.profession_unit; return e;})
             data=data.map((e)=>{return{"idfile":e.idfile,
                                         "statusId":e.statusId,
-                                        "urgency":e.urgency,
-                                        "ApplicationSubmissionDate":e.ApplicationSubmissionDate,
+                                        "urgency":e.urgency,                               
+                                        "ApplicationSubmissionDate":new Date(e.ApplicationSubmissionDate).toLocaleDateString(),
                                         "IDnumberOfApplicant":e.IDnumberOfApplicant,
                                         "name":e.name,
                                         "result":e.result,

@@ -1,0 +1,11 @@
+import { Link } from "react-router-dom";
+
+        <Link to={`/Place/${props.id}`} id="link"  >
+          More info
+        </Link>
+
+<Route exact path='/Story/:id' element={<Story/>}></Route>
+
+import { useParams } from 'react-router-dom';
+ const params=useParams()
+        const myData = await getData(`places/${params.id}`);

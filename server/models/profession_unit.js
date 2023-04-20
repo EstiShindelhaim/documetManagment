@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {//primary key
             },
             name: { type: DataTypes.STRING, allowNull: false },
             daysForViewingClosedFile: { type: DataTypes.INTEGER },
-            CostOfFillingApplication: { type: DataTypes.INTEGER },
+            costOfFillingApplication: { type: DataTypes.INTEGER },
             companyId: { type: DataTypes.INTEGER }
         },
         {
