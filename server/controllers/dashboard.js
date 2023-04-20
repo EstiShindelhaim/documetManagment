@@ -73,7 +73,7 @@ exports.getFilesBy2month = async(req, res) => {
     try{
         const data=await dashDal.getFilesBy2month(id);
         if (data) {
-            res.send({'num':data});
+            res.send(data);
         } 
         else {
             res.status(404).send({
@@ -93,7 +93,7 @@ exports.getFilesBy2year = async(req, res) => {
     try{
         const data=await dashDal.getFilesBy2year(id);
         if (data) {
-            res.send({'num':data});
+            res.send(data);
         } 
         else {
             res.status(404).send({
@@ -139,6 +139,66 @@ exports.getGrafOfFilesByMonth = (req, res) => {
     
 };
 
-  
+exports.getActiveFiles = (req, res) => {
+
+    dashDal.getActiveFiles(req.params.managerId)
+    .then(data => {
+        res.send(data);
+        })
+    .catch(err => {
+    res.status(500).send({
+        message:
+        err.message || "Some error occurred while retrieving data num of active files."
+    });
+    })
+
+};
+
+
+exports.getFakeFiles = (req, res) => {
+
+    dashDal.getFakeFiles(parseInt(req.params.managerId))
+    .then(data => {
+        res.send(data);
+        })
+    .catch(err => {
+    res.status(500).send({
+        message:
+        err.message || "Some error occurred while retrieving data num of fake files."
+    });
+    })
+
+};
+
+
+exports.getUnderCheckFiles = (req, res) => {
+
+    dashDal.getUnderCheckFiles(parseInt(req.params.managerId))
+    .then(data => {
+        res.send(data);
+        })
+    .catch(err => {
+    res.status(500).send({
+        message:
+        err.message || "Some error occurred while retrieving data num of under check files."
+    });
+    })
+
+};
+
+exports.getCheckedFiles = (req, res) => {
+
+    dashDal.getCheckedFiles(parseInt(req.params.managerId))
+    .then(data => {
+        res.send(data);
+        })
+    .catch(err => {
+    res.status(500).send({
+        message:
+        err.message || "Some error occurred while retrieving data num of checked files."
+    });
+    })
+
+};
 
 
