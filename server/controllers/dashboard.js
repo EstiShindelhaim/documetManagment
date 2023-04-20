@@ -26,8 +26,8 @@ exports.getLastFiles = (req, res) => {
                                     "result":e["file.result"],
                                     "remarks":e["file.remarks"],
                                     "idofficer":e["file.officer.idofficer"],
-                                    "statusName":e["status.name"],
-                                    "officerName":e["file.officer.name"]}});
+                                    "officerName":e["file.officer.name"],
+                                    "statusName":e["file.status.name"]}});
         console.log(data);
         res.send(data);
         })
