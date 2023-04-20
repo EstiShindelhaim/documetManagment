@@ -22,7 +22,7 @@ export default function Delete(props) {
     const confirm2 = (event) => {
         confirmPopup({
             target: event.currentTarget,
-            message: '?האם אתה בטוח שברצונך למחוק פקיד זה',
+            message: props.message,
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
             accept,

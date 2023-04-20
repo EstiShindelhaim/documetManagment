@@ -10,7 +10,7 @@ import { useFunc } from "../../Hooks/useFunc";
 import { Button } from "primereact/button";
 import useAxiosGet from "../../Hooks/useGet"
 import AutoCompleted from "../autoComplete";
-import Submit from "./submit";
+import Submit from "../submit";
 
 export default function UpdateOfficerDetails(props) {
     const { getData, postData } = useFunc();

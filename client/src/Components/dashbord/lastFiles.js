@@ -1,17 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { Tag } from 'primereact/tag';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
 import { Card } from 'primereact/card';
+import { Toast } from 'primereact/toast';
 
 export default function LastFiles() {
     const { getData, postData, updateData, deteteData } = useFunc();
     const { data, loading, error, refetch } = useAxiosGet("dashboard/lastFiles/9", 2);
+    const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
+    const [statusId, setStatusId] = useState(3);
+    const toast = useRef(null);
 
-    if (loading)
+    useEffect(() => {
+        if (dStatuses) {
+            console.log("dStatuses", dStatuses);
+            setStatusId(dStatuses.filter(e => e.name == 'נסגר ע"י המנהל')[0].idstatus);
+            // setStatusPass(dStatuses.filter(e => e.name == 'הועבר למנהל')[0].idstatus);
+            console.log("statusId", statusId);
+        }
+
+    }, [dStatuses]);
+
+    if (loading || lStatuses)
         return <p>loading</p>
+
+        
     const responsiveOptions = [
         {
             breakpoint: '1199px',
@@ -46,6 +62,15 @@ export default function LastFiles() {
         }
     };
 
+    const closeProd = async (id) => {
+        console.log("statusId", statusId);
+        const body = { "statusId": statusId }
+        console.log("idddddddddddddddddddddd", id);
+        await updateData("file", id, body);
+        refetch();
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
+    }
+
     const productTemplate = (product) => {
         return (
             <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
@@ -60,7 +85,9 @@ export default function LastFiles() {
                     <br></br><br></br>
                     <h5 className="mt-0 mb-3">{product.remarks || "---"} :הערות</h5>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                    <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                    <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                    <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                     </div>
                 </div>
             </div>
@@ -75,6 +102,7 @@ export default function LastFiles() {
         <div className="card" style={{ direction: "ltr" }}>
             <Carousel value={data} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
         </div>
+        <Toast ref={toast} />
     </Card>
     </>
     )

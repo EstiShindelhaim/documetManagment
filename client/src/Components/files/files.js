@@ -63,11 +63,9 @@ const Files = () => {
     //         setProducts(data);
     // }, [value]);
 
-    if (loading)
+    if (loading || lStatuses)
         return <p>loading</p>
 
-    if (lStatuses)
-        return <p>loading</p>
 
     const closeProd = async (id) => {
         console.log("statusId", statusId);

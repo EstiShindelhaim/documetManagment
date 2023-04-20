@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url1="http://localhost:5000/";
+const url1 = "http://localhost:5000/";
 
 export const useFunc = () => {
     const postData = async (url, body) => {
@@ -10,7 +10,7 @@ export const useFunc = () => {
             console.log(res);
         }
         catch (err) {
-            console.error(`error ${err}`);
+            return err;
         }
 
     }
@@ -23,7 +23,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            console.error(`error ${err}`);
+            return err;
         }
     };
 
@@ -35,7 +35,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            console.error(`error ${err}`);
+            return err;
         }
     };
 
@@ -47,7 +47,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            console.error(`error ${err}`);
+            return err;
         }
     };
 

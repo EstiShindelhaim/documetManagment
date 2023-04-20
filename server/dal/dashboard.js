@@ -15,11 +15,16 @@ exports.getLastFiles = (numOfFiles, managerId) => {
         { 
           model: db.files, 
           attributes: ['name','result','remarks'], 
-          include: { model: db.officers, attributes:['name'], where: { 'managerId': managerId } } 
+          include: [{ model: db.officers, attributes:['name'], where: { 'managerId': managerId } },
+          {model:db.statuses,  attributes: ['name'], where:{'name':{[Op.ne]: 'נסגר ע"י המנהל'}}}          
+        ],
+        // where:{[Op.and]:{'name':{[Op.ne]: ''},'result':{[Op.ne]: ''},'remarks':{[Op.ne]: ''}}}
+        where:{'name':{[Op.ne]: ''}}
         }, 
-        { model: db.statuses, attributes: ['name'], where: { name: 'נבדק ע"י הפקיד' } }
+        
       ],
       raw: true,
+      // where:{'name':{[Op.ne]: ''}},
       limit: parseInt(numOfFiles),
       order: [['date', 'DESC']]
     }
