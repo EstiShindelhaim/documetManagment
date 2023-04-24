@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useRef} from "react";
+import React, { useEffect, useState , useRef, useContext} from "react";
 // import './addOfficers.css'
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
@@ -13,29 +13,24 @@ import { Button } from "primereact/button";
 import { useFunc } from "../../Hooks/useFunc";
 import useAxiosGet from "../../Hooks/useGet"
 import { Toast } from 'primereact/toast';
+import UserContext from "../User/UserContext"
 
 const AddProfessionUnit = (props) => {
+    const user = useContext(UserContext);
     const { getData, postData } = useFunc();
-    //const {data:d, loading:l, error:e, refetch:f} = useAxiosGet("professionUnit/byManager",1);
-    // const toast = useRef(null);
-    // const [notValidAll, setNotValidAll] = useState(false);
-    // const [notValidMail, setNotValidMail] = useState(false);
-    // const [notValidPassword, setNotValidPassword] = useState(false);
-    // const [notValidDocuments, setNotValidDocuments] = useState(false);
     const hundleSubmit = async () => {
          const  professionUnit =
          {
             name: name,
             daysForViewingClosedFile: daysForViewingClosedFile,
             costOfFillingApplication:costOfFillingApplication,
-            //companyId:1
         }
         console.log(professionUnit);
-       await postData("professionUnit/1",professionUnit);
+       await postData(`professionUnit/${user.idmanager}`,professionUnit);
 
        props.setVisible(false);
 
-       let { data:pr, loading:prl, error:pre, refetch:prr } =await getData("professionUnit/byManager", 1);
+       let { data:pr, loading:prl, error:pre, refetch:prr } =await getData("professionUnit/byManager", user.idmanager);
        props.setProducts(pr);
 
        props.toast.current.show({severity:'success', summary: 'Success', detail:'היחידה נוספה בהצלחה', life: 1500});

@@ -26,7 +26,7 @@ const Officers = () => {
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    console.log("user.idmanager",user.idmanager);
+    console.log("user.idmanager",user);
     const { data, loading, error, refetch } = useAxiosGet("officer/byManager",user.idmanager);
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
