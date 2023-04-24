@@ -10,6 +10,7 @@ export const useFunc = () => {
             console.log(res);
         }
         catch (err) {
+            if(err.request.status==500);
             alert("הראתה שגיאה במערכת")
             return err;
         }
@@ -23,6 +24,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
+            if(err.request.status==500);
             alert("הראתה שגיאה במערכת")
             return err;
         }
@@ -36,7 +38,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            alert("הראתה שגיאה במערכת")
+            if(err.request.status==500);
             return err;
         }
     };
@@ -49,7 +51,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            alert("הראתה שגיאה במערכת")
+            if(err.request.status==500);
             return err;
         }
     };

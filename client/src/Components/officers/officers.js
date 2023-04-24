@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef , useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
@@ -19,12 +19,15 @@ import { useFunc } from "../../Hooks/useFunc";
 import UpdateOfficerDetails from './updateOfficerDetails';
 import Delete from '../delete';
 import { Toast } from 'primereact/toast';
+import UserContext from "../User/UserContext"
 
 const Officers = () => {
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    const { data, loading, error, refetch } = useAxiosGet("officer/byManager", 1);
+    console.log("user.idmanager",user.idmanager);
+    const { data, loading, error, refetch } = useAxiosGet("officer/byManager",user.idmanager);
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -134,7 +137,7 @@ const Officers = () => {
     }
 
     const FilterProduct = async (args) => {
-        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
+        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", user.idmanager);
 
         pr = pr.filter(p => forFilter(p, args))
         setProducts(pr);

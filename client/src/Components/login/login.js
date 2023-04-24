@@ -25,8 +25,10 @@ function Login(props) {
     }
     else {
       if (res.status == 201 || res.status == 200)
-      {        
+      {     
+        console.log(res.data.user);   
         setNotValid(false);
+        props.setUserId(res.data.user)
         navigate("/Home")
       }
         else        

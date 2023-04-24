@@ -8,16 +8,25 @@ import {useNavigate, useLocation} from "react-router-dom"
 import Menu from "./Components/menu";
 import ProfessionUnit from "./Components/professionUnit/professionUnit";
 import Dashboard from "./Components/dashbord/dashbord";
+import { useState } from "react";
+import UserProvider from "./Components/User/UserProvider";
 
 
 function App() {
 const location= useLocation().pathname;
+const [userId, setUserId] = useState('');
+
+const setUserIdCallback = (id) => {
+  console.log("logggggggggggggggggggggggggggg",id);
+  setUserId(id);
+}
   return (<>
+  <UserProvider user1={userId}>
     <div className="App" style={{ direction: "rtl"}}>
       {(location==="/" || location==="/Login" )?<></>:<Menu></Menu>}
      {/* <Router> */}
             <Routes>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={<Login setUserId={setUserIdCallback}></Login>} />
             <Route path='/home' element={<Home />} />
             <Route path='/officers' element={<Officers />} />
             <Route path='/files' element={<Files />} />
@@ -29,6 +38,7 @@ const location= useLocation().pathname;
       {/* <Home/> */}
       {/* <Login></Login>  */}
     </div>
+    </UserProvider>
     </>
   );
 }
