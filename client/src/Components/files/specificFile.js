@@ -15,13 +15,63 @@ import { useFunc } from "../../Hooks/useFunc";
 import { SelectButton } from 'primereact/selectbutton';
 import { Toast } from 'primereact/toast';
 import { useParams } from 'react-router-dom';
-
+import { Card } from 'primereact/card';
 
 const SpecificFiles = () => {
-    const params=useParams()
-    const idfile=params.id;
-    return(<>
-    <h1>{idfile}</h1>
+    const params = useParams()
+    const idfile = params.id;
+    const { data, loading, error, refetch } = useAxiosGet("file", idfile);
+    if (loading) return <p>loading</p>
+
+    const getSeverity = (product) => {
+        switch (product.result) {
+            case 1:
+                return 'success';
+
+            case 0:
+                return 'danger';
+
+            case 'undefined':
+                return 'warning';
+
+            default:
+                return null;
+        }
+    };
+
+    const closeProd = async (id) => {
+        // console.log("statusId", statusId);
+        // const body = { "statusId": statusId }
+        // console.log("idddddddddddddddddddddd", id);
+        // await updateData("file", id, body);
+        // refetch();
+        // toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
+    }
+
+    return (<>
+        <div className="card">
+            <Card title="פרטי התיק" style={{ width: "90%", marginRight: "5%", textAlign: "center" }}>
+
+                        <div className="flex flex-wrap align-items-center justify-content-between gap-2">
+                            <div className="flex align-items-center gap-2">
+                                <Tag value="תוצאת התיק" severity={getSeverity(data)}></Tag>
+                            </div>
+                        </div>
+                        <div className="flex flex-column align-items-center gap-3 py-5">
+                            <h4 className="mt-0 mb-3">מגיש התיק:</h4>
+                            <Tag value={data.name}></Tag>
+                            <h4 className="mb-1">סטטוס: {data.statusName}</h4>
+                            {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
+                            <h4 className="mt-0 mb-3">פקיד מטפל: {data.officerName}</h4>
+                            <h4 className="mt-0 mb-3">תאריך הגשת התיק: {data.ApplicationSubmissionDate}</h4>
+                            <h5 className="mt-0 mb-3">הערות: {data.remarks || "---"}</h5>
+                            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                                <Button onClick={() => { closeProd(data.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                            </div>
+                        </div>
+            </Card>
+        </div>
     </>)
 }
 export default SpecificFiles;
