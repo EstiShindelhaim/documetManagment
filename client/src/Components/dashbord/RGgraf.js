@@ -47,19 +47,19 @@ function RGgraf() {
             labels: years,
             datasets: [
                 {
-                    label: 'red',
+                    label: 'מזוייף',
                     data: reds,
                     fill: false,
-                    backgroundColor: '#2f4860',
-                    borderColor: '#2f4860',
+                    backgroundColor: 'red',
+                    borderColor: 'red',
                     tension: 0.4
                 },
                 {
-                    label: 'green',
+                    label: 'תקין',
                     data: greens,
                     fill: false,
-                    backgroundColor: '#00bb7e',
-                    borderColor: '#00bb7e',
+                    backgroundColor: 'green',
+                    borderColor: 'green',
                     tension: 0.4
                 }
             ]
@@ -137,19 +137,19 @@ function RGgraf() {
             labels: months,
             datasets: [
                 {
-                    label: 'red',
+                    label: 'מזויף',
                     data: reds,
                     fill: false,
-                    backgroundColor: '#2f4860',
-                    borderColor: '#2f4860',
+                    backgroundColor: 'red',
+                    borderColor: 'red',
                     tension: 0.4
                 },
                 {
-                    label: 'green',
+                    label: 'תקין',
                     data: greens,
                     fill: false,
-                    backgroundColor: '#00bb7e',
-                    borderColor: '#00bb7e',
+                    backgroundColor: 'green',
+                    borderColor: 'green',
                     tension: 0.4
                 }
             ]
@@ -196,7 +196,7 @@ function RGgraf() {
 
     if (value == 'לפי שנים')
         return (<>
-        <h3>תוצאות תיקים בשנים האחרונות</h3>
+            <h3>תוצאות תיקים בשנים האחרונות</h3>
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>
@@ -207,7 +207,7 @@ function RGgraf() {
         )
     if (value == 'לפי חודשים')
         return (<>
-        <h3>תוצאות תיקים בחודשים האחרונים</h3>
+            <h3>תוצאות תיקים בחודשים האחרונים</h3>
             {console.log("by monthhhhhhhhhhhhhhhhhhhhhhhhh")}
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
