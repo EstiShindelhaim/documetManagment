@@ -3,11 +3,7 @@ import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
 import Grid from "../grid";
-import PopUp from "../popup";
-import AddOfficer from "./addOfficers"
-import { ProductService } from '../officersAxios';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
 import { InputText } from 'primereact/inputtext';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
@@ -17,9 +13,8 @@ import 'primeflex/primeflex.css';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
 import { SelectButton } from 'primereact/selectbutton';
-import UpdateOfficerDetails from './updateOfficerDetails';
-import Delete from '../delete';
 import { Toast } from 'primereact/toast';
+import { Link } from "react-router-dom";
 
 const Files = () => {
     const { getData, postData, updateData, deteteData } = useFunc();
@@ -77,35 +72,37 @@ const Files = () => {
     }
 
     const listItem = (product) => {
-        if(value=='כל התיקים' || product.statusName=="הועבר למנהל")
-        return (         
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                    <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                        <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
-                            <div className="flex align-items-center gap-3">
-                                <span className="flex align-items-center gap-2">
-                                    <span className="font-semibold">{product.idNumber}</span>
-                                </span>
+        if (value == 'כל התיקים' || product.statusName == "הועבר למנהל")
+            return (
+                <div className="col-12">
+                    <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                        <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                            <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+                                <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
+                                <div className="flex align-items-center gap-3">
+                                    <span className="flex align-items-center gap-2">
+                                        <span className="font-semibold">{product.idNumber}</span>
+                                    </span>
+                                </div>
+                                <h4 className="mt-0 mb-3">מגיש התיק:</h4>
+                                <Tag value={product.name}></Tag>
+                                <h4 className="mb-1">סטטוס: {product.statusName}</h4>
+                                {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
+                                <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                                <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
+                                <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
                             </div>
-                            <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                            <Tag value={product.name}></Tag>
-                            <h4 className="mb-1">סטטוס: {product.statusName}</h4>
-                            {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                            <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
-                            <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
-                            <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
-                        </div>
-                        <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                            <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                            <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                            <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                                <Link to={`/file/${product.idfile}`} id="link"  >
+                                    <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                                </Link>
+                                <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
     };
 
     const getSeverity = (product) => {
@@ -125,32 +122,34 @@ const Files = () => {
     };
 
     const gridItem = (product) => {
-        if(value=='כל התיקים' || product.statusName=="הועבר למנהל")
-        return (
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
-                <div className="p-4 border-1 surface-border surface-card border-round">
-                    <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="flex align-items-center gap-2">
-                            <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
+        if (value == 'כל התיקים' || product.statusName == "הועבר למנהל")
+            return (
+                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+                    <div className="p-4 border-1 surface-border surface-card border-round">
+                        <div className="flex flex-wrap align-items-center justify-content-between gap-2">
+                            <div className="flex align-items-center gap-2">
+                                <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex flex-column align-items-center gap-3 py-5">
-                        <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                        <Tag value={product.name}></Tag>
-                        <h4 className="mb-1">סטטוס: {product.statusName}</h4>
-                        {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                        <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
-                        <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
-                        <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
-                        <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                            <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                            <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                            <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                        <div className="flex flex-column align-items-center gap-3 py-5">
+                            <h4 className="mt-0 mb-3">מגיש התיק:</h4>
+                            <Tag value={product.name}></Tag>
+                            <h4 className="mb-1">סטטוס: {product.statusName}</h4>
+                            {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
+                            <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                            <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
+                            <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
+                            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                                <Link to={`/file/${product.idfile}`} id="link" >
+                                    <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                                </Link>
+                                <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
     };
 
     const itemTemplate = (product, layout) => {

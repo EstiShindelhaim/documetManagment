@@ -1,5 +1,4 @@
 import React, { useEffect, useState , useRef} from "react";
-import './addOfficers.css'
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons

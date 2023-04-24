@@ -10,6 +10,7 @@ import ProfessionUnit from "./Components/professionUnit/professionUnit";
 import Dashboard from "./Components/dashbord/dashbord";
 import { useState } from "react";
 import UserProvider from "./Components/User/UserProvider";
+import SpecificFiles from "./Components/files/specificFile";
 
 
 function App() {
@@ -32,6 +33,7 @@ const setUserIdCallback = (id) => {
             <Route path='/files' element={<Files />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/professionUnits' element={<ProfessionUnit />} />
+            <Route exact path='/file/:id' element={<SpecificFiles/>}></Route>
             <Route path='*' element={<h1> 404 Page not found</h1>} />
             </Routes>
       {/* </Router> */}
