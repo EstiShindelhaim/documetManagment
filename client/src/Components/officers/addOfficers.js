@@ -1,4 +1,5 @@
-import React, { useEffect, useState , useRef} from "react";
+
+import React, { useEffect, useState , useRef, useContext} from "react";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
@@ -12,10 +13,12 @@ import { Button } from "primereact/button";
 import { useFunc } from "../../Hooks/useFunc";
 import useAxiosGet from "../../Hooks/useGet"
 import { Toast } from 'primereact/toast';
+import UserContext from "../User/UserContext"
 
 const AddOfficers = (props) => {
+    const user = useContext(UserContext);
     const { getData, postData } = useFunc();
-    const {data:d, loading:l, error:e, refetch:f} = useAxiosGet("professionUnit/byManager",1);
+    const {data:d, loading:l, error:e, refetch:f} = useAxiosGet("professionUnit/byManager",user.idmanager);
     // const toast = useRef(null);
     const [notValidAll, setNotValidAll] = useState(false);
     const [notValidMail, setNotValidMail] = useState(false);
@@ -45,7 +48,7 @@ const AddOfficers = (props) => {
             return;
         }
         if(notValidMail) setNotValidMail(false);
-        const {data, loading, error, refetch} =await getData("manager/numOfDocumentsForOfficer",1)
+        const {data, loading, error, refetch} =await getData("manager/numOfDocumentsForOfficer",user.idmanager)
         const num=data.num
         if(num<parseInt(numOfDocuments))
         {
@@ -56,7 +59,7 @@ const AddOfficers = (props) => {
         let professionUnit=d.filter((p=>p.name==professionUnitId))
          const officer =
          {
-            managerId: 1,
+            managerId:user.idmanager,
             professionUnitId:professionUnit[0].idprofession_unit,
             idNumber: parseInt(id),
             name: name,
@@ -69,7 +72,7 @@ const AddOfficers = (props) => {
 
        props.setVisible(false);
 
-       let { data:pr, loading:prl, error:pre, refetch:prr } =await getData("officer/byManager", 1);
+       let { data:pr, loading:prl, error:pre, refetch:prr } =await getData("officer/byManager", user.idmanager);
        props.setProducts(pr);
 
        props.toast.current.show({severity:'success', summary: 'Success', detail:'הפקיד נוסף בהצלחה', life: 1500});
@@ -130,7 +133,7 @@ const AddOfficers = (props) => {
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="professionUnitId">יחידת מקצוע</label>
-                <AutoCompleted id="professionUnitId"value={professionUnitId}managerId={1}url={"professionUnit/byManager"}params={1} setValue={setProfessionUnitId}></AutoCompleted>
+                <AutoCompleted id="professionUnitId"value={professionUnitId}managerId={user.idmanager}url={"professionUnit/byManager"}params={user.idmanager} setValue={setProfessionUnitId}></AutoCompleted>
                 {notValidAll && <span style={{ color: "red" }}>נא למלא את כל השדות</span>}
             </div>
         </div>

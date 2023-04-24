@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
@@ -20,12 +20,14 @@ import AddProfessionUnit from "./addprofessionUnit"
 import UpdateProfessionUnitDetails from './updateProfessionUnitDetails';
 import Delete from '../delete';
 import { Toast } from 'primereact/toast';
+import UserContext from "../User/UserContext"
 
 const ProfessionUnit = () => {
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    const { data, loading, error, refetch } = useAxiosGet("professionUnit/byManager", 1);
+    const { data, loading, error, refetch } = useAxiosGet("professionUnit/byManager",user.idmanager);
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -145,7 +147,7 @@ const ProfessionUnit = () => {
         return false;
     }
     const FilterProduct = async (args) => {
-        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("professionUnit/byManager", 1);
+        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("professionUnit/byManager", user.idmanager);
 
         pr = pr.filter(p => forFilter(p, args))
         console.log(pr);

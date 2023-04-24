@@ -11,8 +11,8 @@ export const useFunc = () => {
         }
         catch (err) {
             if(err.request.status==500);
-            alert("הראתה שגיאה במערכת")
-            return err;
+            // alert("הראתה שגיאה במערכת")
+            // return err;
         }
 
     }
@@ -24,8 +24,8 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            if(err.request.status==500);
-            alert("הראתה שגיאה במערכת")
+            // if(err.request.status==500);
+            // //alert("הראתה שגיאה במערכת")
             return err;
         }
     };
@@ -38,7 +38,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            if(err.request.status==500);
+            // if(err.request.status==500);
             return err;
         }
     };
@@ -51,7 +51,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
-            if(err.request.status==500);
+            // if(err.request.status==500);
             return err;
         }
     };

@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Chart } from 'primereact/chart';
 import useAxiosGet from "../../Hooks/useGet"
 // import {GetGrafOfFiles} from '../../Hooks/dashboard'
+import UserContext from "../User/UserContext"
 import { SelectButton } from 'primereact/selectbutton';
 function CountGraf() {
+    const user = useContext(UserContext);
     const [chartDataY, setChartDataY] = useState({});
     const [chartOptionsY, setChartOptionsY] = useState({});
     const [chartDataM, setChartDataM] = useState({});
     const [chartOptionsM, setChartOptionsM] = useState({});
-    const { data: dy, loading: ly, error: et, refetch: ry } = useAxiosGet("dashboard/filesByYear", 2);
-    const { data: dm, loading: lm, error: em, refetch: rm } = useAxiosGet("dashboard/filesByMonth", 2);
+    const { data: dy, loading: ly, error: et, refetch: ry } = useAxiosGet("dashboard/filesByYear", user.idmanager);
+    const { data: dm, loading: lm, error: em, refetch: rm } = useAxiosGet("dashboard/filesByMonth",user.idmanager);
     const options = ['לפי שנים', 'לפי חודשים'];
     const [value, setValue] = useState(options[0]);
+    
 
 
     useEffect(() => {

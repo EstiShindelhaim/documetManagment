@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
@@ -11,8 +11,10 @@ import { Button } from "primereact/button";
 import useAxiosGet from "../../Hooks/useGet"
 import AutoCompleted from "../autoComplete";
 import Submit from "../submit"
+import UserContext from "../User/UserContext"
 
 export default function UpdateProfessionUnitDetails(props) {
+    const user = useContext(UserContext);
     const { getData, updateData } = useFunc();
     // const { data: d, loading: l, error: e, refetch: f } = useAxiosGet("professionUnit/byManager", 1);
     const [name, setname] = useState(props.name);
@@ -33,7 +35,7 @@ export default function UpdateProfessionUnitDetails(props) {
 
         props.setVisible(false)
 
-        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("professionUnit/byManager",1);
+        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("professionUnit/byManager",user.idmanager);
         props.setProducts(pr);
 
         props.toast.current.show({severity:'success', summary: 'Success', detail:'היחידה עודכנה בהצלחה', life: 1500});

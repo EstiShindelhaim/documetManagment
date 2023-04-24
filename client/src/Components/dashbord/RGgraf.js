@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useContext} from 'react';
 import { Chart } from 'primereact/chart';
 import useAxiosGet from "../../Hooks/useGet"
 // import {GetGrafOfFiles} from '../../Hooks/dashboard'
 import { SelectButton } from 'primereact/selectbutton';
+import UserContext from "../User/UserContext"
 function RGgraf() {
+    const user = useContext(UserContext);
     const [chartDataY, setChartDataY] = useState({});
     const [chartOptionsY, setChartOptionsY] = useState({});
     const [chartDataM, setChartDataM] = useState({});
     const [chartOptionsM, setChartOptionsM] = useState({});
-    const { data: dy, loading: ly, error: et, refetch: ry } = useAxiosGet("dashboard/RGFilesByYear", 2);
-    const { data: dm, loading: lm, error: em, refetch: rm } = useAxiosGet("dashboard/RGFilesByMonth", 2);
+    const { data: dy, loading: ly, error: et, refetch: ry } = useAxiosGet("dashboard/RGFilesByYear",user.idmanager);
+    const { data: dm, loading: lm, error: em, refetch: rm } = useAxiosGet("dashboard/RGFilesByMonth", user.idmanager);
     const options = ['לפי שנים', 'לפי חודשים'];
     const [value, setValue] = useState(options[0]);
     useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { Tag } from 'primereact/tag';
@@ -6,10 +6,12 @@ import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
+import UserContext from "../User/UserContext"
 
 export default function LastFiles() {
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
-    const { data, loading, error, refetch } = useAxiosGet("dashboard/lastFiles/9", 2);
+    const { data, loading, error, refetch } = useAxiosGet("dashboard/lastFiles/9", user.idmanager);
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [statusId, setStatusId] = useState(3);
     const toast = useRef(null);
