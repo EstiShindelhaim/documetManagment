@@ -58,6 +58,13 @@ exports.getOfficersByManagerId=(id)=>{
     });
 };
 
+exports.getOfficersByprofession_unitsId=(id)=>{
+    console.log(id);
+    return Officer.findAll({
+        where:{professionUnitId:id},
+        //include: [{ model: db.profession_units, attributes:['name']}]
+    });
+};
 
 exports.updateOfficerById=(id,officerToUpdate)=>{
     console.log(id);

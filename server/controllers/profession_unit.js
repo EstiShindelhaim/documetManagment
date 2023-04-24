@@ -1,34 +1,36 @@
 const ProfessionDal = require("../dal/profession_unit");
 const managerDal = require("../dal/manager");
+const officerDal = require("../dal/officer");
+const { login } = require("./manager");
 
-exports.addProfessionUnit = async(req, res) => {
-    const id=req.params.managerId;
-    let manager;
-    try{
-      const data= await managerDal.getManagerById(id);
-      if (data) {
-        manager=data;
-      } 
-      else {
-        res.status(404).send({
-          message: `Cannot find manager with id= ${id}.`,
-        });
-      }
+exports.addProfessionUnit = async (req, res) => {
+  const id = req.params.managerId;
+  let manager;
+  try {
+    const data = await managerDal.getManagerById(id);
+    if (data) {
+      manager = data;
     }
-    catch(err){
-      res.status(500).send({
-        message: `Error retrieving manager with id= ${id}.`,
+    else {
+      res.status(404).send({
+        message: `Cannot find manager with id= ${id}.`,
       });
-    };
+    }
+  }
+  catch (err) {
+    res.status(500).send({
+      message: `Error retrieving manager with id= ${id}.`,
+    });
+  };
 
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
     return;
-  }    
-  let obj=req.body
-  obj.companyId=manager[0].companyId;
+  }
+  let obj = req.body
+  obj.companyId = manager[0].companyId;
   ProfessionDal
     .addProfessionUnit(obj)
     .then((data) => {
@@ -41,27 +43,27 @@ exports.addProfessionUnit = async(req, res) => {
     });
 };
 
-exports.getProfessionUnitByManager = async(req, res) => {
+exports.getProfessionUnitByManager = async (req, res) => {
   let id = req.params.managerId;
   let manager;
-  try{
-    const data= await managerDal.getManagerById(id);
+  try {
+    const data = await managerDal.getManagerById(id);
     if (data) {
-      manager=data;
+      manager = data;
       console.log(data);
-    } 
+    }
     else {
       res.status(404).send({
         message: `Cannot find manager with id= ${id}.`,
       });
     }
   }
-  catch(err){
-    res.status(500).send({
+  catch (err) {
+    res.status(402).send({
       message: `Error retrieving manager with id= ${id}.`,
     });
   };
-  id=manager[0].companyId;
+  id = manager[0].companyId;
   ProfessionDal
     .getProfessionUnitByCompany(id)
     .then((data) => {
@@ -103,11 +105,19 @@ exports.updateProfessionUnit = (req, res) => {
 };
 
 
-exports.deleteProfessionUnitById=(req, res)=>{
+exports.deleteProfessionUnitById = (req, res) => {
   const id = req.params.id;
-  console.log("id",id);
+  console.log("id", id);
+  officerDal.getOfficersByprofession_unitsId(id)
+  .then(d => {   if (d.length > 0) {
+    console.log("bigggggggggggggggggggggggggggggggggggggggggggggggg");
+    res.status(402).send({
+      message: `לא ניתן למחוק יחידת מקצוע זו לפני העברת כל הפקידים שביחידה זו ליחידה אחרת`
+    })
+  }
+  else{
   ProfessionDal.deleteProfessionUnitById(id)
- 
+
     .then(num => {
       if (num == 1) {
         res.send({
@@ -115,13 +125,14 @@ exports.deleteProfessionUnitById=(req, res)=>{
         });
       } else {
         res.send({
-          message: `Cannot delete professionUnit with id. Maybe professionUnit was not found!`
+          message: "יחידת המקצוע לא קימת במאגר"
         });
       }
     })
     .catch(err => {
-      res.status(500).send({
-        message: `Could not delete professionUnit with id= ${id}`
-      });
-    });
+          res.status(402).send({
+            message: `Could not delete professionUnit with id= ${id}`
+          });
+        });
+    }});
 }

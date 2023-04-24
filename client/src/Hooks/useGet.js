@@ -2,6 +2,7 @@ import useAxios from 'axios-hooks'
 import { useEffect } from 'react'
 import axios from "axios"
 
+
 export default function useAxiosGet(url, params) {
     console.log((url));
     let path
@@ -13,7 +14,9 @@ export default function useAxiosGet(url, params) {
     console.log("path",path);
     const [{ data, loading, error }, refetch] = useAxios(path)
     console.log((data));
-    useEffect(() => { }, [error]);
+    //useEffect(() => { }, [error]);
+    if(error)
+    console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",error);
     return { data, loading, error, refetch }
 }
 

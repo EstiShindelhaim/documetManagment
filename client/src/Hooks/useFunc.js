@@ -10,6 +10,7 @@ export const useFunc = () => {
             console.log(res);
         }
         catch (err) {
+            alert("הראתה שגיאה במערכת")
             return err;
         }
 
@@ -19,10 +20,10 @@ export const useFunc = () => {
         try {
             console.log(url);
             const res = await axios.get(`${url1}${url}/${params}`);
-            console.log(res);
             return res
         }
         catch (err) {
+            alert("הראתה שגיאה במערכת")
             return err;
         }
     };
@@ -35,6 +36,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
+            alert("הראתה שגיאה במערכת")
             return err;
         }
     };
@@ -47,6 +49,7 @@ export const useFunc = () => {
             return res
         }
         catch (err) {
+            alert("הראתה שגיאה במערכת")
             return err;
         }
     };

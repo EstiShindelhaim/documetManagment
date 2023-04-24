@@ -12,25 +12,32 @@ function Login(props) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginHandler =async() => {
-    //לטפל בעניין שאם המספר זהות לא קייים מחזיר שגיאה ולא מציג את ההודעה
-    console.log("id",id," password",password);
+  const loginHandler = async () => {
+    console.log("id", id, " password", password);
     if (id == '' || password == '') {
-      if(!notValid) setNotValid(true);
+      if (!notValid) setNotValid(true);
       return;
     }
-    let { data, loading, error, refetch} = await getData(`manager/login/${id}`, password);
-    if(!data){
-      if(!notValid) setNotValid(true);
-      return;
+    let res = await getData(`manager/login/${id}`, password);
+    if (res.status != 201 && res.status != 200) {
+      console.log(res);
+      setNotValid(true);
     }
-    if(data.message){
-      if(!notValid) setNotValid(true);
-      return;
+    else {
+      if (res.status == 201 || res.status == 200)
+      {        
+        setNotValid(false);
+        navigate("/Home")
+      }
+        else        
+        setNotValid(true);
+
     }
-    if(data.user){
-      navigate("/Home")
-    }
+
+
+
+
+    return;
   }
   return (
     //style={{textAlign:"center"}}
@@ -39,14 +46,14 @@ function Login(props) {
       <br></br>
       <br></br>
       <br></br>
-      <Card title="הכנס פרטי כניסה" style={{ width: "50%", marginRight: "25%", textAlign:"center"}}>
+      <Card title="הכנס פרטי כניסה" style={{ width: "50%", marginRight: "25%", textAlign: "center" }}>
         <div className="card flex justify-content-center">
           <InputText placeholder="הכנס מספר זהות" keyfilter="int" value={id} onChange={(e) => setId(e.target.value)} />
         </div>
         <br></br>
         <div className="card flex justify-content-center">
           <InputText placeholder="הכנס סיסמה" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div> 
+        </div>
         {notValid && <><span style={{ color: "red" }}>מספר הזהות ו/או הסיסמה אינם נכונים</span> <br></br></>}
         <br></br>
         <div className="card flex justify-content-center">

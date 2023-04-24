@@ -7,21 +7,29 @@ exports.login = (req, res) => {
     .getManagerByIdNumber(idNumber)
     .then((data) => {
       if (data) {
+        console.log("Password",password,"data[0].password",data[0].password);
         if(data[0].password==password)
+        {
+          console.log("true");
           res.send({user:data[0]});
+        }
         else
-        res.send({
-          message: `The password:${password} not correct for id number: ${idNumber}`,
-        });
+        { 
+          console.log("false");
+          res.status(404).send({
+          message: `The password:${password} not correct for id number: ${idNumber}`,});}
+       
+        
       } else {
+        console.log("false");
         res.status(404).send({
           message: `Cannot find Manager with id= ${idNumber}.`,
         });
       }
     })
     .catch((err) => {
-      res.status(500).send({
-        message: `Error retrieving Manager with id= ${idNumber}.`,
+      res.status(404).send({
+        message: `Cannot find Manager with id= ${idNumber}.`,
       });
     });
 };
