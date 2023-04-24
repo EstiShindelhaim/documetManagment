@@ -46,10 +46,10 @@ export default function Menu() {
         //     });
 
         getData("manager/numOfDocumentsForManager", 1)
-        .then(data => {
-            console.log("setNumOfDocumentForMan", data);
-            setNumOfDocumentForManager(data.data.num);
-        });
+            .then(data => {
+                console.log("setNumOfDocumentForMan", data);
+                setNumOfDocumentForManager(data.data.num);
+            });
 
     }, []);
     const navigate = useNavigate();
@@ -61,13 +61,13 @@ export default function Menu() {
         },
         {
             label: 'תיקים', icon: 'pi pi-folder-open'
-            ,command:()=>{navigate("/files")}
+            , command: () => { navigate("/files") }
         },
-        { 
-            label: 'יחידות מקצוע', icon: 'pi pi-th-large', 
-            command: () => { navigate("/professionUnits") } 
+        {
+            label: 'יחידות מקצוע', icon: 'pi pi-th-large',
+            command: () => { navigate("/professionUnits") }
         },
-        { 
+        {
             label: 'דאשבורד', icon: 'pi pi-chart-line',
             command: () => { navigate("/dashboard") }
         }
@@ -89,23 +89,27 @@ export default function Menu() {
     };
 
     return (
-        <div style={{display:"flex", flexWrap:"wrap"}} className="card">
+        <div style={{ display: "flex"}} className="card">
             <TabMenu model={items} />
-            <div style={{ width: "10%", marginRight:"10%" /*, display:"flex", flexWrap:"wrap"}}*/}}> 
-                <Tag value="מנהל" rounded></Tag>
-                {2000 - numOfDocumentForManager}/<b>2000</b>
-                <ProgressBar value={((2000 - numOfDocumentForManager) / 2000) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
-            </div> 
-            <div style={{ width: "2%"}}></div>
-            <div style={{ width: "10%" /*, display:"flex", flexWrap:"wrap"}}*/}}>
-                <Tag value="פקידים" rounded></Tag>
-                {2000 - numOfDocumentForEmp}/<b>2000</b>
-                <ProgressBar value={((2000 - numOfDocumentForEmp) / 2000) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
+            <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <Tag value="מנהל" rounded></Tag>
+                    {2000 - numOfDocumentForManager}/<b>2000</b>
+                    <ProgressBar value={((2000 - numOfDocumentForManager) / 2000) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
+                </div>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <Tag value="פקידים" rounded></Tag>
+                    {2000 - numOfDocumentForEmp}/<b>2000</b>
+                    <ProgressBar value={((2000 - numOfDocumentForEmp) / 2000) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
+                </div>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <Button style={{ display: "flex" }} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
+                </div>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
+                </div>
             </div>
-            <div style={{ width: "2%"}}></div>
-            <Button style={{ display:"flex"}} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
-            <div style={{ width: "2%"}}></div>
-            <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
+            
             <Toast ref={toast} />
         </div>
     )
