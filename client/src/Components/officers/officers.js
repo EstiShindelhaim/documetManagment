@@ -82,7 +82,7 @@ const Officers = () => {
                             <Button icon="pi pi-send" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                             <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts}name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit ={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                             {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
-                            <Delete key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
+                            <Delete tooltip="מחיקת הפקיד" key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ const Officers = () => {
                         <Button icon="pi pi-send" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
                         <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts}name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit ={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                         {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
-                        <Delete key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
+                        <Delete tooltip="מחיקת הפקיד" key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
                     </div>
                 </div>
             </div>

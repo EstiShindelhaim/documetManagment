@@ -35,7 +35,7 @@ export default function Delete(props) {
             <Toast ref={toast} />
             <ConfirmPopup />
             <div className="card flex flex-wrap gap-2 justify-content-center">
-                <Button onClick={confirm2} icon="pi pi-times" tooltip="מחיקת פקיד" className="p-button-danger p-button-outlined"></Button>
+            <Button onClick={confirm2} icon="pi pi-times" tooltip={props.tooltip} rounded severity="danger" aria-label="Cancel" />
             </div>
         </>
     )

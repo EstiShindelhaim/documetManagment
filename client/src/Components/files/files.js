@@ -16,6 +16,8 @@ import { SelectButton } from 'primereact/selectbutton';
 import { Toast } from 'primereact/toast';
 import { Link } from "react-router-dom";
 import { InputSwitch } from "primereact/inputswitch";
+import PopUp from "../popup";
+import Progress from './progress';
 
 const Files = () => {
     const { getData, postData, updateData, deteteData } = useFunc();
@@ -24,7 +26,6 @@ const Files = () => {
     const { data, loading, error, refetch } = useAxiosGet("file/byManager", 1);
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [search, setSearch] = useState('');
-    const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
     const [statusId, setStatusId] = useState(3);
     // const [statusPass, setStatusPass] = useState(3);
@@ -102,6 +103,7 @@ const Files = () => {
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
                     </div>
@@ -152,6 +154,7 @@ const Files = () => {
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
                     </div>

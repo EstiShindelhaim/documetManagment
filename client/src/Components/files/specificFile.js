@@ -24,7 +24,18 @@ const SpecificFiles = () => {
     const params = useParams()
     const idfile = params.id;
     const { data, loading, error, refetch } = useAxiosGet("file", idfile);
+    const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
+    const { getData, postData, updateData, deteteData } = useFunc();
+    const [statusId, setStatusId] = useState(3);
 
+    useEffect(() => {
+        if (dStatuses) {
+            console.log("dStatuses", dStatuses);
+            setStatusId(dStatuses.filter(e => e.name == 'נסגר ע"י המנהל')[0].idstatus);
+            console.log("statusId", statusId);        
+        }
+
+    }, [dStatuses]);
 
     if (loading) return <p>loading</p>
 
@@ -45,11 +56,11 @@ const SpecificFiles = () => {
     };
 
     const closeProd = async (id) => {
-        // console.log("statusId", statusId);
-        // const body = { "statusId": statusId }
-        // console.log("idddddddddddddddddddddd", id);
-        // await updateData("file", id, body);
-        // refetch();
+        console.log("statusId", statusId);
+        const body = { "statusId": statusId }
+        console.log("idddddddddddddddddddddddddddddddddd", id);
+        await updateData("file", id, body);
+        refetch();
         // toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
     }
 

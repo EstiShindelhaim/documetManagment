@@ -85,7 +85,7 @@ const ProfessionUnit = () => {
                             <PopUp label="עדכן יחידת מקצוע" icon="pi pi-pencil" header="עדכן יחידת מקצוע" visible={visible} setVisible={setVisible} content={<UpdateProfessionUnitDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} daysForViewingClosedFile={product.daysForViewingClosedFile} costOfFillingApplication={product.costOfFillingApplication} id={product.idprofession_unit} ></UpdateProfessionUnitDetails>} ></PopUp>
                             {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                             <br></br>
-                            <Delete key={product.idprofession_unit} message={'?האם אתה בטוח שברצונך למחוק יחידה זו'} function={() => { deleteProd(product.idprofession_unit) }} ></Delete>
+                            <Delete tooltip="מחיקת יחידת המקצוע" key={product.idprofession_unit} message={'?האם אתה בטוח שברצונך למחוק יחידה זו'} function={() => { deleteProd(product.idprofession_unit) }} ></Delete>
                         </div>
                     </div>
                 </div>
@@ -110,6 +110,7 @@ const ProfessionUnit = () => {
                         <Tag value={product.daysForViewingClosedFile}></Tag>
                     </div>
                     <div className="flex align-items-center justify-content-between">
+                        
                         {/* <div className="flex align-items-center gap-3"> */}
                         {/* <span className="flex align-items-center gap-2"> */}
                         {/* <span className="font-semibold">{product.idNumber}</span> */}
@@ -119,9 +120,10 @@ const ProfessionUnit = () => {
                         {/* {let id=product.idofficer} */}
                         {/* <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"> */}
                         <PopUp label="עדכן יחידת מקצוע" icon="pi pi-pencil" header="עדכן יחידת מקצוע" visible={visible} setVisible={setVisible} content={<UpdateProfessionUnitDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} daysForViewingClosedFile={product.daysForViewingClosedFile} costOfFillingApplication={product.costOfFillingApplication} id={product.idprofession_unit}></UpdateProfessionUnitDetails>} ></PopUp>
+                        <Delete tooltip="מחיקת יחידת המקצוע" key={product.idprofession_unit} message={'?האם אתה בטוח שברצונך למחוק יחידה זו'} function={() => { deleteProd(product.idprofession_unit) }} ></Delete>
                     </div> {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                     <br></br>
-                    <Delete key={product.idprofession_unit} message={'?האם אתה בטוח שברצונך למחוק יחידה זו'} function={() => { deleteProd(product.idprofession_unit) }} ></Delete>
+                    
 
                 </div>
             </div>
