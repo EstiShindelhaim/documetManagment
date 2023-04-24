@@ -12,16 +12,16 @@ exports.getLastFiles = (numOfFiles, managerId) => {
   return Stages.findAll(
     {
       include: [
-        { 
-          model: db.files, 
-          attributes: ['name','result','remarks'], 
-          include: [{ model: db.officers, attributes:['name'], where: { 'managerId': managerId } },
-          {model:db.statuses,  attributes: ['name'], where:{'name':{[Op.ne]: 'נסגר ע"י המנהל'}}}          
-        ],
-        // where:{[Op.and]:{'name':{[Op.ne]: ''},'result':{[Op.ne]: ''},'remarks':{[Op.ne]: ''}}}
-        where:{'name':{[Op.ne]: ''}}
-        }, 
-        
+        {
+          model: db.files,
+          attributes: ['name', 'result', 'remarks'],
+          include: [{ model: db.officers, attributes: ['name'], where: { 'managerId': managerId } },
+          { model: db.statuses, attributes: ['name'], where: { 'name': { [Op.ne]: 'נסגר ע"י המנהל' } } }
+          ],
+          // where: { [Op.or]: [{'name':{[Op.ne]: ''}}, {'result':{[Op.ne]: ''}},{'remarks':{[Op.ne]: ''}}]}
+          where: { 'name': { [Op.ne]: '' } }
+        },
+
       ],
       raw: true,
       // where:{'name':{[Op.ne]: ''}},
@@ -167,6 +167,50 @@ exports.getGrafOfFilesByMonth = (id) => {
     where: sequelize.where(sequelize.fn('YEAR', sequelize.col('date')), year),
     raw: true,
     group: [sequelize.fn('MONTH', sequelize.col('date'))],
+  })
+};
+
+
+//מכאן והלאה לא עובד!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+exports.getActiveFiles = (managerId) => {
+  return File.findAll({
+    attributes: [
+      [sequelize.fn('COUNT', '*'), 'active']
+    ],
+    include: [
+      { model: db.statuses, attributes: [], where: { 'name': { [Op.ne]: 'נסגר ע"י המנהל' } } },
+    { model: db.officers, attributes: [], where: { 'managerId': managerId } }
+    ]
+  })
+};
+
+exports.getFakeFiles = (managerId) => {
+
+  return File.findAll({
+    attributes: [
+      [sequelize.fn('COUNT', '*'), 'fake']
+    ],
+    where: { officerId: officerId, result: 0 }
+  })
+};
+
+exports.getUnderCheckFiles = (managerId) => {
+
+  return File.findAll({
+    attributes: [
+      [sequelize.fn('COUNT', '*'), 'UnderCheck']
+    ],
+    where: { officerId: officerId, statusId: 1 }
+  })
+};
+
+exports.getCheckedFiles = (managerId) => {
+
+  return File.findAll({
+    attributes: [
+      [sequelize.fn('COUNT', '*'), 'Checked']
+    ],
+    where: { officerId: officerId, statusId: 2 }
   })
 };
 

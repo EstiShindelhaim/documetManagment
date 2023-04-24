@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Graf from './graf';
 import LastFiles from './lastFiles';
+import RGgraf from './RGgraf';
 
 export default function Dashboard() {
     return (<>
@@ -13,7 +13,7 @@ export default function Dashboard() {
                     <div className="flex justify-content-between mb-3">
                         <div>
                             <span className="block text-500 font-medium mb-3">תיקים תקולים</span>
-                            {/* <div className="text-900 font-medium text-xl"><Fake></Fake></div> */}
+                            <div className="text-900 font-medium text-xl"><span></span></div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                             <i className="pi false-icon pi-times-circle text-blue-500 text-xl"></i>
@@ -60,32 +60,29 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-            <div className="col-12 xl:col-6">
-                <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
-                    <h3>תיקים שנבדקו לאחרונה</h3>
-                    {/* <DataTable value={products} rows={5} paginator responsiveLayout="scroll">
-                    <Column header="Image" body={(data) => <img className="shadow-2" src={`/demo/images/product/${data.image}`} alt={data.image} width="50" />} />
-                    <Column field="name" header="Name" sortable style={{ width: '35%' }} />
-                    <Column field="price" header="Price" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                    <Column
-                        header="View"
-                        style={{ width: '15%' }}
-                        body={() => (
-                            <>
-                                <Button icon="pi pi-search" type="button" text />
-                            </>
-                        )}
-                    />
-                </DataTable> */}
-                    {/* <GetLasts></GetLasts> */}
-                </div>
-            </div>
 
             <div className="col-12 xl:col-6">
                 <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
-                    <h3>תיקים בשנים האחרונות</h3>
                     {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
-                    <Graf></Graf>
+                    <RGgraf></RGgraf>
+                </div>
+            </div>
+            <div className="col-12 xl:col-6">
+                <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                    {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
+                    <RGgraf></RGgraf>
+                </div>
+            </div>
+            <div className="col-12 xl:col-6">
+                <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                    {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
+                    <RGgraf></RGgraf>
+                </div>
+            </div>
+            <div className="col-12 xl:col-6">
+                <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                    {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
+                    <RGgraf></RGgraf>
                 </div>
             </div>
         </div>
