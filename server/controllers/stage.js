@@ -45,6 +45,16 @@ exports.getStagebyFileId = (req, res) => {
   stageDal
     .getStagebyFileId(fileId)
     .then((data) => {
+      data = data.map((e) => {
+        return {
+          "idstages": e.idstages_of_progress_of_file,
+          "fileId": e.fileId,
+          "statusId": e.statusId,
+          "date": new Date(e.date).toLocaleDateString(),
+          "IDnumberOfApplicant": e.IDnumberOfApplicant,
+          "statusName": e.status.name
+        }
+      })
       if (data) {
         res.send(data);
       } else {

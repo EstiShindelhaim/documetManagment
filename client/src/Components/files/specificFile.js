@@ -16,11 +16,16 @@ import { SelectButton } from 'primereact/selectbutton';
 import { Toast } from 'primereact/toast';
 import { useParams } from 'react-router-dom';
 import { Card } from 'primereact/card';
+import PopUp from "../popup";
+import Progress from './progress';
 
 const SpecificFiles = () => {
+    const [visible, setVisible] = useState(false);
     const params = useParams()
     const idfile = params.id;
     const { data, loading, error, refetch } = useAxiosGet("file", idfile);
+
+
     if (loading) return <p>loading</p>
 
     const getSeverity = (product) => {
@@ -50,7 +55,7 @@ const SpecificFiles = () => {
 
     return (<>
         <div className="card">
-            <Card title="פרטי התיק" style={{ width: "90%", marginRight: "5%", textAlign: "center" }}>
+            <Card title="פרטי התיק" style={{ width: "70%", marginRight: "15%", textAlign: "center" }}>
 
                         <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                             <div className="flex align-items-center gap-2">
@@ -68,6 +73,8 @@ const SpecificFiles = () => {
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Button onClick={() => { closeProd(data.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={idfile} ></Progress>} ></PopUp>
+
                             </div>
                         </div>
             </Card>

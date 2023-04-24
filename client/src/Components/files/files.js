@@ -15,12 +15,13 @@ import { useFunc } from "../../Hooks/useFunc";
 import { SelectButton } from 'primereact/selectbutton';
 import { Toast } from 'primereact/toast';
 import { Link } from "react-router-dom";
+import { InputSwitch } from "primereact/inputswitch";
 
 const Files = () => {
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    const { data, loading, error, refetch } = useAxiosGet("file/byManager", 2);
+    const { data, loading, error, refetch } = useAxiosGet("file/byManager", 1);
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
@@ -90,6 +91,9 @@ const Files = () => {
                                 {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                                 <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
                                 <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
+                                {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
+                                {product.thoroughCheck == 1 && <InputSwitch checked={true}/>}
+                                {product.thoroughCheck != 1 && <InputSwitch checked={false} />} */}
                                 <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
                             </div>
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
@@ -138,6 +142,9 @@ const Files = () => {
                             {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                             <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
                             <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
+                            {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
+                            {product.thoroughCheck == 1 && <InputSwitch checked={true} />}
+                            {product.thoroughCheck != 1 && <InputSwitch checked={false} />} */}
                             <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Link to={`/file/${product.idfile}`} id="link" >

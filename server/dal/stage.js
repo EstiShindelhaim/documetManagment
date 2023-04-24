@@ -41,7 +41,10 @@ exports.addStage = (stageToAdd) => {
 // };
 
 exports.getStagebyFileId = (id) => {
-  return Stage.findAll({ where: { fileId: id } });
+  return Stage.findAll({
+    where: { fileId: id },
+    include: { model: db.statuses, attributes: ['name'] }
+  });
 };
 
 exports.updateStagebyFileId = (fileId, stageToUpdate) => {
