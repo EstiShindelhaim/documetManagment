@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Graf from './graf';
 import LastFiles from './lastFiles';
+import RGgraf from './RGgraf';
 
 export default function Dashboard() {
     return (<>
@@ -63,30 +63,26 @@ export default function Dashboard() {
 
             <div className="col-12 xl:col-6">
                 <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
-                    <h3>תיקים בשנים האחרונות</h3>
                     {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
-                    <Graf></Graf>
+                    <RGgraf></RGgraf>
                 </div>
             </div>
             <div className="col-12 xl:col-6">
                 <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
-                    <h3>תיקים בשנים האחרונות</h3>
                     {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
-                    <Graf></Graf>
+                    <RGgraf></RGgraf>
                 </div>
             </div>
             <div className="col-12 xl:col-6">
                 <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
-                    <h3>תיקים בשנים האחרונות</h3>
                     {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
-                    <Graf></Graf>
+                    <RGgraf></RGgraf>
                 </div>
             </div>
             <div className="col-12 xl:col-6">
                 <div className="card surface-0 shadow-2 p-3 border-1 border-50 border-round">
-                    <h3>תיקים בשנים האחרונות</h3>
                     {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
-                    <Graf></Graf>
+                    <RGgraf></RGgraf>
                 </div>
             </div>
         </div>
