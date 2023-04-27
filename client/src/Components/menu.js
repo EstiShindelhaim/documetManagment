@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext  } from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 import { useNavigate } from "react-router-dom"
 import PopUp from './popup';
@@ -10,8 +10,10 @@ import { useFunc } from "../Hooks/useFunc";
 import { Toast } from 'primereact/toast';
 import EmailLink from './emailLink';
 import useAxiosGet from '../Hooks/useGet';
+import UserContext from "./User/UserContext"
 
 export default function Menu() {
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [visible, setVisible] = useState(false);
     const [numOfDocumentForEmp, setNumOfDocumentForEmp] = useState(0);
@@ -19,12 +21,12 @@ export default function Menu() {
     const { data, loading, error, refetch } = useAxiosGet("principal");
 
     const RestFileEmp = async () => {
-        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForOfficer", 1);
+        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForOfficer",  user.idmanager);
         console.log("data num", data.num);
         return (data.num)
     }
     const RestFileForManager = async () => {
-        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForManager", 1);
+        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForManager",  user.idmanager);
         console.log("data num", data.num);
         return (data.num)
     }
@@ -35,7 +37,7 @@ export default function Menu() {
         //     console.log("setNumOfDocumentForEmp", data);
         //     setNumOfDocumentForEmp(data);
         // });
-        getData("manager/numOfDocumentsForOfficer", 1)
+        getData("manager/numOfDocumentsForOfficer", user.idmanager)
             .then(data => {
                 console.log("setNumOfDocumentForEmp", data);
                 setNumOfDocumentForEmp(data.data.num);
@@ -47,7 +49,7 @@ export default function Menu() {
         //         setNumOfDocumentForManager(data);
         //     });
 
-        getData("manager/numOfDocumentsForManager", 1)
+        getData("manager/numOfDocumentsForManager",  user.idmanager)
             .then(data => {
                 console.log("setNumOfDocumentForMan", data);
                 setNumOfDocumentForManager(data.data.num);
@@ -80,14 +82,14 @@ export default function Menu() {
     const valueTemplateEmp = (value) => {
         return (
             <React.Fragment>
-                <b>2000</b>/{2000 - numOfDocumentForEmp}
+                <b>{user.numOfDocumentsForOfficer}</b>/{user.numOfDocumentsForOfficer - numOfDocumentForEmp}
             </React.Fragment>
         );
     };
     const valueTemplateMan = (value) => {
         return (
             <React.Fragment>
-                <b>2000</b>/{2000 - numOfDocumentForManager}
+                <b>{user.numOfDocumentsForManager}</b>/{user.numOfDocumentsForManager- numOfDocumentForManager}
             </React.Fragment>
         );
     };
@@ -98,13 +100,13 @@ export default function Menu() {
             <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
                 <div className="col-12 md:col-6 lg:col-3">
                     <Tag value="מנהל" rounded></Tag>
-                    {2000 - numOfDocumentForManager}/<b>2000</b>
-                    <ProgressBar value={((2000 - numOfDocumentForManager) / 2000) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
+                    {user.numOfDocumentsForManager- numOfDocumentForManager}/<b>{user.numOfDocumentsForManager}</b>
+                    <ProgressBar value={((user.numOfDocumentsForManager - numOfDocumentForManager) / user.numOfDocumentsForManager) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <Tag value="פקידים" rounded></Tag>
-                    {2000 - numOfDocumentForEmp}/<b>2000</b>
-                    <ProgressBar value={((2000 - numOfDocumentForEmp) / 2000) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
+                    {user.numOfDocumentsForOfficer - numOfDocumentForEmp}/<b>{user.numOfDocumentsForOfficer}</b>
+                    <ProgressBar value={((user.numOfDocumentsForOfficer - numOfDocumentForEmp) / user.numOfDocumentsForOfficer) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <EmailLink email={data.mail} tooltip="צור קשר עם סוכן המערכת"></EmailLink>
