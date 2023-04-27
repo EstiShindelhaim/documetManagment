@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext  } from "react";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
@@ -8,14 +8,15 @@ import { InputText } from "primereact/inputtext";
 import { Password } from 'primereact/password';
 import { useFunc } from "../Hooks/useFunc";
 import { Button } from "primereact/button";
+import UserContext from "./User/UserContext"
 
 export default function UpdateDetails(props) {
 
-
-    const [name, setname] = useState('');
+    const user = useContext(UserContext);
+    const [name, setname] = useState(user.name);
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
-    const [mail, setmail] = useState('');
+    const [mail, setmail] = useState(user.mail);
     const { updateData } = useFunc();
     const [notValidMail, setNotValidMail] = useState(false);
     const [notValidPassword, setNotValidPassword] = useState(false);
