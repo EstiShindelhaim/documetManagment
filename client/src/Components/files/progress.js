@@ -10,7 +10,7 @@ console.log("dddddddddddddata",data);
 const findDate=(element)=>{
     const find=data.filter(e=>e.statusName==element);
     console.log("findddddddddddddddddd",find);
-    if(find.length==0) return "";
+    if(find.length==0) return "---";
     return find[0].date
 }
 const arr=['נבדק ע"י הפקיד','הועבר למנהל','נסגר ע"י הפקיד','נבדק ע"י המנהל','נסגר ע"י המנהל'];
