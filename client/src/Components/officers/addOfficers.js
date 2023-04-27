@@ -61,6 +61,18 @@ const AddOfficers = (props) => {
             return false;
         return true;
     }
+    
+    function checkEmail(val){
+        if(!val.match(/\S+@\S+\.\S+/)){ // Jaymon's / Squirtle's solution
+            // Do something
+            return false;
+        }
+        if( val.indexOf(' ')!=-1 || val.indexOf('..')!=-1){
+            // Do something
+            return false;
+        }
+        return true;
+    }
 
     const hundleSubmit = async () => {
         if(!id || !name || !password1 || !password2 || !mail || !numOfDocuments)
@@ -90,7 +102,7 @@ const AddOfficers = (props) => {
             return
         }
         if(notValidPassword) setNotValidPassword(false);
-        if (!mail.endsWith('@gmail.com')) {
+        if (!checkEmail(mail)) {
             if(!notValidMail) setNotValidMail(true);
             if(notValidDocuments) setNotValidDocuments(false);
             return;
