@@ -22,18 +22,66 @@ const AddOfficers = (props) => {
     // const toast = useRef(null);
     const [notValidAll, setNotValidAll] = useState(false);
     const [notValidMail, setNotValidMail] = useState(false);
+    const [notValidId, setNotValidId] = useState(false);
     const [notValidPassword, setNotValidPassword] = useState(false);
     const [notValidDocuments, setNotValidDocuments] = useState(false);
+    
+    const [id, setId] = useState('');
+    const [professionUnitId, setProfessionUnitId] = useState('');
+    const [name, setname] = useState('');
+    const [password1, setpassword1] = useState('');
+    const [password2, setpassword2] = useState('');
+    const [mail, setmail] = useState('');
+    const [numOfDocuments, setnumOfDocuments] = useState('');
+    if(l)
+    return (<p>louding</p>)
+
+    const validId=(value)=>
+    {
+        if(value.length!= 9)
+            return false;
+        let sum=0;
+        let ss=0;
+        let a=value.split("");
+        let i=0;
+        for(i=0;i<a.length-1;i+=2)
+        {
+            sum+=parseInt(a[i]);
+        }
+        for(i=1;i<a.length-1;i+=2)
+        {
+            ss=2*parseInt(a[i]);
+            if(ss>9)
+            {
+                ss=parseInt(ss/10)+ss%10;
+            }
+            sum+=ss;
+        }
+        if(parseInt(a[a.length-1])!=(10-sum%10))
+            return false;
+        return true;
+    }
+
     const hundleSubmit = async () => {
         if(!id || !name || !password1 || !password2 || !mail || !numOfDocuments)
         {
             if(!notValidAll) setNotValidAll(true);
+            if(notValidId) setNotValidId(false);
             if(notValidPassword) setNotValidPassword(false);
             if(notValidMail) setNotValidMail(false);
             if(notValidDocuments) setNotValidDocuments(false);
             return;
         }
         if(notValidAll) setNotValidAll(false);
+        if(!validId(id))
+        {
+            if(!notValidId) setNotValidId(true);
+            if(notValidPassword) setNotValidPassword(false);
+            if(notValidMail) setNotValidMail(false);
+            if(notValidDocuments) setNotValidDocuments(false);
+            return;
+        }
+        if(notValidId) setNotValidId(false);
         if(password1!=password2)
         {
             if(!notValidPassword) setNotValidPassword(true);
@@ -79,21 +127,13 @@ const AddOfficers = (props) => {
                  
     }
 
-    const [id, setId] = useState('');
-    const [professionUnitId, setProfessionUnitId] = useState('');
-    const [name, setname] = useState('');
-    const [password1, setpassword1] = useState('');
-    const [password2, setpassword2] = useState('');
-    const [mail, setmail] = useState('');
-    const [numOfDocuments, setnumOfDocuments] = useState('');
-    if(l)
-    return (<p>louding</p>)
     return (<>
     {/* //    // //{data=fillData()} */}
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="id">מס' זהות</label>
                 <InputText id="id" aria-describedby="id-help" value={id} keyfilter="int" onChange={(e) => setId(e.target.value)} />
+                {notValidId && <span style={{ color: "red" }}>מס' זהות לא תקין</span>}
             </div>
         </div>
         <div className="card flex justify-content-center">
