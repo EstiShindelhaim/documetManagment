@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef , useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
@@ -20,14 +20,15 @@ import UpdateOfficerDetails from './updateOfficerDetails';
 import Delete from '../delete';
 import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
+import EmailLink from '../emailLink';
 
 const Officers = () => {
     const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    console.log("user.idmanager",user);
-    const { data, loading, error, refetch } = useAxiosGet("officer/byManager",user.idmanager);
+    console.log("user.idmanager", user);
+    const { data, loading, error, refetch } = useAxiosGet("officer/byManager", user.idmanager);
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -52,12 +53,12 @@ const Officers = () => {
         await deteteData("officer", id);
         refetch();
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'הפקיד נמחק בהצלחה', life: 1500 });
-        
+
         // const { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
         // console.log("products===========", pr);
         // setProducts(pr)
         // setProducts([{ name: "aaa", idNumber: 123, mail: "jjjj", numOfDocuments: 1, professionUnit: "asd" }]);
-        
+
     }
     const listItem = (product) => {
         return (
@@ -79,8 +80,8 @@ const Officers = () => {
                         </div>
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <Button icon="pi pi-send" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                            <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts}name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit ={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                            <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>
+                            <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                             {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                             <Delete tooltip="מחיקת הפקיד" key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
                         </div>
@@ -108,10 +109,11 @@ const Officers = () => {
                         <Tag value={product.professionUnit}></Tag>
                     </div>
                     <div className="flex align-items-center justify-content-between">
-                        <Button icon="pi pi-send" tooltip="צור קשר" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts}name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit ={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                        <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>
+                        <PopUp label="עדכן פרטי פקיד" icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                         {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                         <Delete tooltip="מחיקת הפקיד" key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
+
                     </div>
                 </div>
             </div>

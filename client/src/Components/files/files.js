@@ -153,6 +153,8 @@ const Files = () => {
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                            </div>
+                            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                                 <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>

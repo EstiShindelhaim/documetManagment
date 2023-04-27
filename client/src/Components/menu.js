@@ -8,13 +8,15 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Tag } from 'primereact/tag';
 import { useFunc } from "../Hooks/useFunc";
 import { Toast } from 'primereact/toast';
-
+import EmailLink from './emailLink';
+import useAxiosGet from '../Hooks/useGet';
 
 export default function Menu() {
     const { getData, postData, updateData, deteteData } = useFunc();
     const [visible, setVisible] = useState(false);
     const [numOfDocumentForEmp, setNumOfDocumentForEmp] = useState(0);
     const [numOfDocumentForManager, setNumOfDocumentForManager] = useState(0);
+    const { data, loading, error, refetch } = useAxiosGet("principal");
 
     const RestFileEmp = async () => {
         const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForOfficer", 1);
@@ -89,7 +91,7 @@ export default function Menu() {
     };
 
     return (
-        <div style={{ display: "flex"}} className="card">
+        <div style={{ display: "flex" }} className="card">
             <TabMenu model={items} />
             <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
                 <div className="col-12 md:col-6 lg:col-3">
@@ -103,13 +105,14 @@ export default function Menu() {
                     <ProgressBar value={((2000 - numOfDocumentForEmp) / 2000) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                    <Button style={{ display: "flex" }} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button>
+                    <EmailLink email={data.mail} tooltip="צור קשר עם סוכן המערכת"></EmailLink>
+                    {/* <Button style={{ display: "flex" }} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button> */}
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
                 </div>
             </div>
-            
+
             <Toast ref={toast} />
         </div>
     )
