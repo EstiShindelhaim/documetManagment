@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef , useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
@@ -18,15 +18,17 @@ import { Link } from "react-router-dom";
 import { InputSwitch } from "primereact/inputswitch";
 import PopUp from "../popup";
 import Progress from './progress';
+import UserContext from "../User/UserContext"
 
 const Files = () => {
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    const { data, loading, error, refetch } = useAxiosGet("file/byManager", 1);
+    const { data, loading, error, refetch } = useAxiosGet("file/byManager", user.idmanager);
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [search, setSearch] = useState('');
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(0);
     const [statusId, setStatusId] = useState(3);
     // const [statusPass, setStatusPass] = useState(3);
     const options = ['כל התיקים', 'תיקים שהועברו למנהל'];
@@ -103,7 +105,7 @@ const Files = () => {
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+                                <PopUp label="הצג התקדמות התיק" id={product.idfile} icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
                     </div>
@@ -156,7 +158,7 @@ const Files = () => {
                             </div>
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
                     </div>

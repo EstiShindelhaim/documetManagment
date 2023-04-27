@@ -18,7 +18,7 @@ export default function LastFiles() {
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [statusId, setStatusId] = useState(3);
     const toast = useRef(null);
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(0);
 
     useEffect(() => {
         if (dStatuses) {
@@ -99,7 +99,7 @@ export default function LastFiles() {
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                        <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+                        <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
 
                     </div>
                 </div>
