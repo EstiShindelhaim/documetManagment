@@ -20,6 +20,18 @@ export default function UpdateDetails(props) {
     const { updateData } = useFunc();
     const [notValidMail, setNotValidMail] = useState(false);
     const [notValidPassword, setNotValidPassword] = useState(false);
+
+    function checkEmail(val){
+        if(!val.match(/\S+@\S+\.\S+/)){ // Jaymon's / Squirtle's solution
+            // Do something
+            return false;
+        }
+        if( val.indexOf(' ')!=-1 || val.indexOf('..')!=-1){
+            // Do something
+            return false;
+        }
+        return true;
+    }
     const hundleSubmit = async () => {
         console.log(password1,"password1",password2,"password2");
         const managerToUpdae =
@@ -45,7 +57,7 @@ export default function UpdateDetails(props) {
         }
 
         if (mail != '') {
-            if (!mail.endsWith('@gmail.com')) {
+            if (!checkEmail(mail)) {
                 if(!notValidMail) setNotValidMail(true);
                 return;
             }  
