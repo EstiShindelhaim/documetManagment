@@ -170,7 +170,7 @@ const ProfessionUnit = () => {
             import('jspdf-autotable').then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(exportColumns, products);
-                doc.save('products.pdf');
+                doc.save('professionUnits.pdf');
             });
         });
     };
@@ -202,7 +202,7 @@ const ProfessionUnit = () => {
                 type: 'array'
             });
 
-            saveAsExcelFile(excelBuffer, 'products');
+            saveAsExcelFile(excelBuffer, 'professionUnits');
         });
     };
 

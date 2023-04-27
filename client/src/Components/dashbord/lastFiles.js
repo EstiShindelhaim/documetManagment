@@ -7,6 +7,9 @@ import { useFunc } from "../../Hooks/useFunc";
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
+import PopUp from '../popup';
+import Progress from '../files/progress';
+import { Link } from "react-router-dom";
 
 export default function LastFiles() {
     const user = useContext(UserContext);
@@ -15,6 +18,7 @@ export default function LastFiles() {
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
     const [statusId, setStatusId] = useState(3);
     const toast = useRef(null);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         if (dStatuses) {
@@ -88,9 +92,15 @@ export default function LastFiles() {
                     <br></br><br></br>
                     <h5 className="mt-0 mb-3">{product.remarks || "---"} :הערות</h5>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                    <Link to={`/file/${product.idfile}`} id="link"  >
+                                    <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                                </Link>
                         <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                    </div>
+                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                        <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+
                     </div>
                 </div>
             </div>

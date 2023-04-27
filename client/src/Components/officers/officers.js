@@ -160,7 +160,7 @@ const Officers = () => {
             import('jspdf-autotable').then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(exportColumns, products);
-                doc.save('products.pdf');
+                doc.save('officers.pdf');
             });
         });
     };
@@ -182,7 +182,7 @@ const Officers = () => {
                 type: 'array'
             });
 
-            saveAsExcelFile(excelBuffer, 'products');
+            saveAsExcelFile(excelBuffer, 'officers');
         });
     };
 

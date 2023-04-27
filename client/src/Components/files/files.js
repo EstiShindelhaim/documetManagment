@@ -205,7 +205,7 @@ const Files = () => {
             import('jspdf-autotable').then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(exportColumns, products);
-                doc.save('products.pdf');
+                doc.save('files.pdf');
             });
         });
     };
@@ -228,7 +228,7 @@ const Files = () => {
                 type: 'array'
             });
 
-            saveAsExcelFile(excelBuffer, 'products');
+            saveAsExcelFile(excelBuffer, 'files');
         });
     };
 

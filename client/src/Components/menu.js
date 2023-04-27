@@ -54,8 +54,10 @@ export default function Menu() {
             });
 
     }, []);
+    
     const navigate = useNavigate();
     const toast = useRef(null);
+    if(loading) return <p>loading</p>
     const items = [
         {
             label: 'פקידים', icon: 'pi pi-fw pi-users',
