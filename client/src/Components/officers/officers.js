@@ -146,11 +146,11 @@ const Officers = () => {
     }
 
     const cols = [
-        { field: 'idNumber', header: 'Id Number' },
-        { field: 'name', header: 'Name' },
-        { field: 'mail', header: 'Mail' },
-        { field: 'numOfDocuments', header: 'Num Of Documents' },
-        { field: 'professionUnit', header: 'Profession Unit' }
+        { field: 'idNumber', header: "תעודת זהות"},
+        { field: 'name', header: "שם" },
+        { field: 'mail', header: "מייל" },
+        { field: 'numOfDocuments', header: "מס' מסמכים שיכול לשלוח לבדיקה" },
+        { field: 'professionUnit', header: "יחידת מקצוע" }
     ];
 
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
@@ -169,11 +169,11 @@ const Officers = () => {
         import('xlsx').then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(products.map((e) => {
                 return {
-                    "Id Number": e.idNumber,
-                    "Name": e.name,
-                    "Mail": e.mail,
-                    "num Of Documents": e.numOfDocuments,
-                    "Profession Unit": e.professionUnit
+                    "תעודת זהות": e.idNumber,
+                    "שם": e.name,
+                    "מייל": e.mail,
+                    "מס' מסמכים שיכול לשלוח לבדיקה": e.numOfDocuments,
+                    "יחידת מקצוע": e.professionUnit
                 }
             }));
             const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
