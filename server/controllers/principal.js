@@ -1,10 +1,10 @@
 const principalDal=require('../dal/principal');
 const principal = require('../models/principal');
 
-exports.getPrincipal=(req, res)=>{//לשים לב למיין
+exports.getPrincipal=(req, res)=>{
     principalDal.getPrincipal()
     .then(data => {
-        res.send(data);
+        res.send(data[0]);
         })
         .catch(err => {
         res.status(500).send({

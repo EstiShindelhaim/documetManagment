@@ -177,10 +177,10 @@ exports.getActiveFiles = (managerId) => {
     attributes: [
       [sequelize.fn('COUNT', '*'), 'active']
     ],
-    include: [
-      { model: db.statuses, attributes: [], where: { 'name': { [Op.ne]: 'נסגר ע"י המנהל' } } },
-    { model: db.officers, attributes: [], where: { 'managerId': managerId } }
-    ]
+    // include: [
+    //   { model: db.statuses, attributes: [], where: { 'name': { [Op.ne]: 'נסגר ע"י המנהל' } } },
+    // { model: db.officers, attributes: [], where: { 'managerId': managerId } }
+    // ]
   })
 };
 

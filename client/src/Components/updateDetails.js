@@ -62,7 +62,8 @@ export default function UpdateDetails(props) {
 
 
     return (<>
-        <div className="card flex justify-content-center">
+    <div style={{direction:"rtl"}}>
+        <div className="card flex justify-content-center" >
             <div className="flex flex-column gap-2">
                 <label htmlFor="name">שם</label>
                 <InputText id="name" aria-describedby="name-help" value={name} onChange={(e) => setname(e.target.value)} />
@@ -89,7 +90,9 @@ export default function UpdateDetails(props) {
             </div> 
             
         </div>  
+        </div>
         <Button label="אישור" icon="pi pi-check" onClick={hundleSubmit}></Button>
+        
     </>
     )
 }
