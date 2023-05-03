@@ -231,15 +231,6 @@ const Officers = () => {
             <Toast ref={toast} />
         </div>
     )
-
-    //         return (<>
-    //             {/* 
-    // בשביל שיהיה בשמאל ולא במרכז צריך שבאבא
-    // justify-content: flex-end !important;
-    // } */}
-    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="הפקידים שלי" popup={<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
-    //         </>)
-    //     }
 };
 
 export default Officers;

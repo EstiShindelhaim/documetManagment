@@ -18,6 +18,7 @@ import { useParams } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import PopUp from "../popup";
 import Progress from './progress';
+import Result from './documents';
 
 const SpecificFiles = () => {
     const [visible, setVisible] = useState(false);
@@ -89,6 +90,8 @@ const SpecificFiles = () => {
                             </div>
                         </div>
             </Card>
+            <br></br>
+            <Result details={{idfile:idfile}}></Result>
         </div>
     </>)
 }
