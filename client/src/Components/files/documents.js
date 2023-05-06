@@ -15,7 +15,7 @@ function Result(props) {
     if (loading) {
         return <p>Loading...</p>;
     }
-    if (error) { return <p>Error!</p>; }
+    if (error) { return <p>אין מסמכים</p>; }
     const ProductTemplate = (data) => {
         // const getDocuments = async () => {
         //     const x = await FetchFileData(`${props.details.idfile}/${data.name}`);

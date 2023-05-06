@@ -70,9 +70,9 @@ const ProfessionUnit = () => {
                             <div className="text-2xl font-bold text-900">{product.name}</div>
                             {/* <div className="font-semibold">{product.mail}</div> */}
                             <p>מחיר למילוי הבקשה:</p>
-                            <Tag value={product.costOfFillingApplication}></Tag>
+                            <Tag value={product.costOfFillingApplication} severity={'success'}></Tag>
                             <p>מספר ימים לצפיה בבקשה:</p>
-                            <Tag value={product.daysForViewingClosedFile}></Tag>
+                            <Tag value={product.daysForViewingClosedFile} severity={'success'}></Tag>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
                                     {/* <span className="font-semibold">{product.idNumber}</span> */}
@@ -105,9 +105,9 @@ const ProfessionUnit = () => {
                         <div className="text-2xl font-bold text-900">{product.name}</div>
                         {/* <div className="font-semibold">{product.mail}</div> */}
                         <p>מחיר למילוי הבקשה:</p>
-                        <Tag value={product.costOfFillingApplication}></Tag>
+                        <Tag value={product.costOfFillingApplication} severity={'success'}></Tag>
                         <p>מספר ימים לצפיה בבקשה:</p>
-                        <Tag value={product.daysForViewingClosedFile}></Tag>
+                        <Tag value={product.daysForViewingClosedFile} severity={'success'}></Tag>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         

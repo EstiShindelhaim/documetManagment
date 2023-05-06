@@ -74,9 +74,9 @@ const Officers = () => {
                             </div>
                             <div className="font-semibold">{product.mail}</div>
                             <p>מספר קבצים מאושרים: </p>
-                            <Tag value={product.numOfDocuments}></Tag>
+                            <Tag value={product.numOfDocuments} severity={'success'}></Tag>
                             <p>יחידת מקצוע: </p>
-                            <Tag value={product.professionUnit}></Tag>
+                            <Tag value={product.professionUnit} severity={'success'}></Tag>
                         </div>
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
@@ -104,9 +104,9 @@ const Officers = () => {
                         <div className="text-2xl font-bold">{product.name}</div>
                         <div className="font-semibold">{product.mail}</div>
                         <p>מספר קבצים מאושרים: </p>
-                        <Tag value={product.numOfDocuments}></Tag>
+                        <Tag value={product.numOfDocuments} severity={'success'}></Tag>
                         <p>יחידת מקצוע: </p>
-                        <Tag value={product.professionUnit}></Tag>
+                        <Tag value={product.professionUnit} severity={'success'}></Tag>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>

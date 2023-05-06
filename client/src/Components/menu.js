@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useRef, useContext  } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 import { useNavigate } from "react-router-dom"
 import PopUp from './popup';
 import UpdateDetails from './updateDetails';
-import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Tag } from 'primereact/tag';
-import { useFunc } from "../Hooks/useFunc";
 import { Toast } from 'primereact/toast';
 import EmailLink from './emailLink';
 import useAxiosGet from '../Hooks/useGet';
@@ -14,52 +12,19 @@ import UserContext from "./User/UserContext"
 
 export default function Menu() {
     const user = useContext(UserContext);
-    const { getData, postData, updateData, deteteData } = useFunc();
     const [visible, setVisible] = useState(false);
-    const [numOfDocumentForEmp, setNumOfDocumentForEmp] = useState(0);
-    const [numOfDocumentForManager, setNumOfDocumentForManager] = useState(0);
-    const { data, loading, error, refetch } = useAxiosGet("principal");
-
-    const RestFileEmp = async () => {
-        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForOfficer",  user.idmanager);
-        console.log("data num", data.num);
-        return (data.num)
-    }
-    const RestFileForManager = async () => {
-        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForManager",  user.idmanager);
-        console.log("data num", data.num);
-        return (data.num)
-    }
-
-    useEffect(() => {
-        // RestFileEmp()
-        // .then(data => {
-        //     console.log("setNumOfDocumentForEmp", data);
-        //     setNumOfDocumentForEmp(data);
-        // });
-        getData("manager/numOfDocumentsForOfficer", user.idmanager)
-            .then(data => {
-                console.log("setNumOfDocumentForEmp", data);
-                setNumOfDocumentForEmp(data.data.num);
-            });
-
-        // RestFileForManager()
-        //     .then(data => {
-        //         console.log("setNumOfDocumentForMan", data);
-        //         setNumOfDocumentForManager(data);
-        //     });
-
-        getData("manager/numOfDocumentsForManager",  user.idmanager)
-            .then(data => {
-                console.log("setNumOfDocumentForMan", data);
-                setNumOfDocumentForManager(data.data.num);
-            });
-
-    }, []);
-    
+    const { data, loading: ld, error: ed, refetch: rd } = useAxiosGet("principal");
+    let { data: numOfDocumentForEmp, loading: le, error: ee, refetch: re } = useAxiosGet("manager/numOfDocumentsForOfficer", user.idmanager);
+    let { data: numOfDocumentForManager, loading: lm, error: em, refetch: rm } = useAxiosGet("manager/numOfDocumentsForManager", user.idmanager);
+    console.log("numOfDocumentForEmp", numOfDocumentForEmp);
+    console.log("numOfDocumentForManager", numOfDocumentForManager);
     const navigate = useNavigate();
     const toast = useRef(null);
-    if(loading) return <p>loading</p>
+
+    if (ld || le || lm) return <p>loading....</p>
+
+    numOfDocumentForEmp = numOfDocumentForEmp.num;
+    numOfDocumentForManager = numOfDocumentForManager.num;
     const items = [
         {
             label: 'פקידים', icon: 'pi pi-fw pi-users',
@@ -89,7 +54,7 @@ export default function Menu() {
     const valueTemplateMan = (value) => {
         return (
             <React.Fragment>
-                <b>{user.numOfDocumentsForManager}</b>/{user.numOfDocumentsForManager- numOfDocumentForManager}
+                <b>{user.numOfDocumentsForManager}</b>/{user.numOfDocumentsForManager - numOfDocumentForManager}
             </React.Fragment>
         );
     };
@@ -97,10 +62,11 @@ export default function Menu() {
     return (
         <div style={{ display: "flex" }} className="card">
             <TabMenu model={items} />
+            <div >
             <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
                 <div className="col-12 md:col-6 lg:col-3">
                     <Tag value="מנהל" rounded></Tag>
-                    {user.numOfDocumentsForManager- numOfDocumentForManager}/<b>{user.numOfDocumentsForManager}</b>
+                    {user.numOfDocumentsForManager - numOfDocumentForManager}/<b>{user.numOfDocumentsForManager}</b>
                     <ProgressBar value={((user.numOfDocumentsForManager - numOfDocumentForManager) / user.numOfDocumentsForManager) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
@@ -110,13 +76,12 @@ export default function Menu() {
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <EmailLink email={data.mail} tooltip="צור קשר עם סוכן המערכת"></EmailLink>
-                    {/* <Button style={{ display: "flex" }} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button> */}
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
                 </div>
             </div>
-
+            </div>
             <Toast ref={toast} />
         </div>
     )
