@@ -21,6 +21,7 @@ import UpdateProfessionUnitDetails from './updateProfessionUnitDetails';
 import Delete from '../delete';
 import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
+import Header from '../Head';
 
 const ProfessionUnit = () => {
     const us=localStorage.getItem("user")
@@ -208,16 +209,26 @@ const ProfessionUnit = () => {
         });
     };
 
+    const filterToExcel=(e)=>{
+        return {
+            "שם": e.name,
+            "מס' ימים לצפיה בבקשה": e.daysForViewingClosedFile,
+            "מחיר למילוי בקשה": e.CostOfFillingApplication
+        }
+    }
     const header = () => {
         return (<>
-            <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
+            {/* <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
                 <h1 className="m-0" >{"יחידות מקצוע"}</h1>
                 <span className="p-input-icon-right">
-                    <i className="pi pi-search" />
+                    <i className="pi pi-search" /> */}
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
-                </span>
+                    <Header b={true} h={"יחידות המקצוע שלי"}  products={products} name='professionUnit' filterToExcel={filterToExcel} label="הוסף יחידת מקצוע חדשה" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></Header>
+
+                {/* </span>
             </div>
             <br></br>
+            
             <div style={{ textAlign: "center" }}>
                 <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא היחידות ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
@@ -227,7 +238,7 @@ const ProfessionUnit = () => {
             <PopUp label="הוסף יחידת מקצוע חדשה" icon="pi pi-calendar-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></PopUp>
             <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-            </div>
+            </div> */}
         </>
         );
     };

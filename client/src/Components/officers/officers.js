@@ -222,7 +222,7 @@ const filterToExcel=(e)=>{
             {/* </div> */}
             {/* <br></br>
             <div style={{ textAlign: "center" }}> */}
-                <Header h={"הפקידים שלי"}  products={products} filterToExcel={filterToExcel} label="הוסף פקיד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header>
+                <Header b={true} h={"הפקידים שלי"}  products={products} name='officers' filterToExcel={filterToExcel} label="הוסף פקיד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header>
                 {/* <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא הפקידים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" /> */}
                 {/* <span> </span> */}
                 {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא הפקידים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}

@@ -85,13 +85,13 @@ exports.getDoucumentsByFileId=(req, res)=>{
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Document with fileId=${fileId}.`
+          message: `Cannot find Document with fileId=${id}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Document with fileId=" + fileId
+        message: "Error retrieving Document with fileId=" + id
       });
     });
 }
@@ -114,31 +114,3 @@ exports.getDocumentById=(req, res)=>{
       });
     });
 }
-
-exports.getOpenDocumentById = (req, res, next) => {
-
-  //   function getByteArray(filePath){
-  //     let fileData = fs.readFileSync(filePath).toString('hex');
-  //     let result = []
-  //     for (var i = 0; i < fileData.length; i+=2)
-  //       result.push('0x'+fileData[i]+''+fileData[i+1])
-  //     return result;
-  // }
-  
-  // result = getByteArray(`${process.env.PATH_FILE}/${req.params.file}/${req.params.document}.pdf`)
-  //   res.send(result) 
-    const options = { 
-      root: `${process.env.PATH_FILE}/${req.params.file}`
-  }; 
-  
-    const fileName =  `${req.params.document}.${req.params.docType}`;
-    res.sendFile(fileName, options, function (err) {
-        if (err) {
-          console.log(err);
-            next(err);
-        } else { 
-          console.log('Sent:', fileName); 
-      }
-  });
-}
- 
