@@ -11,8 +11,10 @@ import { Button } from "primereact/button";
 import UserContext from "./User/UserContext"
 
 export default function UpdateDetails(props) {
+    const us=localStorage.getItem("user")
+    const user=JSON.parse(us)
 
-    const user = useContext(UserContext);
+    // const user = useContext(UserContext);
     const [name, setname] = useState(user.name);
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');

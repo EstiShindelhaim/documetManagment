@@ -23,7 +23,9 @@ import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
 
 const ProfessionUnit = () => {
-    const user = useContext(UserContext);
+    const us=localStorage.getItem("user")
+    const user=JSON.parse(us)
+    // const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
@@ -70,9 +72,9 @@ const ProfessionUnit = () => {
                             <div className="text-2xl font-bold text-900">{product.name}</div>
                             {/* <div className="font-semibold">{product.mail}</div> */}
                             <p>מחיר למילוי הבקשה:</p>
-                            <Tag value={product.costOfFillingApplication} severity={'success'}></Tag>
+                            <Tag value={product.costOfFillingApplication}></Tag>
                             <p>מספר ימים לצפיה בבקשה:</p>
-                            <Tag value={product.daysForViewingClosedFile} severity={'success'}></Tag>
+                            <Tag value={product.daysForViewingClosedFile}></Tag>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
                                     {/* <span className="font-semibold">{product.idNumber}</span> */}
@@ -105,9 +107,9 @@ const ProfessionUnit = () => {
                         <div className="text-2xl font-bold text-900">{product.name}</div>
                         {/* <div className="font-semibold">{product.mail}</div> */}
                         <p>מחיר למילוי הבקשה:</p>
-                        <Tag value={product.costOfFillingApplication} severity={'success'}></Tag>
+                        <Tag value={product.costOfFillingApplication}></Tag>
                         <p>מספר ימים לצפיה בבקשה:</p>
-                        <Tag value={product.daysForViewingClosedFile} severity={'success'}></Tag>
+                        <Tag value={product.daysForViewingClosedFile}></Tag>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         

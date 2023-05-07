@@ -8,13 +8,27 @@ import {useNavigate, useLocation} from "react-router-dom"
 import Menu from "./Components/menu";
 import ProfessionUnit from "./Components/professionUnit/professionUnit";
 import Dashboard from "./Components/dashbord/dashbord";
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import UserProvider from "./Components/User/UserProvider";
 import SpecificFiles from "./Components/files/specificFile";
+// import { useEffect, useState, useContext } from 'react'
+
+
 
 function App() {
 const location= useLocation().pathname;
 const [userId, setUserId] = useState('');
+
+
+useEffect(() => {
+  const userIdFromLocalStorage = localStorage.getItem("userId");
+  if (userIdFromLocalStorage) setUserId(userIdFromLocalStorage);
+}, []);
+
+// useEffect(() => {
+//   const userIdFromLocalStorage = localStorage.getItem("userId");
+//   if (userIdFromLocalStorage) setUserId(userIdFromLocalStorage);
+// }, []);
 
 const setUserIdCallback = (id) => {
   console.log("logggggggggggggggggggggggggggg",id);

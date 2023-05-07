@@ -5,7 +5,9 @@ import useAxiosGet from "../../Hooks/useGet"
 import { SelectButton } from 'primereact/selectbutton';
 import UserContext from "../User/UserContext"
 function RGgraf() {
-    const user = useContext(UserContext);
+    const us=localStorage.getItem("user")
+    const user=JSON.parse(us)
+    // const user = useContext(UserContext);
     const [chartDataY, setChartDataY] = useState({});
     const [chartOptionsY, setChartOptionsY] = useState({});
     const [chartDataM, setChartDataM] = useState({});

@@ -21,7 +21,9 @@ import Progress from './progress';
 import UserContext from "../User/UserContext"
 
 const Files = () => {
-    const user = useContext(UserContext);
+    const us=localStorage.getItem("user")
+    const user=JSON.parse(us)
+    // const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
@@ -89,7 +91,7 @@ const Files = () => {
                                     </span>
                                 </div>
                                 <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                                <Tag value={product.name} severity={'success'}></Tag>
+                                <Tag value={product.name}></Tag>
                                 <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                                 {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                                 <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
@@ -141,7 +143,7 @@ const Files = () => {
                         </div>
                         <div className="flex flex-column align-items-center gap-3 py-5">
                             <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                            <Tag value={product.name} severity={'success'}></Tag>
+                            <Tag value={product.name}></Tag>
                             <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                             {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                             <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
@@ -155,7 +157,8 @@ const Files = () => {
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-
+                            </div>
+                            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
                                 <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>

@@ -29,6 +29,8 @@ function Login(props) {
         console.log(res.data.user);   
         setNotValid(false);
         props.setUserId(res.data.user)
+        console.log("kkkkkkkkkkkkkkkkkkkkkkkkk",res.data.user);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
         navigate("/Home")
       }
         else        

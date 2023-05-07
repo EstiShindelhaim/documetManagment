@@ -18,16 +18,7 @@ import UserContext from "../User/UserContext"
 const AddProfessionUnit = (props) => {
     const user = useContext(UserContext);
     const { getData, postData } = useFunc();
-    const [notValidAll, setNotValidAll] = useState(false);
-
     const hundleSubmit = async () => {
-
-        if (!name || !daysForViewingClosedFile || !costOfFillingApplication) {
-            if (!notValidAll) setNotValidAll(true);
-            return;
-        }
-        if (notValidAll) setNotValidAll(false);
-
          const  professionUnit =
          {
             name: name,
@@ -45,35 +36,35 @@ const AddProfessionUnit = (props) => {
        props.toast.current.show({severity:'success', summary: 'Success', detail:'היחידה נוספה בהצלחה', life: 1500});
                  
     }
-    const [name, setName] = useState('');
+    const [name, setname] = useState('');
     const [daysForViewingClosedFile, setdaysForViewingClosedFile] = useState('');
     const [costOfFillingApplication, setCostOfFillingApplication] = useState('');
     // if(l)
     // return (<p>louding</p>)
     return (<>
     {/* //    // //{data=fillData()} */}
-       <div style={{direction:"rtl"}}>
+       
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="name">שם</label>
-                <InputText id="name" aria-describedby="name-help" value={name} onChange={(e) => setName(e.target.value)} />
+                <InputText id="name" aria-describedby="name-help" value={name} onChange={(e) => setname(e.target.value)} />
             </div>
         </div>
         <br></br>
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="daysForViewingClosedFile">מס' ימים לצפיה במסמך</label>
-                <InputText keyfilter="int" id="daysForViewingClosedFile" aria-describedby="daysForViewingClosedFile-help" value={daysForViewingClosedFile} onChange={(e) => setdaysForViewingClosedFile(e.target.value)}/>
+                <InputText id="daysForViewingClosedFile" aria-describedby="daysForViewingClosedFile-help" value={daysForViewingClosedFile} onChange={(e) => setdaysForViewingClosedFile(e.target.value)}/>
+                {/* {notValidMail && <span style={{ color: "red" }}>כתובת מייל לא חוקית</span>} */}
             </div>
         </div>
         <br></br>
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="CostOfFillingApplication">מחיר לבקשה</label>
-                <InputText keyfilter="int" id="CostOfFillingApplication" aria-describedby="CostOfFillingApplication-help" value={costOfFillingApplication} onChange={(e) => setCostOfFillingApplication(e.target.value)}/>
-                {notValidAll && <span style={{ color: "red" }}>נא למלא את כל השדות</span>}
+                <InputText id="CostOfFillingApplication" aria-describedby="CostOfFillingApplication-help" value={costOfFillingApplication} onChange={(e) => setCostOfFillingApplication(e.target.value)}/>
+                {/* {notValidDocuments && <span style={{ color: "red" }}>מדי הרבה מסמכים מאושרים</span>} */}
             </div>
-        </div>
         </div>
         {/* <Toast ref={toast} /> */}
         <Button label="אישור" icon="pi pi-check" onClick={hundleSubmit}></Button>

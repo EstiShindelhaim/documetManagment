@@ -12,7 +12,9 @@ import Progress from '../files/progress';
 import { Link } from "react-router-dom";
 
 export default function LastFiles() {
-    const user = useContext(UserContext);
+    const us=localStorage.getItem("user")
+    const user=JSON.parse(us)
+    // const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const { data, loading, error, refetch } = useAxiosGet("dashboard/lastFiles/9", user.idmanager);
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
