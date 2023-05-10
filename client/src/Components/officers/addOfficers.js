@@ -55,11 +55,12 @@ const AddOfficers = (props) => {
             ss=2*parseInt(a[i]);
             if(ss>9)
             {
-                ss=parseInt(ss/10)+ss%10;
+                ss=1+ss%10;
             }
             sum+=ss;
         }
-        if(parseInt(a[a.length-1])!=(10-sum%10))
+        if(sum%10!=0)
+       // if(parseInt(a[a.length-1])!=(10-sum%10))
             return false;
         return true;
     }
