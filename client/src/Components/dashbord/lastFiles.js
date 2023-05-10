@@ -78,10 +78,28 @@ export default function LastFiles() {
         refetch();
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
     }
+    const forResult = (product) => {
+        switch (product.result) {
+            case 1:
+                return 'תקין';
+
+            case 0:
+                return 'מזויף';
+
+            case 'undefined':
+                return 'אזהרה';
+
+            default:
+                return null;
+        }
+    };
+
+
+
 
     const productTemplate = (product) => {
         return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3" style={{ width:"70%", padding: "10px" }}>
                 <div className="mb-3">
                     <h4 className="mt-0 mb-3">:מגיש התיק</h4>
                     <Tag value={product.name}></Tag>
@@ -90,8 +108,7 @@ export default function LastFiles() {
                     <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                     <h4 className="mb-1">תאריך בדיקה: {product.date}</h4>
                     <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
-                    <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
-                    <br></br><br></br>
+                    <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
                     <h5 className="mt-0 mb-3">{product.remarks || "---"} :הערות</h5>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                     <Link to={`/file/${product.idfile}`} id="link"  >
@@ -112,10 +129,10 @@ export default function LastFiles() {
     return (<>
         <Card>
             <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
-                <h1 className="m-0" >{'תיקים שנבדקו לאחרונה ע"י הפקידים'}</h1>
+                <h1 className="m-0" >{'תיקים אחרונים'}</h1>
             </div>
             <div className="card" style={{ direction: "ltr" }}>
-                <Carousel value={data} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
+                <Carousel value={data} numVisible={4} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
             </div>
             <Toast ref={toast} />
         </Card>

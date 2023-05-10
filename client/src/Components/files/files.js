@@ -85,7 +85,7 @@ const Files = () => {
                     <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                         <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                             <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                                <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
+                            <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
                                 <div className="flex align-items-center gap-3">
                                     <span className="flex align-items-center gap-2">
                                         <span className="font-semibold">{product.idNumber}</span>
@@ -132,14 +132,30 @@ const Files = () => {
         }
     };
 
+    const forResult = (product) => {
+        switch (product.result) {
+            case 1:
+                return 'תקין';
+
+            case 0:
+                return 'מזויף';
+
+            case 'undefined':
+                return 'אזהרה';
+
+            default:
+                return null;
+        }
+    };
+
     const gridItem = (product) => {
         if (value == 'כל התיקים' || product.statusName == "הועבר למנהל")
             return (
-                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" style={{ width:"20%", padding: "10px" }}>
                     <div className="p-4 border-1 surface-border surface-card border-round">
                         <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                             <div className="flex align-items-center gap-2">
-                                <Tag value="תוצאת התיק" severity={getSeverity(product)}></Tag>
+                                <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
                             </div>
                         </div>
                         <div className="flex flex-column align-items-center gap-3 py-5">
