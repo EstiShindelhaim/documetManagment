@@ -69,6 +69,7 @@ exports.getStagebyFileId = (req, res) => {
       });
     });
 };
+
 exports.updateStagebyFileId = (req, res) => {
   const fileId = req.params.fileId;
   stageDal

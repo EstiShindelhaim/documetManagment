@@ -31,6 +31,8 @@ function Login(props) {
         props.setUserId(res.data.user)
         console.log("kkkkkkkkkkkkkkkkkkkkkkkkk",res.data.user);
         localStorage.setItem('user', JSON.stringify(res.data.user));
+        const us=localStorage.getItem("user")
+        const user=JSON.parse(us)
         navigate("/Home")
       }
         else        

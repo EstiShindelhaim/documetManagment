@@ -26,10 +26,10 @@ import Header from '../Head'
 
 const Officers = () => {
     // console.log("ssssssssssssssssssssssssssssssssssssssssssss")
-    const us=localStorage.getItem("user")
-    const user=JSON.parse(us)
+    // const us=localStorage.getItem("user")
+    // const user=JSON.parse(us)
     // console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",user);//
-//  const user = useContext(UserContext);
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
@@ -87,7 +87,7 @@ const Officers = () => {
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>
-                            <PopUp label="עדכן פרטי פקיד"  id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                            <PopUp label="עדכן פרטי פקיד" id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                             {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                             <Delete tooltip="מחיקת הפקיד" key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
                         </div>
@@ -116,7 +116,7 @@ const Officers = () => {
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>
-                        <PopUp label="עדכן פרטי פקיד"  id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                        <PopUp label="עדכן פרטי פקיד" id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                         {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                         <Delete tooltip="מחיקת הפקיד" key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
 
@@ -152,7 +152,7 @@ const Officers = () => {
     }
 
     const cols = [
-        { field: 'idNumber', header: "תעודת זהות"},
+        { field: 'idNumber', header: "תעודת זהות" },
         { field: 'name', header: "שם" },
         { field: 'mail', header: "מייל" },
         { field: 'numOfDocuments', header: "מס' מסמכים שיכול לשלוח לבדיקה" },
@@ -171,67 +171,67 @@ const Officers = () => {
     //     });
     // };
 
-const filterToExcel=(e)=>{
-    return {
-                    "תעודת זהות": e.idNumber,
-                    "שם": e.name,
-                    "מייל": e.mail,
-                    "מס' מסמכים שיכול לשלוח לבדיקה": e.numOfDocuments,
-                    "יחידת מקצוע": e.professionUnit
-                }
-}
-//   const exportExcel = () => {
-//         import('xlsx').then((xlsx) => {
-//             const worksheet = xlsx.utils.json_to_sheet(products.map((e) => {
-//                 console.log("eeeeeeeeeeeeeeeeeeeeeeeee",e);
-//                return(filterToExcel(e)) 
-//             }));
-//             const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-//             const excelBuffer = xlsx.write(workbook, {
-//                 bookType: 'xlsx',
-//                 type: 'array'
-//             });
+    const filterToExcel = (e) => {
+        return {
+            "תעודת זהות": e.idNumber,
+            "שם": e.name,
+            "מייל": e.mail,
+            "מס' מסמכים שיכול לשלוח לבדיקה": e.numOfDocuments,
+            "יחידת מקצוע": e.professionUnit
+        }
+    }
+      const exportExcel = () => {
+            import('xlsx').then((xlsx) => {
+                const worksheet = xlsx.utils.json_to_sheet(products.map((e) => {
+                    console.log("eeeeeeeeeeeeeeeeeeeeeeeee",e);
+                   return(filterToExcel(e)) 
+                }));
+                const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+                const excelBuffer = xlsx.write(workbook, {
+                    bookType: 'xlsx',
+                    type: 'array'
+                });
 
-//             saveAsExcelFile(excelBuffer, 'officers');
-//         });
-//     };
+                saveAsExcelFile(excelBuffer, 'officers');
+            });
+        };
 
-    // const saveAsExcelFile = (buffer, fileName) => {
-    //     import('file-saver').then((module) => {
-    //         if (module && module.default) {
-    //             let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    //             let EXCEL_EXTENSION = '.xlsx';
-    //             const data = new Blob([buffer], {
-    //                 type: EXCEL_TYPE
-    //             });
+    const saveAsExcelFile = (buffer, fileName) => {
+        import('file-saver').then((module) => {
+            if (module && module.default) {
+                let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+                let EXCEL_EXTENSION = '.xlsx';
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
 
-    //             module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    //         }
-    //     });
-    // };
+                module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+            }
+        });
+    };
 
 
     const header = () => {
         return (<>
-            {/* <div className="flex flex-wrap gap-2 align-items-center justify-content-between" > */}
-                {/* <h1 className="m-0" >{"הפקידים שלי"}</h1>
+            <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
+                <h1 className="m-0" >{"הפקידים שלי"}</h1>
                 <span className="p-input-icon-right">
-                    <i className="pi pi-search" /> */}
+                    <i className="pi pi-search" />
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
-                {/* </span> */}
-            {/* </div> */}
-            {/* <br></br>
-            <div style={{ textAlign: "center" }}> */}
-                <Header b={true} h={"הפקידים שלי"}  products={products} name='officers' filterToExcel={filterToExcel} label="הוסף פקיד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header>
-                {/* <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא הפקידים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" /> */}
-                {/* <span> </span> */}
+                </span>
+            </div>
+            <br></br>
+            <div style={{ textAlign: "center" }}>
+                {/* <Header b={true} h={"הפקידים שלי"} products={products} name='officers' filterToExcel={filterToExcel} label="הוסף פקיד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header> */}
+                <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא הפקידים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+                <span> </span>
                 {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא הפקידים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
-            {/* </div> */}
-            {/* <br></br> */}
-            {/* <PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></PopUp> */}
-            {/* <div className="flex justify-content-end" style={{ direction: "ltr" }}>
+            </div>
+            <br></br>
+            <PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></PopUp>
+            <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-            </div> */}
+            </div>
         </>
         );
     };

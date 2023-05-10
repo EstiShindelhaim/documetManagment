@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Chart } from 'primereact/chart';
 import useAxiosGet from "../../Hooks/useGet"
-// import {GetGrafOfFiles} from '../../Hooks/dashboard'
 import UserContext from "../User/UserContext"
 import { SelectButton } from 'primereact/selectbutton';
 function CountGraf() {

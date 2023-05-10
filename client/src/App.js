@@ -1,6 +1,5 @@
 import Files from "./Components/files/files";
 import Home from "./Components/Home";
-import React from "react";
 import Login from "./Components/login/login";
 import Officers from "./Components/officers/officers"
 import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
@@ -8,11 +7,9 @@ import {useNavigate, useLocation} from "react-router-dom"
 import Menu from "./Components/menu";
 import ProfessionUnit from "./Components/professionUnit/professionUnit";
 import Dashboard from "./Components/dashbord/dashbord";
-import {useEffect, useState } from "react";
+import {useEffect, useState,React } from "react";
 import UserProvider from "./Components/User/UserProvider";
 import SpecificFiles from "./Components/files/specificFile";
-// import { useEffect, useState, useContext } from 'react'
-
 
 
 function App() {
@@ -21,17 +18,17 @@ const [userId, setUserId] = useState('');
 
 
 useEffect(() => {
-  const userIdFromLocalStorage = localStorage.getItem("userId");
-  if (userIdFromLocalStorage) setUserId(userIdFromLocalStorage);
-}, []);
-
-// useEffect(() => {
-//   const userIdFromLocalStorage = localStorage.getItem("userId");
-//   if (userIdFromLocalStorage) setUserId(userIdFromLocalStorage);
-// }, []);
+  if(!userId){
+    const us = localStorage.getItem("user");
+  const userIdFromLocalStorage=JSON.parse(us)
+  console.log("ddddddddddddddddddddddddddddddddddddd",userIdFromLocalStorage);
+  if (userIdFromLocalStorage) setUserIdCallback(userIdFromLocalStorage);
+  }
+  
+});
 
 const setUserIdCallback = (id) => {
-  console.log("logggggggggggggggggggggggggggg",id);
+  console.log("ddddddddddddddddddddddddddddddddddddd",id);
   setUserId(id);
 }
   return (<>

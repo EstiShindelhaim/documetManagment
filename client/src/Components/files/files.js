@@ -22,9 +22,9 @@ import UserContext from "../User/UserContext"
 import Header from '../Head'
 
 const Files = () => {
-    const us=localStorage.getItem("user")
-    const user=JSON.parse(us)
-    // const user = useContext(UserContext);
+    // const us=localStorage.getItem("user")
+    // const user=JSON.parse(us)
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
@@ -189,7 +189,7 @@ const Files = () => {
 
     const FilterProduct = async (args) => {
 
-        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("file/byManager", 2);
+        let { data: pr, loading: prl, error: pre, refetch: prr } = await getData("file/byManager", user.idmanager);
         pr = pr.filter(p => forFilter(p, args))
         setProducts(pr);
     }
@@ -263,28 +263,28 @@ const Files = () => {
 
     const header = () => {
         return (<>
-            {/* <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
+            <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
                 <h1 className="m-0" >{"התיקים שלי"}</h1>
                 <span className="p-input-icon-right">
-                    <i className="pi pi-search" /> */}
+                    <i className="pi pi-search" />
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
-                {/* </span> */}
-            {/* </div> */}
-            {/* <br></br> */}
-            {/* <div style={{ textAlign: "center" }}> */}
-            <Header b={false} h={"התיקים שלי"}  products={products} name='files' filterToExcel={filterToExcel} ></Header>
+                </span> 
+            </div>
+            <br></br>
+            <div style={{ textAlign: "center" }}>
+            {/* <Header b={false} h={"התיקים שלי"}  products={products} name='files' filterToExcel={filterToExcel} ></Header> */}
 
-                {/* <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא התיקים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+             <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא התיקים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא התיקים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
-            {/* </div> */}
-            {/* <br></br> */}
-            {/* <div className="flex justify-content-end" style={{ direction: "ltr" }}> */}
-                {/* <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} /> */}
-            {/* </div> */}
-            {/* <div className="card flex justify-content-center" style={{ direction: "ltr" }}> */}
+                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא התיקים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
+            </div>
+            <br></br>
+            <div className="flex justify-content-end" style={{ direction: "ltr" }}>
+                <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
+            </div>
+            <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
-            {/* </div> */}
+            </div>
         </>
         );
     };

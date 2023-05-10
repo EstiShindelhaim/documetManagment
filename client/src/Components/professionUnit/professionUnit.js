@@ -24,9 +24,9 @@ import UserContext from "../User/UserContext"
 import Header from '../Head';
 
 const ProfessionUnit = () => {
-    const us=localStorage.getItem("user")
-    const user=JSON.parse(us)
-    // const user = useContext(UserContext);
+    // const us=localStorage.getItem("user")
+    // const user=JSON.parse(us)
+    const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
@@ -218,27 +218,27 @@ const ProfessionUnit = () => {
     }
     const header = () => {
         return (<>
-            {/* <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
+            <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
                 <h1 className="m-0" >{"יחידות מקצוע"}</h1>
                 <span className="p-input-icon-right">
-                    <i className="pi pi-search" /> */}
+                    <i className="pi pi-search" /> 
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
-                    <Header b={true} h={"יחידות המקצוע שלי"}  products={products} name='professionUnit' filterToExcel={filterToExcel} label="הוסף יחידת מקצוע חדשה" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></Header>
+                    {/* <Header b={true} h={"יחידות המקצוע שלי"}  products={products} name='professionUnit' filterToExcel={filterToExcel} label="הוסף יחידת מקצוע חדשה" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></Header> */}
 
-                {/* </span>
+            </span>
             </div>
             <br></br>
             
             <div style={{ textAlign: "center" }}>
                 <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא היחידות ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא היחידות ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
+                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא היחידות ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
             </div>
             <br></br>
             <PopUp label="הוסף יחידת מקצוע חדשה" icon="pi pi-calendar-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></PopUp>
             <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-            </div> */}
+            </div> 
         </>
         );
     };

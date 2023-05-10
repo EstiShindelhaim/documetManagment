@@ -14,9 +14,9 @@ import Submit from "../submit";
 import UserContext from "../User/UserContext"
 
 export default function UpdateOfficerDetails(props) {
-    // const user = useContext(UserContext);
-    const us=localStorage.getItem("user")
-    const user=JSON.parse(us)
+    const user = useContext(UserContext);
+    // const us=localStorage.getItem("user")
+    // const user=JSON.parse(us)
     const { getData, postData } = useFunc();
     const { data: d, loading: l, error: e, refetch: f } = useAxiosGet("professionUnit/byManager", user.idmanager);
     const [name, setname] = useState(props.name);
