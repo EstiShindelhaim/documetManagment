@@ -13,5 +13,7 @@ documentRouter.route("/")
   .put(documentCntrl.updateDocumentById)
     .delete(documentCntrl.deleteDocumentById)
     documentRouter.route("/byFile/:fileId")
-       .get(documentCntrl.getDoucumentsByFileId)
+       .get(documentCntrl.getDoucumentsByFileId)     
+     documentRouter.route("/:file/:document/:docType")
+       .get(documentCntrl.getOpenDocumentById)
 module.exports = documentRouter;

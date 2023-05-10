@@ -15,12 +15,17 @@ exports.getDocumentById=(id)=>{
     qry.raw=true;
     return Document.findAll(qry);    
 };
-exports.getDoucumentsByFileId=(id)=>{
-    qry={}
-    qry.where={fileId:id}
-    qry.include=[{model:db.languages,  attributes: ['name'] }];
-    qry.raw=true;
-    return Document.findAll(qry); 
+exports.getDoucumentsByFileId = (id) => {
+    // qry = {}
+    // qry.where={fileId:id}
+    // qry.include=[{model:db.languages,  attributes: ['name'] }];
+    // qry.raw=true;
+    // return Document.findAll(qry); 
+    console.log("iiiiiiiiiiiiiiiiiiiiiiid", id);
+    return Document.findAll({
+        where: { fileId: id },
+        include: [{ model: db.languages, attributes: ['name'] }]
+    });
 };
 exports.getAllDocuments= ()=>{
     qry={}
