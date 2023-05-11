@@ -86,7 +86,7 @@ const Officers = () => {
                         </div>
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>
+                            <EmailLink email={product.mail} tooltip="יצירת קשר "></EmailLink>
                             <PopUp label="עדכון " id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                             {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                             <Delete tooltip="מחיקה " key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
@@ -115,7 +115,7 @@ const Officers = () => {
                         <Tag value={product.professionUnit}></Tag>
                     </div>
                     <div className="flex align-items-center justify-content-between">
-                        <EmailLink email={product.mail} tooltip="צור קשר עם הפקיד "></EmailLink>
+                        <EmailLink email={product.mail} tooltip="יצירת קשר "></EmailLink>
                         <PopUp label="עדכון" id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
                         {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                         <Delete tooltip="מחיקה " key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
