@@ -58,7 +58,7 @@ const Officers = () => {
     const deleteProd = async (id) => {
         await deteteData("officer", id);
         refetch();
-        toast.current.show({ severity: 'success', summary: 'Success', detail: 'הפקיד נמחק בהצלחה', life: 1500 });
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'העובד נמחק בהצלחה', life: 1500 });
 
         // const { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
         // console.log("products===========", pr);
@@ -87,9 +87,9 @@ const Officers = () => {
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <EmailLink email={product.mail} tooltip="יצירת קשר "></EmailLink>
-                            <PopUp label="עדכון " id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
-                            {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
-                            <Delete tooltip="מחיקה " key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
+                            <PopUp label="עדכון " id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי עובד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                            {/* <Button icon="pi pi-user-minus" tooltip="מחיקת עובד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
+                            <Delete tooltip="מחיקה " key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק עובד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
                         </div>
                     </div>
                 </div>
@@ -116,9 +116,9 @@ const Officers = () => {
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <EmailLink email={product.mail} tooltip="יצירת קשר "></EmailLink>
-                        <PopUp label="עדכון" id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי פקיד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
-                        {/* <Button icon="pi pi-user-minus" tooltip="מחיקת פקיד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
-                        <Delete tooltip="מחיקה " key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק פקיד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
+                        <PopUp label="עדכון" id={product.idofficer} icon="pi pi-user-edit" header="עדכן פרטי עובד" visible={visible} setVisible={setVisible} content={<UpdateOfficerDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} mail={product.mail} numOfDocuments={product.numOfDocuments} professionUnit={product.professionUnit} id={product.idofficer}></UpdateOfficerDetails>} ></PopUp>
+                        {/* <Button icon="pi pi-user-minus" tooltip="מחיקת עובד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
+                        <Delete tooltip="מחיקה " key={product.idofficer} message={'?האם אתה בטוח שברצונך למחוק עובד זה'} function={() => { deleteProd(product.idofficer) }} ></Delete>
 
                     </div>
                 </div>
@@ -214,7 +214,7 @@ const Officers = () => {
     const header = () => {
         return (<>
             <div className="flex flex-wrap gap-2 align-items-center justify-content-between" >
-                <h1 className="m-0" >{"הפקידים שלי"}</h1>
+                <h1 className="m-0" >{"העובדים שלי"}</h1>
                 <span className="p-input-icon-right">
                     <i className="pi pi-search" />
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
@@ -222,13 +222,13 @@ const Officers = () => {
             </div>
             <br></br>
             <div style={{ textAlign: "center" }}>
-                {/* <Header b={true} h={"הפקידים שלי"} products={products} name='officers' filterToExcel={filterToExcel} label="הוסף פקיד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header> */}
-                <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא הפקידים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+                {/* <Header b={true} h={"העובדים שלי"} products={products} name='officers' filterToExcel={filterToExcel} label="הוסף עובד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי עובד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header> */}
+                <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא העובדים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא הפקידים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
+                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא העובדים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
             </div>
             <br></br>
-            <PopUp label="הוסף פקיד" icon="pi pi-user-plus" header="הכנס פרטי פקיד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></PopUp>
+            <PopUp label="הוסף עובד" icon="pi pi-user-plus" header="הכנס פרטי עובד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></PopUp>
             <div className="flex justify-content-end" style={{ direction: "ltr" }}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
             </div>
@@ -248,7 +248,7 @@ const Officers = () => {
     // בשביל שיהיה בשמאל ולא במרכז צריך שבאבא
     // justify-content: flex-end !important;
     // } */}
-    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="הפקידים שלי" popup={<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
+    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="העובדים שלי" popup={<PopUp label="הוסף עובד חדש" icon="pi pi-user-plus" header="הכנס פרטי עובד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
     //         </>)
     //     }
 };

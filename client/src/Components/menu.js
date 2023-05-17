@@ -64,7 +64,11 @@ export default function Menu() {
     if(loading) return <p>loading</p>
     const items = [
         {
-            label: 'פקידים', icon: 'pi pi-fw pi-users',
+            label: 'דאשבורד', icon: 'pi pi-chart-line',
+            command: () => { navigate("/dashboard") }
+        },
+        {
+            label: 'עובדים', icon: 'pi pi-fw pi-users',
             command: () => { navigate("/officers") }
         },
         {
@@ -74,11 +78,8 @@ export default function Menu() {
         {
             label: 'יחידות מקצוע', icon: 'pi pi-th-large',
             command: () => { navigate("/professionUnits") }
-        },
-        {
-            label: 'דאשבורד', icon: 'pi pi-chart-line',
-            command: () => { navigate("/dashboard") }
         }
+     
     ];
 
     const valueTemplateEmp = (value) => {
@@ -106,7 +107,7 @@ export default function Menu() {
                     <ProgressBar value={((user.numOfDocumentsForManager - numOfDocumentForManager) / user.numOfDocumentsForManager) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                    <Tag value="פקידים" rounded></Tag>
+                    <Tag value="עובדים" rounded></Tag>
                     {user.numOfDocumentsForOfficer - numOfDocumentForEmp}/<b>{user.numOfDocumentsForOfficer}</b>
                     <ProgressBar value={((user.numOfDocumentsForOfficer - numOfDocumentForEmp) / user.numOfDocumentsForOfficer) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
                 </div>
