@@ -200,7 +200,7 @@ function RGgraf() {
 
     if (value == 'לפי שנים')
         return (<>
-            <h3>תוצאות תיקים בשנים האחרונות</h3>
+            <h3>תוצאות תיקים</h3>
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>
@@ -211,7 +211,7 @@ function RGgraf() {
         )
     if (value == 'לפי חודשים')
         return (<>
-            <h3>תוצאות תיקים בחודשים האחרונים</h3>
+            <h3>תוצאות תיקים</h3>
             {console.log("by monthhhhhhhhhhhhhhhhhhhhhhhhh")}
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />

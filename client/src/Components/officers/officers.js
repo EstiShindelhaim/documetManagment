@@ -80,10 +80,8 @@ const Officers = () => {
                                 </span>
                             </div>
                             <div className="font-semibold">{product.mail}</div>
-                            <p>מספר קבצים מאושרים: </p>
-                            <Tag value={product.numOfDocuments}></Tag>
-                            <p>יחידת מקצוע: </p>
-                            <Tag value={product.professionUnit}></Tag>
+                            <p>מספר קבצים מאושרים: {product.numOfDocuments}</p>  
+                            <p>יחידת מקצוע: {product.professionUnit}</p>
                         </div>
                         {/* {let id=product.idofficer} */}
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
@@ -111,10 +109,8 @@ const Officers = () => {
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <div className="text-2xl font-bold">{product.name}</div>
                         <div className="font-semibold">{product.mail}</div>
-                        <p>מספר קבצים מאושרים: </p>
-                        <Tag value={product.numOfDocuments}></Tag>
-                        <p>יחידת מקצוע: </p>
-                        <Tag value={product.professionUnit}></Tag>
+                        <p>מספר קבצים מאושרים: {product.numOfDocuments}</p>
+                        <p>יחידת מקצוע: {product.professionUnit}</p>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <EmailLink email={product.mail} tooltip="יצירת קשר "></EmailLink>

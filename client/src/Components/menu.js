@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext  } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 import { useNavigate } from "react-router-dom"
 import PopUp from './popup';
@@ -13,8 +13,8 @@ import useAxiosGet from '../Hooks/useGet';
 import UserContext from "./User/UserContext"
 
 export default function Menu() {
-    const us=localStorage.getItem("user")
-    const user=JSON.parse(us)
+    const us = localStorage.getItem("user")
+    const user = JSON.parse(us)
     // const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [visible, setVisible] = useState(false);
@@ -51,17 +51,32 @@ export default function Menu() {
         //         setNumOfDocumentForManager(data);
         //     });
 
-        getData("manager/numOfDocumentsForManager",  user.idmanager)
+        getData("manager/numOfDocumentsForManager", user.idmanager)
             .then(data => {
                 console.log("setNumOfDocumentForMan", data);
                 setNumOfDocumentForManager(data.data.num);
             });
 
     }, []);
-    
+
+    const valueTemplateEmp = (value) => {
+        return (
+            <React.Fragment>
+                <b>{user.numOfDocumentsForOfficer}</b>/{user.numOfDocumentsForOfficer - numOfDocumentForEmp}
+            </React.Fragment>
+        );
+    };
+    const valueTemplateMan = (value) => {
+        return (
+            <React.Fragment>
+                <b>{user.numOfDocumentsForManager}</b>/{user.numOfDocumentsForManager - numOfDocumentForManager}
+            </React.Fragment>
+        );
+    };
+
     const navigate = useNavigate();
     const toast = useRef(null);
-    if(loading) return <p>loading</p>
+    if (loading) return <p>loading</p>
     const items = [
         {
             label: 'דאשבורד', icon: 'pi pi-chart-line',
@@ -78,32 +93,50 @@ export default function Menu() {
         {
             label: 'יחידות מקצוע', icon: 'pi pi-th-large',
             command: () => { navigate("/professionUnits") }
+        },
+        {
+            label: ' ', disabled: true, style: { width: "40%" }
+        },
+        {
+            label: <div >
+                <Tag value="מנהל" rounded></Tag>
+                {user.numOfDocumentsForManager - numOfDocumentForManager}/<b>{user.numOfDocumentsForManager}</b>
+                <ProgressBar value={((user.numOfDocumentsForManager - numOfDocumentForManager) / user.numOfDocumentsForManager) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
+            </div>,
+            command: () => { }
+        },
+        {
+            label: <div>
+                <Tag value="עובדים" rounded></Tag>
+                {user.numOfDocumentsForOfficer - numOfDocumentForEmp}/<b>{user.numOfDocumentsForOfficer}</b>
+                <ProgressBar value={((user.numOfDocumentsForOfficer - numOfDocumentForEmp) / user.numOfDocumentsForOfficer) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
+            </div>,
+            command: () => { }
+        },
+        {
+            label: <div >
+                <EmailLink email={data.mail} tooltip="יצירת קשר עם מנהל המערכת"></EmailLink>
+            </div>,
+            command: () => { }
+        },
+        {
+            label: <div >
+                <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
+            </div>,
+            command: () => { },
         }
-     
+
     ];
 
-    const valueTemplateEmp = (value) => {
-        return (
-            <React.Fragment>
-                <b>{user.numOfDocumentsForOfficer}</b>/{user.numOfDocumentsForOfficer - numOfDocumentForEmp}
-            </React.Fragment>
-        );
-    };
-    const valueTemplateMan = (value) => {
-        return (
-            <React.Fragment>
-                <b>{user.numOfDocumentsForManager}</b>/{user.numOfDocumentsForManager- numOfDocumentForManager}
-            </React.Fragment>
-        );
-    };
+
 
     return (
-        <div style={{ display: "flex" }} className="card">
+        <div >
             <TabMenu model={items} />
-            <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
+            {/* <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
                 <div className="col-12 md:col-6 lg:col-3">
                     <Tag value="מנהל" rounded></Tag>
-                    {user.numOfDocumentsForManager- numOfDocumentForManager}/<b>{user.numOfDocumentsForManager}</b>
+                    {user.numOfDocumentsForManager - numOfDocumentForManager}/<b>{user.numOfDocumentsForManager}</b>
                     <ProgressBar value={((user.numOfDocumentsForManager - numOfDocumentForManager) / user.numOfDocumentsForManager) * 100} displayValueTemplate={valueTemplateMan}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
@@ -112,13 +145,12 @@ export default function Menu() {
                     <ProgressBar value={((user.numOfDocumentsForOfficer - numOfDocumentForEmp) / user.numOfDocumentsForOfficer) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                    <EmailLink email={data.mail} tooltip="יצירת קשר עם סוכן המערכת"></EmailLink>
-                    {/* <Button style={{ display: "flex" }} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button> */}
+                    <EmailLink email={data.mail} tooltip="יצירת קשר עם מנהל המערכת"></EmailLink>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
                 </div>
-            </div>
+            </div> */}
 
             <Toast ref={toast} />
         </div>

@@ -102,7 +102,7 @@ function Pie() {
 
     if (value == 'לפי שנים')
         return (<>
-            <h3>תיקים שנפתחו בשנתייים האחרונות</h3>
+            <h3>תיקים שנפתחו</h3>
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>
@@ -113,7 +113,7 @@ function Pie() {
         )
     if (value == 'לפי חודשים')
         return (<>
-            <h3>תיקים שנפתחו בחודשיים האחרונים</h3>
+            <h3>תיקים שנפתחו</h3>
             {console.log("by monthhhhhhhhhhhhhhhhhhhhhhhhh")}
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />

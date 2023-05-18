@@ -101,15 +101,16 @@ export default function LastFiles() {
         return (
             <div className="border-1 surface-border border-round m-2 text-center py-5 px-3" style={{ width:"70%", padding: "10px" }}>
                 <div className="mb-3">
-                    <h4 className="mt-0 mb-3">:מגיש התיק</h4>
-                    <Tag value={product.name}></Tag>
+                    <p className="mt-0 mb-3">מגיש התיק: {product.name}</p>
                 </div>
                 <div>
-                    <h4 className="mb-1">סטטוס: {product.statusName}</h4>
-                    <h4 className="mb-1">תאריך בדיקה: {product.date}</h4>
-                    <h4 className="mt-0 mb-3">עובד מטפל: {product.officerName}</h4>
+                    <p className="mb-1">סטטוס: {product.statusName}</p>
+                    <p className="mb-1">תאריך בדיקה: {product.date}</p>
+                    <p className="mt-0 mb-3">עובד מטפל: {product.officerName}</p>
                     <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
-                    <h5 className="mt-0 mb-3">{product.remarks || "---"} :הערות</h5>
+                    <br></br>
+                    <br></br>
+                    <p className="mt-0 mb-3">{product.remarks || "---"} :הערות</p>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                     <Link to={`/file/${product.idfile}`} id="link"  >
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
@@ -118,7 +119,7 @@ export default function LastFiles() {
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                        <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+                        <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
 
                     </div>
                 </div>

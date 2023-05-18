@@ -38,7 +38,7 @@ function CountGraf() {
                 labels: years,
                 datasets: [
                     {
-                        label: 'כמות תיקים שנפתחו',
+                        label: 'תיקים שנפתחו',
                         data: counts,
                         backgroundColor: [
                             'rgba(255, 159, 64, 0.2)',
@@ -90,7 +90,7 @@ function CountGraf() {
                 labels: months,
                 datasets: [
                     {
-                        label: 'כמות תיקים שנפתחו',
+                        label: 'תיקים שנפתחו',
                         data: counts,
                         backgroundColor: [
                             'rgba(255, 159, 64, 0.2)',
@@ -126,7 +126,7 @@ function CountGraf() {
 
     if (value == 'לפי שנים')
         return (<>
-            <h3>תיקים שנפתחו בשנים האחרונות</h3>
+            <h3>תיקים שנפתחו</h3>
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>
@@ -137,7 +137,7 @@ function CountGraf() {
         )
     if (value == 'לפי חודשים')
         return (<>
-            <h3>תיקים שנפתחו בחודשים האחרונים</h3>
+            <h3>תיקים שנפתחו</h3>
             {console.log("by monthhhhhhhhhhhhhhhhhhhhhhhhh")}
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />

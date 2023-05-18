@@ -72,10 +72,8 @@ const ProfessionUnit = () => {
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.name}</div>
                             {/* <div className="font-semibold">{product.mail}</div> */}
-                            <p>מחיר למילוי הבקשה:</p>
-                            <Tag value={product.costOfFillingApplication}></Tag>
-                            <p>מספר ימים לצפיה בבקשה:</p>
-                            <Tag value={product.daysForViewingClosedFile}></Tag>
+                            <p>מחיר למילוי הבקשה: {product.costOfFillingApplication}</p>
+                            <p>מספר ימים לצפיה בבקשה: {product.daysForViewingClosedFile}</p>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
                                     {/* <span className="font-semibold">{product.idNumber}</span> */}
@@ -107,10 +105,8 @@ const ProfessionUnit = () => {
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <div className="text-2xl font-bold text-900">{product.name}</div>
                         {/* <div className="font-semibold">{product.mail}</div> */}
-                        <p>מחיר למילוי הבקשה:</p>
-                        <Tag value={product.costOfFillingApplication}></Tag>
-                        <p>מספר ימים לצפיה בבקשה:</p>
-                        <Tag value={product.daysForViewingClosedFile}></Tag>
+                        <p>מחיר למילוי הבקשה: {product.costOfFillingApplication}</p>
+                        <p>מספר ימים לצפיה בבקשה: {product.daysForViewingClosedFile}</p>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         

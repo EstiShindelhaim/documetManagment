@@ -33,7 +33,7 @@ const SpecificFiles = () => {
         if (dStatuses) {
             console.log("dStatuses", dStatuses);
             setStatusId(dStatuses.filter(e => e.name == 'נסגר ע"י המנהל')[0].idstatus);
-            console.log("statusId", statusId);        
+            console.log("statusId", statusId);
         }
 
     }, [dStatuses]);
@@ -68,30 +68,27 @@ const SpecificFiles = () => {
     return (<>
         <div className="card">
             <Card title="פרטי התיק" style={{ width: "70%", marginRight: "15%", textAlign: "center" }}>
-
-                        <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-                            <div className="flex align-items-center gap-2">
-                                <Tag value="תוצאת התיק" severity={getSeverity(data)}></Tag>
-                            </div>
-                        </div>
-                        <div className="flex flex-column align-items-center gap-3 py-5">
-                            <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                            <Tag value={data.name}></Tag>
-                            <h4 className="mb-1">סטטוס: {data.statusName}</h4>
-                            {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                            <h4 className="mt-0 mb-3">עובד מטפל: {data.officerName}</h4>
-                            <h4 className="mt-0 mb-3">תאריך הגשת התיק: {data.ApplicationSubmissionDate}</h4>
-                            <h5 className="mt-0 mb-3">הערות: {data.remarks || "---"}</h5>
-                            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                                <Button onClick={() => { closeProd(data.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={idfile} ></Progress>} ></PopUp>
-
-                            </div>
-                        </div>
+                <div className="flex flex-wrap align-items-center justify-content-between gap-2">
+                    <div className="flex align-items-center gap-2">
+                        <Tag value="תוצאת התיק" severity={getSeverity(data)}></Tag>
+                    </div>
+                </div>
+                <div className="flex flex-column align-items-center gap-3 py-5">
+                    <h4 className="mt-0 mb-3">מגיש התיק: {data.name}</h4>
+                    <h4 className="mb-1">סטטוס: {data.statusName}</h4>
+                    {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
+                    <h4 className="mt-0 mb-3">עובד מטפל: {data.officerName}</h4>
+                    <h4 className="mt-0 mb-3">תאריך הגשת התיק: {data.ApplicationSubmissionDate}</h4>
+                    <h5 className="mt-0 mb-3">הערות: {data.remarks || "---"}</h5>
+                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                        <Button onClick={() => { closeProd(data.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
+                        <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                        <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={idfile} ></Progress>} ></PopUp>
+                    </div>
+                </div>
             </Card>
             <br></br>
-            <Result details={{idfile:idfile}}></Result>
+            <Result details={{ idfile: idfile }}></Result>
         </div>
     </>)
 }

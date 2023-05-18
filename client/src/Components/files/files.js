@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef , useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
 import { PrimeIcons } from 'primereact/api';
@@ -85,22 +85,21 @@ const Files = () => {
                     <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                         <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                             <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
+                                <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
                                 <div className="flex align-items-center gap-3">
                                     <span className="flex align-items-center gap-2">
                                         <span className="font-semibold">{product.idNumber}</span>
                                     </span>
                                 </div>
-                                <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                                <Tag value={product.name}></Tag>
-                                <h4 className="mb-1">סטטוס: {product.statusName}</h4>
+                                <p className="mt-0 mb-3">מגיש התיק: {product.name}</p>
+                                <p className="mb-1">סטטוס: {product.statusName}</p>
                                 {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                                <h4 className="mt-0 mb-3">עובד מטפל: {product.officerName}</h4>
-                                <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
+                                <p className="mt-0 mb-3">עובד מטפל: {product.officerName}</p>
+                                <p className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</p>
                                 {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
                                 {product.thoroughCheck == 1 && <InputSwitch checked={true}/>}
                                 {product.thoroughCheck != 1 && <InputSwitch checked={false} />} */}
-                                <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
+                                <p className="mt-0 mb-3">הערות: {product.remarks || "---"}</p>
                             </div>
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                                 <Link to={`/file/${product.idfile}`} id="link"  >
@@ -108,7 +107,7 @@ const Files = () => {
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                                <PopUp label="הצג התקדמות התיק" id={product.idfile} icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+                                <PopUp label="התקדמות התיק" id={product.idfile} icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
                     </div>
@@ -151,7 +150,7 @@ const Files = () => {
     const gridItem = (product) => {
         if (value == 'כל התיקים' || product.statusName == "הועבר למנהל")
             return (
-                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" style={{ width:"20%", padding: "10px" }}>
+                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" style={{ width: "20%", padding: "10px" }}>
                     <div className="p-4 border-1 surface-border surface-card border-round">
                         <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                             <div className="flex align-items-center gap-2">
@@ -159,16 +158,15 @@ const Files = () => {
                             </div>
                         </div>
                         <div className="flex flex-column align-items-center gap-3 py-5">
-                            <h4 className="mt-0 mb-3">מגיש התיק:</h4>
-                            <Tag value={product.name}></Tag>
-                            <h4 className="mb-1">סטטוס: {product.statusName}</h4>
+                            <p className="mt-0 mb-3">מגיש התיק: {product.name}</p>
+                            <p className="mb-1">סטטוס: {product.statusName}</p>
                             {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                            <h4 className="mt-0 mb-3">עובד מטפל: {product.officerName}</h4>
-                            <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
+                            <p className="mt-0 mb-3">עובד מטפל: {product.officerName}</p>
+                            <p className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</p>
                             {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
                             {product.thoroughCheck == 1 && <InputSwitch checked={true} />}
                             {product.thoroughCheck != 1 && <InputSwitch checked={false} />} */}
-                            <h5 className="mt-0 mb-3">הערות: {product.remarks || "---"}</h5>
+                            <p className="mt-0 mb-3">הערות: {product.remarks || "---"}</p>
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Link to={`/file/${product.idfile}`} id="link" >
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
@@ -177,7 +175,7 @@ const Files = () => {
                             </div>
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
-                                <PopUp label="הצג התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
+                                <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
                     </div>
@@ -266,7 +264,7 @@ const Files = () => {
             }
         });
     };
-    const filterToExcel=(e)=>{
+    const filterToExcel = (e) => {
         return {
             'מגיש התיק': e.name,
             'סטטוס': e.statusName,
@@ -284,13 +282,13 @@ const Files = () => {
                 <span className="p-input-icon-right">
                     <i className="pi pi-search" />
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
-                </span> 
+                </span>
             </div>
             <br></br>
             <div style={{ textAlign: "center" }}>
-            {/* <Header b={false} h={"התיקים שלי"}  products={products} name='files' filterToExcel={filterToExcel} ></Header> */}
+                {/* <Header b={false} h={"התיקים שלי"}  products={products} name='files' filterToExcel={filterToExcel} ></Header> */}
 
-             <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא התיקים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+                <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא התיקים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
                 {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא התיקים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
             </div>
