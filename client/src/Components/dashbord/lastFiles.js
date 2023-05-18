@@ -99,7 +99,7 @@ export default function LastFiles() {
 
     const productTemplate = (product) => {
         return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3" style={{ width:"70%", padding: "10px" }}>
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3" >
                 <div className="mb-3">
                     <p className="mt-0 mb-3">מגיש התיק: {product.name}</p>
                 </div>
@@ -118,7 +118,7 @@ export default function LastFiles() {
                         <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                        <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                         <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
 
                     </div>

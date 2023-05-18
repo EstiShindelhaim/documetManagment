@@ -106,7 +106,7 @@ const Files = () => {
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                                 <PopUp label="התקדמות התיק" id={product.idfile} icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
@@ -150,7 +150,7 @@ const Files = () => {
     const gridItem = (product) => {
         if (value == 'כל התיקים' || product.statusName == "הועבר למנהל")
             return (
-                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" style={{ width: "20%", padding: "10px" }}>
+                <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                     <div className="p-4 border-1 surface-border surface-card border-round">
                         <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                             <div className="flex align-items-center gap-2">
@@ -172,9 +172,7 @@ const Files = () => {
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                            </div>
-                            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                                 <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>

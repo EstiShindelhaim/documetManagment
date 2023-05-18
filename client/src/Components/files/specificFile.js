@@ -82,7 +82,7 @@ const SpecificFiles = () => {
                     <h5 className="mt-0 mb-3">הערות: {data.remarks || "---"}</h5>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button onClick={() => { closeProd(data.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                        <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שלח לבדיקה' />
+                        <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                         <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={idfile} ></Progress>} ></PopUp>
                     </div>
                 </div>
