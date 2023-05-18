@@ -75,6 +75,7 @@ const Officers = () => {
                             <div className="text-2xl font-bold text-900">{product.name}</div>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
+                                    <span>מספר זהות:</span>
                                     <span className="font-semibold">{product.idNumber}</span>
                                 </span>
                             </div>
@@ -99,10 +100,11 @@ const Officers = () => {
 
     const gridItem = (product) => {
         return (
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" style={{ width:"20%", padding: "10px" }}>
+            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" style={{ width: "20%", padding: "10px" }}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                         <div className="flex align-items-center gap-2">
+                            <span>מספר זהות:</span>
                             <span className="font-semibold">{product.idNumber}</span>
                         </div>
                     </div>
@@ -180,21 +182,21 @@ const Officers = () => {
             "יחידת מקצוע": e.professionUnit
         }
     }
-      const exportExcel = () => {
-            import('xlsx').then((xlsx) => {
-                const worksheet = xlsx.utils.json_to_sheet(products.map((e) => {
-                    console.log("eeeeeeeeeeeeeeeeeeeeeeeee",e);
-                   return(filterToExcel(e)) 
-                }));
-                const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-                const excelBuffer = xlsx.write(workbook, {
-                    bookType: 'xlsx',
-                    type: 'array'
-                });
-
-                saveAsExcelFile(excelBuffer, 'officers');
+    const exportExcel = () => {
+        import('xlsx').then((xlsx) => {
+            const worksheet = xlsx.utils.json_to_sheet(products.map((e) => {
+                console.log("eeeeeeeeeeeeeeeeeeeeeeeee", e);
+                return (filterToExcel(e))
+            }));
+            const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+            const excelBuffer = xlsx.write(workbook, {
+                bookType: 'xlsx',
+                type: 'array'
             });
-        };
+
+            saveAsExcelFile(excelBuffer, 'officers');
+        });
+    };
 
     const saveAsExcelFile = (buffer, fileName) => {
         import('file-saver').then((module) => {

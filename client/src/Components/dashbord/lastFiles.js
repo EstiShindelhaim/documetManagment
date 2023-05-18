@@ -107,7 +107,7 @@ export default function LastFiles() {
                 <div>
                     <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                     <h4 className="mb-1">תאריך בדיקה: {product.date}</h4>
-                    <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                    <h4 className="mt-0 mb-3">עובד מטפל: {product.officerName}</h4>
                     <Tag value={`תוצאת תיק: ${forResult(product)}`} severity={getSeverity(product)}></Tag>
                     <h5 className="mt-0 mb-3">{product.remarks || "---"} :הערות</h5>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">

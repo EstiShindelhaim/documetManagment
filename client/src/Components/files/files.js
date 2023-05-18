@@ -95,7 +95,7 @@ const Files = () => {
                                 <Tag value={product.name}></Tag>
                                 <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                                 {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                                <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                                <h4 className="mt-0 mb-3">עובד מטפל: {product.officerName}</h4>
                                 <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
                                 {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
                                 {product.thoroughCheck == 1 && <InputSwitch checked={true}/>}
@@ -163,7 +163,7 @@ const Files = () => {
                             <Tag value={product.name}></Tag>
                             <h4 className="mb-1">סטטוס: {product.statusName}</h4>
                             {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                            <h4 className="mt-0 mb-3">פקיד מטפל: {product.officerName}</h4>
+                            <h4 className="mt-0 mb-3">עובד מטפל: {product.officerName}</h4>
                             <h4 className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</h4>
                             {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
                             {product.thoroughCheck == 1 && <InputSwitch checked={true} />}
@@ -214,7 +214,7 @@ const Files = () => {
         { field: "name", header: 'מגיש התיק' },
         { field: "statusName", header: 'סטטוס' },
         { field: "result", header: 'תוצאת התיק' },
-        { field: "officerName", header: 'פקיד מטפל' },
+        { field: "officerName", header: 'עובד מטפל' },
         { field: "ApplicationSubmissionDate", header: 'תאריך הגשת התיק' },
         { field: "remarks", header: 'הערות' }
     ];
@@ -238,7 +238,7 @@ const Files = () => {
                     'מגיש התיק': e.name,
                     'סטטוס': e.statusName,
                     'תוצאת התיק': e.result,
-                    'פקיד מטפל': e.officerName,
+                    'עובד מטפל': e.officerName,
                     'הערות': e.remarks,
                     'תאריך הגשת התיק': e.ApplicationSubmissionDate
                 }
@@ -271,7 +271,7 @@ const Files = () => {
             'מגיש התיק': e.name,
             'סטטוס': e.statusName,
             'תוצאת התיק': e.result,
-            'פקיד מטפל': e.officerName,
+            'עובד מטפל': e.officerName,
             'הערות': e.remarks,
             'תאריך הגשת התיק': e.ApplicationSubmissionDate
         }
@@ -317,7 +317,7 @@ const Files = () => {
     // בשביל שיהיה בשמאל ולא במרכז צריך שבאבא
     // justify-content: flex-end !important;
     // } */}
-    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="הפקידים שלי" popup={<PopUp label="הוסף פקיד חדש" icon="pi pi-user-plus" header="הכנס פרטי פקיד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
+    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="העובדים שלי" popup={<PopUp label="הוסף עובד חדש" icon="pi pi-user-plus" header="הכנס פרטי עובד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
     //         </>)
     //     }
 };

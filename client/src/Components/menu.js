@@ -22,16 +22,16 @@ export default function Menu() {
     const [numOfDocumentForManager, setNumOfDocumentForManager] = useState(0);
     const { data, loading, error, refetch } = useAxiosGet("principal");
 
-    const RestFileEmp = async () => {
-        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForOfficer",  user.idmanager);
-        console.log("data num", data.num);
-        return (data.num)
-    }
-    const RestFileForManager = async () => {
-        const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForManager",  user.idmanager);
-        console.log("data num", data.num);
-        return (data.num)
-    }
+    // const RestFileEmp = async () => {
+    //     const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForOfficer",  user.idmanager);
+    //     console.log("data num", data.num);
+    //     return (data.num)
+    // }
+    // const RestFileForManager = async () => {
+    //     const { data, loading, error, refetch } = await getData("manager/numOfDocumentsForManager",  user.idmanager);
+    //     console.log("data num", data.num);
+    //     return (data.num)
+    // }
 
     useEffect(() => {
         // RestFileEmp()
@@ -112,11 +112,11 @@ export default function Menu() {
                     <ProgressBar value={((user.numOfDocumentsForOfficer - numOfDocumentForEmp) / user.numOfDocumentsForOfficer) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                    <EmailLink email={data.mail} tooltip="צור קשר עם סוכן המערכת"></EmailLink>
+                    <EmailLink email={data.mail} tooltip="יצירת קשר עם סוכן המערכת"></EmailLink>
                     {/* <Button style={{ display: "flex" }} icon="pi pi-send" tooltip="צור קשר עם סוכן המערכת" lassName="p-button-rounded" ></Button> */}
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                    <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים אישיים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
+                    <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
                 </div>
             </div>
 

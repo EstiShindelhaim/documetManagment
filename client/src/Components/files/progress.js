@@ -13,15 +13,15 @@ const findDate=(element)=>{
     if(find.length==0) return "---";
     return find[0].date
 }
-const arr=['נבדק ע"י הפקיד','הועבר למנהל','נסגר ע"י הפקיד','נבדק ע"י המנהל','נסגר ע"י המנהל'];
+const arr=['נבדק ע"י העובד','הועבר למנהל','נסגר ע"י העובד','נבדק ע"י המנהל','נסגר ע"י המנהל'];
 let events=[]
 arr.forEach(element => {
         events.push({status:element, date: findDate(element)})
 });
     // const events = [
-    //     { status: 'נבדק ע"י הפקיד', date: data.filter(e=>e.statusName=='נבדק ע"י הפקיד')[0].date},
+    //     { status: 'נבדק ע"י העובד', date: data.filter(e=>e.statusName=='נבדק ע"י העובד')[0].date},
     //     { status: 'הועבר למנהל', daטte: '15/10/2020 14:00'},
-    //     { status: 'נסגר ע"י הפקיד', date: '15/10/2020 16:15'},
+    //     { status: 'נסגר ע"י העובד', date: '15/10/2020 16:15'},
     //     { status: 'נבדק ע"י המנהל', date: '16/10/2020 10:02'},
     //     { status: 'נסגר ע"י המנהל', date: '16/10/2020 11:01'}
     // ];

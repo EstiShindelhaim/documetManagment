@@ -2,7 +2,6 @@ const ResultDal=require('../dal/document_result');
 
 
 exports.addResult=(req, res)=>{
-    console.log("contoller");
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!"

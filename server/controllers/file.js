@@ -54,8 +54,6 @@ exports.getFileByID = (req, res) => {
 }
 
 exports.getAllFiles = (req, res) => {//לשים לב למיין
-  console.log(req.body);
-  console.log("in controller");
   fileDal.getAllFiles(req.body)
     .then(data => {
       res.send(data);
@@ -69,16 +67,10 @@ exports.getAllFiles = (req, res) => {//לשים לב למיין
 }
 
 exports.getFilesByManagerId = (req, res) => {
-  console.log(req.params.managerId);
   const managerId = req.params.managerId;
   fileDal.getFilesByManagerId(managerId)
     .then(data => {
       if (data) {
-        // data.forEach(element => {
-        //   element['professionUnit']=element.profession_unit.name;
-        //   delete element.profession_unit;
-        // });
-        // d=data.map((e)=>{e['professionUnit']=e.profession_unit.name; delete e.profession_unit; return e;})
         data = data.map((e) => {
           return {
             "idfile": e.idfile,
@@ -93,7 +85,6 @@ exports.getFilesByManagerId = (req, res) => {
             "remarks": e.remarks,
             "statusName": e.status.name,
             "officerName": e.officer.name,
-            // "openDate":e.stages_of_progress_of_files.date
           }
         })
         res.send(data);

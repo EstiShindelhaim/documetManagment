@@ -79,7 +79,7 @@ const SpecificFiles = () => {
                             <Tag value={data.name}></Tag>
                             <h4 className="mb-1">סטטוס: {data.statusName}</h4>
                             {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
-                            <h4 className="mt-0 mb-3">פקיד מטפל: {data.officerName}</h4>
+                            <h4 className="mt-0 mb-3">עובד מטפל: {data.officerName}</h4>
                             <h4 className="mt-0 mb-3">תאריך הגשת התיק: {data.ApplicationSubmissionDate}</h4>
                             <h5 className="mt-0 mb-3">הערות: {data.remarks || "---"}</h5>
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
