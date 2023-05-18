@@ -95,7 +95,7 @@ export default function Menu() {
             command: () => { navigate("/professionUnits") }
         },
         {
-            label: ' ', disabled: true, style: { width: "40%" }
+            label: ' ', disabled: true, style: { width: "45%" }
         },
         {
             label: <div >
@@ -113,12 +113,12 @@ export default function Menu() {
             </div>,
             command: () => { }
         },
-        {
-            label: <div >
-                <EmailLink email={data.mail} tooltip="יצירת קשר עם מנהל המערכת"></EmailLink>
-            </div>,
-            command: () => { }
-        },
+        // {
+        //     label: <div >
+        //         <EmailLink email={data.mail} tooltip="יצירת קשר עם מנהל המערכת"></EmailLink>
+        //     </div>,
+        //     command: () => { },
+        // },
         {
             label: <div >
                 <PopUp visible={visible} setVisible={setVisible} label="עדכון פרטים" icon="pi pi-user-edit" header="הכנס את הפרטים החדשים" content={<UpdateDetails toast={toast} setVisible={setVisible}>  </UpdateDetails>} ></PopUp>
@@ -126,13 +126,14 @@ export default function Menu() {
             command: () => { },
         }
 
+
     ];
 
 
 
     return (
         <div >
-            <TabMenu model={items} />
+            <TabMenu model={items}/>
             {/* <div className="grid" style={{ fontFamily: 'Segoe UI' }}>
                 <div className="col-12 md:col-6 lg:col-3">
                     <Tag value="מנהל" rounded></Tag>
@@ -143,7 +144,7 @@ export default function Menu() {
                     <Tag value="עובדים" rounded></Tag>
                     {user.numOfDocumentsForOfficer - numOfDocumentForEmp}/<b>{user.numOfDocumentsForOfficer}</b>
                     <ProgressBar value={((user.numOfDocumentsForOfficer - numOfDocumentForEmp) / user.numOfDocumentsForOfficer) * 100} displayValueTemplate={valueTemplateEmp}></ProgressBar>
-                </div>
+    </div></div>
                 <div className="col-12 md:col-6 lg:col-3">
                     <EmailLink email={data.mail} tooltip="יצירת קשר עם מנהל המערכת"></EmailLink>
                 </div>

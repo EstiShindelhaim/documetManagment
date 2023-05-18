@@ -12,8 +12,8 @@ import Progress from '../files/progress';
 import { Link } from "react-router-dom";
 
 export default function LastFiles() {
-    const us=localStorage.getItem("user")
-    const user=JSON.parse(us)
+    const us = localStorage.getItem("user")
+    const user = JSON.parse(us)
     // const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const { data, loading, error, refetch } = useAxiosGet("dashboard/lastFiles/9", user.idmanager);
@@ -112,9 +112,9 @@ export default function LastFiles() {
                     <br></br>
                     <p className="mt-0 mb-3">{product.remarks || "---"} :הערות</p>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                    <Link to={`/file/${product.idfile}`} id="link"  >
-                                    <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
-                                </Link>
+                        <Link to={`/file/${product.idfile}`} id="link"  >
+                            <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
+                        </Link>
                         <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
