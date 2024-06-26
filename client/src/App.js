@@ -21,14 +21,12 @@ useEffect(() => {
   if(!userId){
     const us = localStorage.getItem("user");
   const userIdFromLocalStorage=JSON.parse(us)
-  console.log("ddddddddddddddddddddddddddddddddddddd",userIdFromLocalStorage);
   if (userIdFromLocalStorage) setUserIdCallback(userIdFromLocalStorage);
   }
   
 });
 
 const setUserIdCallback = (id) => {
-  console.log("ddddddddddddddddddddddddddddddddddddd",id);
   setUserId(id);
 }
   return (<>
@@ -46,9 +44,6 @@ const setUserIdCallback = (id) => {
             <Route exact path='/file/:id' element={<SpecificFiles/>}></Route>
             <Route path='*' element={<h1> 404 Page not found</h1>} />
             </Routes>
-      {/* </Router> */}
-      {/* <Home/> */}
-      {/* <Login></Login>  */}
     </div>
     </UserProvider>
     </>

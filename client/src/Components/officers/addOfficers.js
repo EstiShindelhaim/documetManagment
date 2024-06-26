@@ -7,21 +7,15 @@ import 'primeflex/primeflex.css';
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import AutoCompleted from "../autoComplete";
-import MyButton from "../button";
-import { useGet } from "../../Hooks/useGet"
 import { Button } from "primereact/button";
 import { useFunc } from "../../Hooks/useFunc";
 import useAxiosGet from "../../Hooks/useGet"
-import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
 
 const AddOfficers = (props) => {
-    // const us=localStorage.getItem("user")
-    // const user=JSON.parse(us)
     const user = useContext(UserContext);
     const { getData, postData } = useFunc();
     const { data: d, loading: l, error: e, refetch: f } = useAxiosGet("professionUnit/byManager", user.idmanager);
-    // const toast = useRef(null);
     const [notValidAll, setNotValidAll] = useState(false);
     const [notValidMail, setNotValidMail] = useState(false);
     const [notValidId, setNotValidId] = useState(false);
@@ -74,6 +68,7 @@ const AddOfficers = (props) => {
     }
 
     const hundleSubmit = async () => {
+        console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
         if (!id || !name || !password1 || !password2 || !mail || !numOfDocuments) {
             if (!notValidAll) setNotValidAll(true);
             if (notValidId) setNotValidId(false);
@@ -122,7 +117,6 @@ const AddOfficers = (props) => {
             mail: mail,
             numOfDocuments: parseInt(numOfDocuments)
         }
-        console.log(officer);
         await postData("officer", officer);
 
         props.setVisible(false);
@@ -135,7 +129,6 @@ const AddOfficers = (props) => {
     }
 
     return (<>
-        {/* //    // //{data=fillData()} */}
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <label htmlFor="id">מס' זהות</label>

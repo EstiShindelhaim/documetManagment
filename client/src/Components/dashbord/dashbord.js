@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import LastFiles from './lastFiles';
 import CountGraf from './countGraf';
 import RGgraf from './RGgraf';

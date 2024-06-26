@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Chart } from 'primereact/chart';
 import useAxiosGet from "../../Hooks/useGet"
-import UserContext from "../User/UserContext"
 import { SelectButton } from 'primereact/selectbutton';
 function CountGraf() {
     const us=localStorage.getItem("user")
     const user=JSON.parse(us)
-    // const user = useContext(UserContext);
     const [chartDataY, setChartDataY] = useState({});
     const [chartOptionsY, setChartOptionsY] = useState({});
     const [chartDataM, setChartDataM] = useState({});
@@ -77,15 +75,12 @@ function CountGraf() {
         let counts = [];
 
         if (dm) {
-            console.log("dyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy", dm);
             dm.forEach(element => {
                 months.push(element.month)
             });
-            console.log("yearsssssssssssssssssssssssssssssss", months);
             dm.forEach(element => {
                 counts.push(element.count)
             });
-            console.log("countssssssssssssssssssssssssssssssssssss", counts);
             data = {
                 labels: months,
                 datasets: [
@@ -119,10 +114,6 @@ function CountGraf() {
         setChartDataM(data);
         setChartOptionsM(options);
     }, [dm]);
-    {/* <Chart  options={lineOptions} /> */ }
-
-
-
 
     if (value == 'לפי שנים')
         return (<>
@@ -138,7 +129,6 @@ function CountGraf() {
     if (value == 'לפי חודשים')
         return (<>
             <h3>תיקים שנפתחו</h3>
-            {console.log("by monthhhhhhhhhhhhhhhhhhhhhhhhh")}
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>

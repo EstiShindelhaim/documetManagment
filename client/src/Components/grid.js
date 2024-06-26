@@ -111,9 +111,6 @@ console.log(data);
         }
         return false;
     }
-    //לשי לב!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //לסנן רק עפ"י מה שמוצג
-    // לשים לב לתאריך אם הוא מחרוזת
     const filterProduct = async(args) => {
         let pr = await ProductService.getProducts()
 

@@ -6,7 +6,6 @@ import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
-import UserContext from "../User/UserContext"
 import PopUp from '../popup';
 import Progress from '../files/progress';
 import { Link } from "react-router-dom";
@@ -14,7 +13,6 @@ import { Link } from "react-router-dom";
 export default function LastFiles() {
     const us = localStorage.getItem("user")
     const user = JSON.parse(us)
-    // const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const { data, loading, error, refetch } = useAxiosGet("dashboard/lastFiles/9", user.idmanager);
     const { data: dStatuses, loading: lStatuses, error: eStatuses, refetch: rStatuses } = useAxiosGet("status");
@@ -24,9 +22,9 @@ export default function LastFiles() {
 
     useEffect(() => {
         if (dStatuses) {
+            
             console.log("dStatuses", dStatuses);
             setStatusId(dStatuses.filter(e => e.name == 'נסגר ע"י המנהל')[0].idstatus);
-            // setStatusPass(dStatuses.filter(e => e.name == 'הועבר למנהל')[0].idstatus);
             console.log("statusId", statusId);
         }
 

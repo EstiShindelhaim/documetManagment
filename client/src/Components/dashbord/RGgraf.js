@@ -1,13 +1,10 @@
 import React, { useState, useEffect , useContext} from 'react';
 import { Chart } from 'primereact/chart';
 import useAxiosGet from "../../Hooks/useGet"
-// import {GetGrafOfFiles} from '../../Hooks/dashboard'
 import { SelectButton } from 'primereact/selectbutton';
-import UserContext from "../User/UserContext"
 function RGgraf() {
     const us=localStorage.getItem("user")
     const user=JSON.parse(us)
-    // const user = useContext(UserContext);
     const [chartDataY, setChartDataY] = useState({});
     const [chartOptionsY, setChartOptionsY] = useState({});
     const [chartDataM, setChartDataM] = useState({});
@@ -193,7 +190,6 @@ function RGgraf() {
         setChartDataM(data1);
         setChartOptionsM(options);
     }, [dm]);
-    {/* <Chart  options={lineOptions} /> */ }
 
 
 

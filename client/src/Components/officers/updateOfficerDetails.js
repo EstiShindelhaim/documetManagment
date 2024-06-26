@@ -4,9 +4,7 @@ import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css';
 import { InputText } from "primereact/inputtext";
-import { Password } from 'primereact/password';
 import { useFunc } from "../../Hooks/useFunc";
-import { Button } from "primereact/button";
 import useAxiosGet from "../../Hooks/useGet"
 import AutoCompleted from "../autoComplete";
 import Submit from "../submit";
@@ -25,7 +23,6 @@ export default function UpdateOfficerDetails(props) {
     const [numOfDocuments, setnumOfDocuments] = useState(props.numOfDocuments);
     const { updateData } = useFunc();
     const [notValidMail, setNotValidMail] = useState(false);
-    const [notValidPassword, setNotValidPassword] = useState(false);
     const [notValidDocuments, setNotValidDocuments] = useState(false);
 
     function checkEmail(val){

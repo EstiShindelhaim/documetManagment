@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
-import { PrimeIcons } from 'primereact/api';
-import Grid from "../grid";
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Tag } from 'primereact/tag';
 import { InputText } from 'primereact/inputtext';
@@ -15,15 +13,11 @@ import { useFunc } from "../../Hooks/useFunc";
 import { SelectButton } from 'primereact/selectbutton';
 import { Toast } from 'primereact/toast';
 import { Link } from "react-router-dom";
-import { InputSwitch } from "primereact/inputswitch";
 import PopUp from "../popup";
 import Progress from './progress';
 import UserContext from "../User/UserContext"
-import Header from '../Head'
 
 const Files = () => {
-    // const us=localStorage.getItem("user")
-    // const user=JSON.parse(us)
     const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
@@ -33,49 +27,45 @@ const Files = () => {
     const [search, setSearch] = useState('');
     const [visible, setVisible] = useState(0);
     const [statusId, setStatusId] = useState(3);
-    // const [statusPass, setStatusPass] = useState(3);
     const options = ['כל התיקים', 'תיקים שהועברו למנהל'];
     const [value, setValue] = useState(options[0]);
 
     const toast = useRef(null);
     useEffect(() => {
-        console.log("products", products);
         setProducts(data);
     }, [data]);
 
     useEffect(() => {
         if (dStatuses) {
-            console.log("dStatuses", dStatuses);
             setStatusId(dStatuses.filter(e => e.name == 'נסגר ע"י המנהל')[0].idstatus);
-            // setStatusPass(dStatuses.filter(e => e.name == 'הועבר למנהל')[0].idstatus);
-            console.log("statusId", statusId);
         }
-
     }, [dStatuses]);
 
     useEffect(() => {
-        console.log("products", products);
         if (!search || search == '')
             setProducts(data);
     }, [search]);
-
-    // useEffect(() => {
-    //     console.log("products", products);
-    //     if (!search || search == '')
-    //         setProducts(data);
-    // }, [value]);
 
     if (loading || lStatuses)
         return <p>loading</p>
 
 
     const closeProd = async (id) => {
-        console.log("statusId", statusId);
         const body = { "statusId": statusId }
-        console.log("idddddddddddddddddddddd", id);
         await updateData("file", id, body);
         refetch();
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
+    }
+
+    const checkFile = async (id) => {
+        const body = {}
+        await updateData("file/checkFile", id, body);
+        setTimeout(function () {
+            refetch();
+            toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נבדק בהצלחה', life: 1500 });
+          }, 1000);
+          console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+        
     }
 
     const listItem = (product) => {
@@ -93,12 +83,8 @@ const Files = () => {
                                 </div>
                                 <p className="mt-0 mb-3">מגיש התיק: {product.name}</p>
                                 <p className="mb-1">סטטוס: {product.statusName}</p>
-                                {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                                 <p className="mt-0 mb-3">עובד מטפל: {product.officerName}</p>
                                 <p className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</p>
-                                {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
-                                {product.thoroughCheck == 1 && <InputSwitch checked={true}/>}
-                                {product.thoroughCheck != 1 && <InputSwitch checked={false} />} */}
                                 <p className="mt-0 mb-3">הערות: {product.remarks || "---"}</p>
                             </div>
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
@@ -106,7 +92,7 @@ const Files = () => {
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
+                                <Button onClick={() => { checkFile(product.idfile) }} icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                                 <PopUp label="התקדמות התיק" id={product.idfile} icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
@@ -160,19 +146,15 @@ const Files = () => {
                         <div className="flex flex-column align-items-center gap-3 py-5">
                             <p className="mt-0 mb-3">מגיש התיק: {product.name}</p>
                             <p className="mb-1">סטטוס: {product.statusName}</p>
-                            {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                             <p className="mt-0 mb-3">עובד מטפל: {product.officerName}</p>
-                            <p className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</p>
-                            {/* <h4 className="mt-0 mb-3"> בדיקה יסודית:</h4>
-                            {product.thoroughCheck == 1 && <InputSwitch checked={true} />}
-                            {product.thoroughCheck != 1 && <InputSwitch checked={false} />} */}
+                            <p className="mt-0 mb-3">תאריך הגשת התיק: {product.ApplicationSubmissionDate}</p>                           
                             <p className="mt-0 mb-3">הערות: {product.remarks || "---"}</p>
                             <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                                 <Link to={`/file/${product.idfile}`} id="link" >
                                     <Button icon="pi pi-sign-in" className="p-button p-button-rounded" tooltip='כניסה לתיק' />
                                 </Link>
                                 <Button onClick={() => { closeProd(product.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                                <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
+                                <Button onClick={() => { checkFile(product.idfile) }} icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                                 <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" id={product.idfile} visible={visible} setVisible={setVisible} content={<Progress idfile={product.idfile} ></Progress>} ></PopUp>
                             </div>
                         </div>
@@ -284,11 +266,9 @@ const Files = () => {
             </div>
             <br></br>
             <div style={{ textAlign: "center" }}>
-                {/* <Header b={false} h={"התיקים שלי"}  products={products} name='files' filterToExcel={filterToExcel} ></Header> */}
 
                 <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא התיקים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא התיקים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
             </div>
             <br></br>
             <div className="flex justify-content-end" style={{ direction: "ltr" }}>
@@ -308,14 +288,6 @@ const Files = () => {
         </div>
     )
 
-    //         return (<>
-    //             {/* 
-    // בשביל שיהיה בשמאל ולא במרכז צריך שבאבא
-    // justify-content: flex-end !important;
-    // } */}
-    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="העובדים שלי" popup={<PopUp label="הוסף עובד חדש" icon="pi pi-user-plus" header="הכנס פרטי עובד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
-    //         </>)
-    //     }
 };
 
 export default Files;

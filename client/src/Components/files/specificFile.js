@@ -1,19 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
-import { PrimeIcons } from 'primereact/api';
-import Grid from "../grid";
-import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Tag } from 'primereact/tag';
-import { InputText } from 'primereact/inputtext';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
-import 'primereact/resources/primereact.css';                       // core css
-import 'primeicons/primeicons.css';                                 // icons
+import 'primereact/resources/themes/lara-light-indigo/theme.css';   
+import 'primereact/resources/primereact.css';                       
+import 'primeicons/primeicons.css';                                 
 import 'primeflex/primeflex.css';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
-import { SelectButton } from 'primereact/selectbutton';
-import { Toast } from 'primereact/toast';
 import { useParams } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import PopUp from "../popup";
@@ -57,12 +51,9 @@ const SpecificFiles = () => {
     };
 
     const closeProd = async (id) => {
-        console.log("statusId", statusId);
         const body = { "statusId": statusId }
-        console.log("idddddddddddddddddddddddddddddddddd", id);
         await updateData("file", id, body);
         refetch();
-        // toast.current.show({ severity: 'success', summary: 'Success', detail: 'התיק נסגר בהצלחה', life: 1500 });
     }
 
     return (<>
@@ -76,13 +67,12 @@ const SpecificFiles = () => {
                 <div className="flex flex-column align-items-center gap-3 py-5">
                     <h4 className="mt-0 mb-3">מגיש התיק: {data.name}</h4>
                     <h4 className="mb-1">סטטוס: {data.statusName}</h4>
-                    {/* <h4 className="mb-1">תאריך פתיחת התיק: {product.openDate}</h4> */}
                     <h4 className="mt-0 mb-3">עובד מטפל: {data.officerName}</h4>
                     <h4 className="mt-0 mb-3">תאריך הגשת התיק: {data.ApplicationSubmissionDate}</h4>
                     <h5 className="mt-0 mb-3">הערות: {data.remarks || "---"}</h5>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button onClick={() => { closeProd(data.idfile) }} icon="pi pi-lock" className="p-button p-button-rounded" tooltip='סגירת התיק' />
-                        <Button icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
+                        <Button  icon="pi pi-send" className="p-button p-button-rounded" tooltip='שליחה לבדיקה' />
                         <PopUp label="התקדמות התיק" icon="pi pi-ellipsis-v" visible={visible} setVisible={setVisible} content={<Progress idfile={idfile} ></Progress>} ></PopUp>
                     </div>
                 </div>

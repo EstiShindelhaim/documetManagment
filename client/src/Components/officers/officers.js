@@ -1,14 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
-import { PrimeIcons } from 'primereact/api';
-import Grid from "../grid";
 import PopUp from "../popup";
 import AddOfficer from "./addOfficers"
-import { ProductService } from '../officersAxios';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
 import { InputText } from 'primereact/inputtext';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
@@ -21,19 +16,12 @@ import Delete from '../delete';
 import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
 import EmailLink from '../emailLink';
-import { json } from 'react-router-dom';
-import Header from '../Head'
 
 const Officers = () => {
-    // console.log("ssssssssssssssssssssssssssssssssssssssssssss")
-    // const us=localStorage.getItem("user")
-    // const user=JSON.parse(us)
-    // console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",user);//
     const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
-    console.log("user.idmanager", user);
     const { data, loading, error, refetch } = useAxiosGet("officer/byManager", user.idmanager);
     const [search, setSearch] = useState('');
     const [visible1, setVisible1] = useState(false);
@@ -41,13 +29,11 @@ const Officers = () => {
     const toast = useRef(null);
 
     useEffect(() => {
-        console.log("products", products);
         if (!search || search == '')
             setProducts(data);
     }, [data]);
 
     useEffect(() => {
-        console.log("products", products);
         if (!search || search == '')
             setProducts(data);
     }, [search]);
@@ -59,13 +45,8 @@ const Officers = () => {
         await deteteData("officer", id);
         refetch();
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'העובד נמחק בהצלחה', life: 1500 });
-
-        // const { data: pr, loading: prl, error: pre, refetch: prr } = await getData("officer/byManager", 1);
-        // console.log("products===========", pr);
-        // setProducts(pr)
-        // setProducts([{ name: "aaa", idNumber: 123, mail: "jjjj", numOfDocuments: 1, professionUnit: "asd" }]);
-
     }
+
     const listItem = (product) => {
         return (
             <div className="col-12">
@@ -159,16 +140,6 @@ const Officers = () => {
 
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
-    // const exportPdf = () => {
-    //     import('jspdf').then((jsPDF) => {
-    //         import('jspdf-autotable').then(() => {
-    //             const doc = new jsPDF.default(0, 0);
-    //             doc.autoTable(exportColumns, products);
-    //             doc.save('officers.pdf');
-    //         });
-    //     });
-    // };
-
     const filterToExcel = (e) => {
         return {
             "תעודת זהות": e.idNumber,
@@ -220,10 +191,8 @@ const Officers = () => {
             </div>
             <br></br>
             <div style={{ textAlign: "center" }}>
-                {/* <Header b={true} h={"העובדים שלי"} products={products} name='officers' filterToExcel={filterToExcel} label="הוסף עובד חדש" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי עובד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></Header> */}
                 <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא העובדים ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא העובדים ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
             </div>
             <br></br>
             <PopUp label="הוסף עובד" icon="pi pi-user-plus" header="הכנס פרטי עובד" visible={visible1} setVisible={setVisible1} content={<AddOfficer toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddOfficer>} ></PopUp>
@@ -241,14 +210,7 @@ const Officers = () => {
         </div>
     )
 
-    //         return (<>
-    //             {/* 
-    // בשביל שיהיה בשמאל ולא במרכז צריך שבאבא
-    // justify-content: flex-end !important;
-    // } */}
-    //             <Grid url="officer/byManager" param='1' style={{ marginLeft: "50px" }} title="העובדים שלי" popup={<PopUp label="הוסף עובד חדש" icon="pi pi-user-plus" header="הכנס פרטי עובד" content={<AddOfficer></AddOfficer>} ></PopUp>} productService={ProductService}></Grid>
-    //         </>)
-    //     }
+ 
 };
 
 export default Officers;

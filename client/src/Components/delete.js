@@ -10,7 +10,6 @@ export default function Delete(props) {
     const toast = useRef(null);
 
     const accept = () => {
-        console.log("before");
         props.function();
         toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     };

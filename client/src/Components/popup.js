@@ -5,12 +5,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 
 export default function PopUp(props) {
-    const [visible1, setVisible1] = useState(false);
-    console.log("prrrrrrrrrrrrrrrrrrrrrp",(props.visible==props.id),props.visible,props.id)
  if(props.id===props.visible)
-// setVisible1(true)
-
-// setVisible1(false)
     return (
         <div className="card flex justify-content-center" style={{ direction: "ltr"}}>
             <Button label={props.label} icon={props.icon} onClick={() => props.setVisible(props.id)} />

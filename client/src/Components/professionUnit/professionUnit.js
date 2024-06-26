@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button } from 'primereact/button';
 import 'primeicons/primeicons.css';
-import { PrimeIcons } from 'primereact/api';
-import Grid from "../grid";
 import PopUp from "../popup";
-// import AddOfficer from "./addOfficers"
-import { ProductService } from '../officersAxios';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
 import { InputText } from 'primereact/inputtext';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
-import 'primereact/resources/primereact.css';                       // core css
-import 'primeicons/primeicons.css';                                 // icons
+import 'primereact/resources/themes/lara-light-indigo/theme.css';   
+import 'primereact/resources/primereact.css';                       
+import 'primeicons/primeicons.css';                                 
 import 'primeflex/primeflex.css';
 import useAxiosGet from "../../Hooks/useGet"
 import { useFunc } from "../../Hooks/useFunc";
@@ -21,11 +15,8 @@ import UpdateProfessionUnitDetails from './updateProfessionUnitDetails';
 import Delete from '../delete';
 import { Toast } from 'primereact/toast';
 import UserContext from "../User/UserContext"
-import Header from '../Head';
 
 const ProfessionUnit = () => {
-    // const us=localStorage.getItem("user")
-    // const user=JSON.parse(us)
     const user = useContext(UserContext);
     const { getData, postData, updateData, deteteData } = useFunc();
     const [products, setProducts] = useState([]);
@@ -37,13 +28,11 @@ const ProfessionUnit = () => {
     const toast = useRef(null);
 
     useEffect(() => {
-        console.log("products", products);
         if (!search || search == '')
             setProducts(data);
     }, [data]);
 
     useEffect(() => {
-        console.log("products", products);
         if (!search || search == '')
             setProducts(data);
     }, [search]);
@@ -58,10 +47,7 @@ const ProfessionUnit = () => {
             toast.current.show({ severity: 'success', summary: 'Success', detail: 'יחידת המקצוע נמחקה בהצלחה', life: 1500 });
         }
         else {
-            // console.log("resssssssssssssssssssssssssssssssssss",res.response.data.message);
             alert(res.response.data.message)
-           //toast.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
-
         }
     }
     const listItem = (product) => {
@@ -71,20 +57,16 @@ const ProfessionUnit = () => {
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.name}</div>
-                            {/* <div className="font-semibold">{product.mail}</div> */}
                             <p>מחיר למילוי הבקשה: {product.costOfFillingApplication}</p>
                             <p>מספר ימים לצפיה בבקשה: {product.daysForViewingClosedFile}</p>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
-                                    {/* <span className="font-semibold">{product.idNumber}</span> */}
                                 </span>
                             </div>
                         </div>
-                        {/* {let id=product.idofficer} */}
 
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <PopUp label="עדכון  " icon="pi pi-pencil" header="עדכן יחידת מקצוע" id={product.idprofession_unit}  visible={visible} setVisible={setVisible} content={<UpdateProfessionUnitDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} daysForViewingClosedFile={product.daysForViewingClosedFile} costOfFillingApplication={product.costOfFillingApplication} id={product.idprofession_unit} ></UpdateProfessionUnitDetails>} ></PopUp>
-                            {/* <Button icon="pi pi-user-minus" tooltip="מחיקת עובד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
                             <br></br>
                             <Delete tooltip="מחיקה" key={product.idprofession_unit} message={'?האם אתה בטוח שברצונך למחוק יחידה זו'} function={() => { deleteProd(product.idprofession_unit) }} ></Delete>
                         </div>
@@ -104,23 +86,14 @@ const ProfessionUnit = () => {
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <div className="text-2xl font-bold text-900">{product.name}</div>
-                        {/* <div className="font-semibold">{product.mail}</div> */}
                         <p>מחיר למילוי הבקשה: {product.costOfFillingApplication}</p>
                         <p>מספר ימים לצפיה בבקשה: {product.daysForViewingClosedFile}</p>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         
-                        {/* <div className="flex align-items-center gap-3"> */}
-                        {/* <span className="flex align-items-center gap-2"> */}
-                        {/* <span className="font-semibold">{product.idNumber}</span> */}
-                        {/* </span>
-                            </div>
-                        </div> */}
-                        {/* {let id=product.idofficer} */}
-                        {/* <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"> */}
-                        <PopUp label="עדכון  " icon="pi pi-pencil" header="עדכן יחידת מקצוע" id={product.idprofession_unit}  visible={visible} setVisible={setVisible} content={<UpdateProfessionUnitDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} daysForViewingClosedFile={product.daysForViewingClosedFile} costOfFillingApplication={product.costOfFillingApplication} id={product.idprofession_unit} ></UpdateProfessionUnitDetails>} ></PopUp>
+                       <PopUp label="עדכון  " icon="pi pi-pencil" header="עדכן יחידת מקצוע" id={product.idprofession_unit}  visible={visible} setVisible={setVisible} content={<UpdateProfessionUnitDetails toast={toast} setVisible={setVisible} setProducts={setProducts} name={product.name} daysForViewingClosedFile={product.daysForViewingClosedFile} costOfFillingApplication={product.costOfFillingApplication} id={product.idprofession_unit} ></UpdateProfessionUnitDetails>} ></PopUp>
                         <Delete  tooltip="מחיקה" key={product.idprofession_unit} message={'?האם אתה בטוח שברצונך למחוק יחידה זו'} function={() => { deleteProd(product.idprofession_unit) }} ></Delete>
-                    </div> {/* <Button icon="pi pi-user-minus" tooltip="מחיקת עובד" className="p-button-rounded" onClick={() => { deleteProd(product.idofficer) }} disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button> */}
+                    </div> 
                     <br></br>
                     
 
@@ -159,7 +132,6 @@ const ProfessionUnit = () => {
         { field: 'name', header: 'שם' },
         { field: 'daysForViewingClosedFile', header: "מס' ימים לצפיה בבקשה" },
         { field: 'costOfFillingApplication', header: "מחיר למילוי בקשה" },
-        // { field: 'companyId', header: 'Company id' }
     ];
 
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
@@ -219,7 +191,6 @@ const ProfessionUnit = () => {
                 <span className="p-input-icon-right">
                     <i className="pi pi-search" /> 
                     <InputText id="search" value={search} type="search" onInput={(e) => { FilterProduct(e.target.value); setSearch(e.target.value) }} placeholder="חפש..." />
-                    {/* <Header b={true} h={"יחידות המקצוע שלי"}  products={products} name='professionUnit' filterToExcel={filterToExcel} label="הוסף יחידת מקצוע חדשה" layout={layout} setLayout={setLayout} icon="pi pi-user-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></Header> */}
 
             </span>
             </div>
@@ -228,7 +199,6 @@ const ProfessionUnit = () => {
             <div style={{ textAlign: "center" }}>
                 <Button style={{ direction: "ltr" }} type="button" label="EXCELיצוא היחידות ל" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
                 <span> </span>
-                {/* <Button style={{ direction: "ltr" }} type="button" label="PDFיצוא היחידות ל" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
             </div>
             <br></br>
             <PopUp label="הוסף יחידת מקצוע" icon="pi pi-calendar-plus" header="הכנס פרטי יחידת מקצוע" visible={visible1} setVisible={setVisible1} content={<AddProfessionUnit toast={toast} setVisible={setVisible1} setProducts={setProducts} ></AddProfessionUnit>} ></PopUp>

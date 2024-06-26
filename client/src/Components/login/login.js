@@ -13,23 +13,19 @@ function Login(props) {
   const [password, setPassword] = useState('');
 
   const loginHandler = async () => {
-    console.log("id", id, " password", password);
     if (id == '' || password == '') {
       if (!notValid) setNotValid(true);
       return;
     }
     let res = await getData(`manager/login/${id}`, password);
     if (res.status != 201 && res.status != 200) {
-      console.log(res);
       setNotValid(true);
     }
     else {
       if (res.status == 201 || res.status == 200)
       {     
-        console.log(res.data.user);   
         setNotValid(false);
         props.setUserId(res.data.user)
-        console.log("kkkkkkkkkkkkkkkkkkkkkkkkk",res.data.user);
         localStorage.setItem('user', JSON.stringify(res.data.user));
         const us=localStorage.getItem("user")
         const user=JSON.parse(us)
@@ -39,14 +35,9 @@ function Login(props) {
         setNotValid(true);
 
     }
-
-
-
-
     return;
   }
   return (
-    //style={{textAlign:"center"}}
     <div className="card">
       <br></br>
       <br></br>

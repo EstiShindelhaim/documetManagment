@@ -1,13 +1,10 @@
 import React, { useState, useEffect , useContext} from 'react';
 import { Chart } from 'primereact/chart';
 import useAxiosGet from "../../Hooks/useGet"
-// import {GetGrafOfFiles} from '../../Hooks/dashboard'
 import { SelectButton } from 'primereact/selectbutton';
-import UserContext from "../User/UserContext"
 function Pie() {
     const us=localStorage.getItem("user")
     const user=JSON.parse(us)
-    // const user = useContext(UserContext);
     const [chartDataY, setChartDataY] = useState({});
     const [chartOptionsY, setChartOptionsY] = useState({});
     const [chartDataM, setChartDataM] = useState({});
@@ -95,7 +92,6 @@ function Pie() {
         setChartDataM(data);
         setChartOptionsM(options);
     }, [dm]);
-    {/* <Chart  options={lineOptions} /> */ }
 
 
 
@@ -118,10 +114,7 @@ function Pie() {
             <div className="card flex justify-content-center" style={{ direction: "ltr" }}>
                 <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
             </div>
-            {/* 
-            <div className="card">
-                <Chart type="bar" data={chartDataM} options={chartOptionsM} />
-            </div> */}
+           
             <div className="card flex justify-content-center">
                 <Chart type="pie" data={chartDataM} options={chartOptionsM} className="w-full md:w-30rem" />
             </div>
